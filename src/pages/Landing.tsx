@@ -31,7 +31,7 @@ export function Landing() {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: "-100px" }}
         className="px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
