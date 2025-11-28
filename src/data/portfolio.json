@@ -1,46 +1,73 @@
-[
+{
+  "work": [
     {
-        "title": "Elegance ORM",
-        "image": "projects/elegance-orm.png",
-        "description": "A lightweight cli-based Object Relational Mapping for NodeJs inspired by Laravel Eloquent",
-        "tech_stack": [
-            "Typescript",
-            "NodeJs"
-        ],
-        "code_url": "https://github.com/SaiHtetAung-mn/mini-orm-ts",
-        "demo_url": null
+      "title": "PayB One-Stop Payment Gateway",
+      "image": "projects/payb.png",
+      "description": "A single, unified payment gateway that supports all major digital wallets in Myanmar. It simplifies integration for businesses by providing one API connection to process payments across multiple wallet providers",
+      "tech_stack": [
+        "Laravel",
+        "NodeJs"
+      ],
+      "link": "https://blueoceanmm.com/solutions/payb"
     },
     {
-        "title": "Myanmar Location Utility",
-        "image": "projects/myanmar-location-utility.png",
-        "description": "A flexible library to manage and manipulate predefined Myanmar location-based data such as Region, Township, Village Tract and Village in an efficient way.",
-        "tech_stack": [
-            "JavaScript",
-            "Npm"
-        ],
-        "code_url": "https://github.com/SaiHtetAung-mn/myanmar-location-utility",
-        "demo_url": "https://www.npmjs.com/package/myanmar-location-utility"
-    },
-    {
-        "title": "Utilizing Prefix and Postfix Evaluation Algorithm in numeric string calculation",
-        "image": "projects/algorithm.jpeg",
-        "description": "The core focus is to apply this algorithm to parse and compute complex mathematical expressions.",
-        "tech_stack": [
-            "JavaScript"
-        ],
-        "code_url": "https://github.com/SaiHtetAung-mn/calculator-with-algorithm",
-        "demo_url": "https://saihtetaung-mn.github.io/calculator-with-algorithm/"
-    },
-    {
-        "title": "Portfolio Website",
-        "image": "projects/portfolio.png",
-        "description": "My personal portfolio website.",
-        "tech_stack": [
-            "Tytpescript",
-            "ReactJs",
-            "Vite"
-        ],
-        "code_url": "https://github.com/SaiHtetAung-mn/sai-htet-aung",
-        "demo_url": "https://sai-htet-aung-pxv9.vercel.app/"
+      "title": "OHM Astrology And Spiritual Content Digital Service",
+      "image": "projects/ohm.png",
+      "description": "A single, unified payment gateway that supports all major digital wallets in Myanmar. It simplifies integration for businesses by providing one API connection to process payments across multiple wallet providers",
+      "tech_stack": [
+        "Laravel",
+        "USSD Subscription"
+      ],
+      "link": "https://mytel.ohm.com.mm/"
     }
-]
+  ],
+  "personal": [
+    {
+      "title": "Elegance ORM",
+      "image": "projects/elegance-orm.png",
+      "description": "A lightweight cli-based Object Relational Mapping for NodeJs inspired by Laravel Eloquent",
+      "tech_stack": [
+        "Typescript",
+        "NodeJs"
+      ],
+      "code_url": "https://github.com/SaiHtetAung-mn/mini-orm-ts",
+      "demo_url": null
+    },
+    {
+      "title": "Myanmar Location Utility",
+      "image": "projects/myanmar-location-utility.png",
+      "description": "A flexible library to manage and manipulate predefined Myanmar location-based data such as Region, Township, Village Tract and Village in an efficient way.",
+      "tech_stack": [
+        "JavaScript",
+        "Npm"
+      ],
+      "code_url": "https://github.com/SaiHtetAung-mn/myanmar-location-utility",
+      "demo_url": "https://www.npmjs.com/package/myanmar-location-utility"
+    },
+    {
+      "title": "Utilizing Prefix and Postfix Evaluation Algorithm in numeric string calculation",
+      "image": "projects/algorithm.jpeg",
+      "description": "The core focus is to apply this algorithm to parse and compute complex mathematical expressions.",
+      "tech_stack": [
+        "JavaScript"
+      ],
+      "code_url": "https://github.com/SaiHtetAung-mn/calculator-with-algorithm",
+      "demo_url": "https://saihtetaung-mn.github.io/calculator-with-algorithm/"
+    },
+    {
+      "title": "Portfolio Website",
+      "image": "projects/portfolio.png",
+      "description": "My personal portfolio website.",
+      "tech_stack": [
+        "Tytpescript",
+        "ReactJs",
+        "Vite"
+      ],
+      "code_url": "https://github.com/SaiHtetAung-mn/sai-htet-aung",
+      "demo_url": "https://sai-htet-aung-pxv9.vercel.app/"
+    }
+  ],
+  "school": [
+    
+  ]
+}

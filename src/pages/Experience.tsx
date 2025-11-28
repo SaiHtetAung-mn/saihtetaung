@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { MdLocationOn } from 'react-icons/md'
 import { BiSolidBuildingHouse } from 'react-icons/bi'
+import { MdOpenInNew } from 'react-icons/md'
 import experienceData from '../data/experience.json'
 
 export function Experience() {
@@ -9,7 +10,7 @@ export function Experience() {
     title: exp.position,
     company: exp.company,
     period: `${exp.from_date} - ${exp.to_date}`,
-    type: 'Onsite',
+    type: exp.location,
     description: exp.description,
     highlights: [],
     link: exp.link,
@@ -26,10 +27,9 @@ export function Experience() {
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -50 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      x: 0,
       transition: { duration: 0.6 },
     },
   }
@@ -91,9 +91,22 @@ export function Experience() {
                     <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
                       {exp.title}
                     </h3>
-                    <p className="text-lg text-slate-700 dark:text-slate-300 font-semibold mt-1">
-                      {exp.company}
-                    </p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <p className="text-lg text-slate-700 dark:text-slate-300 font-semibold">
+                        {exp.company}
+                      </p>
+                      {exp.link && (
+                        <a
+                          href={exp.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center p-1.5 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-full transition-all"
+                          title={`Visit ${exp.company}`}
+                        >
+                          <MdOpenInNew className="text-sm" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                   
                   {/* Right side info */}
@@ -113,7 +126,6 @@ export function Experience() {
                     >
                       {exp.type === 'Onsite' && <BiSolidBuildingHouse className="text-lg" />}
                       {exp.type === 'Remote' && <MdLocationOn className="text-lg" />}
-                      {exp.type === 'Hybrid' && <span>🔄</span>}
                       {exp.type}
                     </motion.span>
                   </div>

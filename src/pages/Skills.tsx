@@ -1,62 +1,74 @@
 import { motion } from 'framer-motion'
 import {
   SiNodedotjs,
+  SiNestjs,
   SiExpress,
+  SiLaravel,
+  SiFastapi,
   SiMongodb,
   SiPostgresql,
-  SiPython,
+  SiMysql,
+  SiMui,
+  SiJquery,
+  SiRedux,
+  SiHtml5,
   SiReact,
+  SiVite,
   SiTypescript,
   SiTailwindcss,
   SiDocker,
+  SiLinux,
+  SiJira,
   SiGit,
   SiAmazon,
-  SiGithub,
+  SiRedis,
+  SiNginx,
+  SiSocketdotio
 } from 'react-icons/si'
+import { GrDeploy } from "react-icons/gr";
 
 export function Skills() {
   const skillCategories = [
     {
       category: 'Backend',
       skills: [
+        { name: 'TypeScript', icon: SiTypescript },
         { name: 'Node.js', icon: SiNodedotjs },
+        { name: 'NestJs', icon: SiNestjs },
         { name: 'Express', icon: SiExpress },
+        { name: 'Socket.io', icon: SiSocketdotio },
+        { name: 'Laravel', icon: SiLaravel, },
+        { name: 'FastApi', icon: SiFastapi, },
         { name: 'MongoDB', icon: SiMongodb },
         { name: 'PostgreSQL', icon: SiPostgresql },
-        { name: 'Python', icon: SiPython },
-        { name: 'REST APIs', icon: SiGithub },
+        { name: 'MySql', icon: SiMysql },
+        { name: 'Redis', icon: SiRedis },
       ],
     },
     {
       category: 'Frontend',
       skills: [
         { name: 'React', icon: SiReact },
-        { name: 'TypeScript', icon: SiTypescript },
+        { name: 'Redux', icon: SiRedux },
+        { name: 'Vite', icon: SiVite },
+        { name: 'MUI', icon: SiMui },
+        { name: 'JQuery', icon: SiJquery },
         { name: 'Tailwind CSS', icon: SiTailwindcss },
-        { name: 'Next.js', icon: SiReact },
-        { name: 'HTML/CSS', icon: SiGithub },
+        { name: 'HTML/CSS', icon: SiHtml5 },
       ],
     },
     {
       category: 'DevOps & Tools',
       skills: [
+        { name: 'Linux', icon: SiLinux },
+        { name: 'AWS', icon: SiAmazon },
+        { name: 'Nginx', icon: SiNginx },
         { name: 'Docker', icon: SiDocker },
         { name: 'Git', icon: SiGit },
-        { name: 'AWS', icon: SiAmazon },
-        { name: 'CI/CD', icon: SiDocker },
-        { name: 'GitHub', icon: SiGithub },
+        { name: 'CI/CD', icon: GrDeploy },
+        { name: 'Jira', icon: SiJira },
       ],
-    },
-    {
-      category: 'Soft Skills',
-      skills: [
-        { name: 'Team Leadership', icon: SiGithub },
-        { name: 'Problem Solving', icon: SiGithub },
-        { name: 'Communication', icon: SiGithub },
-        { name: 'Project Management', icon: SiGithub },
-        { name: 'Mentoring', icon: SiGithub },
-      ],
-    },
+    }
   ]
 
   const containerVariants = {
