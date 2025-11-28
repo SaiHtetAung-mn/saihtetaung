@@ -1,26 +1,29 @@
 [
-    {
-        "company": "Caring Code Creation Co,. Ltd",
-        "position": "Fullstack Engineer",
-        "from_date": "Mar 2024",
-        "to_date": "Present",
-        "link": "https://c3.com.mm/",
-        "description": "Contributed to end-to-end development, designing scalable architecture and implementing both frontend and backend."
-    },
-    {
-        "company": "Tunyat Co,. Ltd",
-        "position": "Fullstack Engineer",
-        "from_date": "Jan 2023",
-        "to_date": "Feb 2024",
-        "link": "https://www.tunyat.com/",
-        "description": "Helped design and develop Myanmar's first agricultural funding and marketplace platform for farmers."
-    },
-    {
-        "company": "Blue Ocean Co,. Ltd",
-        "position": "Junior Software Engineer",
-        "from_date": "Nov 2021",
-        "to_date": "Dec 2022",
-        "link": "https://blueoceanmm.com/",
-        "description": "Developed and maintained in-house web applications integrated with widely-used payment gateway platforms."
-    }
+  {
+    "company": "Caring Code Creation Co,. Ltd",
+    "position": "Fullstack Engineer",
+    "from_date": "Mar 2024",
+    "to_date": "Present",
+    "location": "Remote",
+    "link": "https://c3.com.mm/",
+    "description": "Contributed to end-to-end development, designing scalable architecture and implementing both frontend and backend."
+  },
+  {
+    "company": "Tunyat Co,. Ltd",
+    "position": "Fullstack Engineer",
+    "from_date": "Jan 2023",
+    "to_date": "Feb 2024",
+    "location": "Onsite",
+    "link": "https://www.tunyat.com/",
+    "description": "Helped design and develop Myanmar's first agricultural funding and marketplace platform for farmers."
+  },
+  {
+    "company": "Blue Ocean Co,. Ltd",
+    "position": "Junior Software Engineer",
+    "from_date": "Nov 2021",
+    "to_date": "Dec 2022",
+    "location": "Onsite",
+    "link": "https://blueoceanmm.com/",
+    "description": "Developed and maintained in-house web applications integrated with widely-used payment gateway platforms."
+  }
 ]

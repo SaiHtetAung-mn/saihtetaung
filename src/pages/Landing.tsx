@@ -69,26 +69,43 @@ export function Landing() {
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
               Hi, I'm
             </h1>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-700 dark:text-slate-300 mb-6">
+            
+            {/* Typewriter Animated Name */}
+            <motion.h2
+              initial={{ width: 0 }}
+              animate={{ width: '100%' }}
+              transition={{ duration: 2, ease: 'easeInOut' }}
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-700 dark:text-slate-300 mb-6 overflow-hidden whitespace-nowrap"
+              style={{ fontFamily: 'monospace' }}
+            >
               Sai Htet Aung
-            </h2>
+            </motion.h2>
 
-            <motion.p
-              variants={itemVariants}
-              className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-3 leading-relaxed"
+            {/* Typewriter Animated Position */}
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: '100%' }}
+              transition={{ duration: 1.5, ease: 'easeInOut', delay: 2 }}
+              className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-3 overflow-hidden whitespace-nowrap"
             >
               Full Stack Software Engineer
-            </motion.p>
+            </motion.div>
 
+            {/* Animated Description */}
             <motion.p
-              variants={itemVariants}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut', delay: 3.5 }}
               className="text-base sm:text-lg text-gray-500 dark:text-gray-500 mb-8 leading-relaxed"
             >
               I build beautiful, responsive web applications with modern technologies. Passionate about creating seamless user experiences and writing clean code.
             </motion.p>
 
+            {/* Animated Buttons */}
             <motion.div
-              variants={itemVariants}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut', delay: 4.3 }}
               className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
             >
               <motion.button

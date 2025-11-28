@@ -17,7 +17,7 @@ function App() {
           <Contact />
         </main>
         <footer className="bg-gray-100 dark:bg-gray-900 py-8 text-center text-gray-600 dark:text-gray-400">
-          <p>© 2024 Your Name. All rights reserved.</p>
+          <p>© { new Date().getFullYear() } Sai Htet Aung. All rights reserved.</p>
         </footer>
       </div>
     </ThemeProvider>

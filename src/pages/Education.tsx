@@ -1,25 +1,18 @@
 import { motion } from 'framer-motion'
-import certificationsData from '../data/certifications.json'
+import certificationsData from '../data/certifications'
 import { FaGraduationCap } from "react-icons/fa";
 import { GiAchievement } from "react-icons/gi";
+import { MdOpenInNew } from 'react-icons/md';
 
 export function Education() {
   const educationItems = [
     {
-      id: 1,
       school: 'University Of Information Technology, Yangon',
       degree: 'Bachelor of Computer Science in Software Engineering',
       year: '2020 - 2024',
+      link: "https://www.uit.edu.mm/"
     }
   ]
-
-  const certificationItems = certificationsData.map((cert, index) => ({
-    id: index + 1,
-    title: cert.title,
-    issuer: cert.issuer,
-    year: cert.year,
-    icon: '🏆',
-  }))
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -32,10 +25,9 @@ export function Education() {
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -50 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      x: 0,
       transition: { duration: 0.6 },
     },
   }
@@ -76,9 +68,9 @@ export function Education() {
             viewport={{ once: true, margin: "-100px" }}
             className="space-y-8"
           >
-            {educationItems.map((edu) => (
+            {educationItems.map((edu, index) => (
               <motion.div
-                key={edu.id}
+                key={index}
                 variants={itemVariants}
                 className="border-l-4 border-slate-700 dark:border-slate-500 sm:pl-8 pl-4 py-4"
               >
@@ -90,8 +82,19 @@ export function Education() {
                   <h4 className="text-2xl font-bold text-gray-900 dark:text-white mt-2">
                     {edu.degree}
                   </h4>
-                  <p className="text-lg text-gray-600 dark:text-gray-300 mt-1">
+                  <p className="flex gap-2 items-center text-lg text-gray-600 dark:text-gray-300 mt-1">
                     {edu.school}
+                    {edu.link && (
+                      <a
+                        href={edu.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center p-1.5 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-full transition-all"
+                        title={`Visit ${edu.school}`}
+                      >
+                        <MdOpenInNew className="text-sm" />
+                      </a>
+                    )}
                   </p>
                 </div>
               </motion.div>
@@ -114,15 +117,15 @@ export function Education() {
             viewport={{ once: true, margin: "-100px" }}
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
-            {certificationItems.map((cert) => (
+            {certificationsData.map((cert, index) => (
               <motion.div
-                key={cert.id}
+                key={index}
                 variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
                 className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border-l-4 border-slate-700 dark:border-slate-500"
               >
                 <div className="flex items-start gap-4">
-                  <div className="text-4xl flex-shrink-0">{cert.icon}</div>
+                  <div className="text-4xl font-bold dark:text-white text-slate-700 dark:text-slate-300">{<cert.icon />}</div>
                   <div className="flex-1">
                     <p className="text-sm font-semibold text-slate-700 dark:text-slate-400 uppercase tracking-wide">
                       {cert.year}
@@ -133,6 +136,16 @@ export function Education() {
                     <p className="text-gray-600 dark:text-gray-300 mt-1">
                       {cert.issuer}
                     </p>
+                    {cert.link && (
+                      <a
+                        href={cert.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block mt-3 px-3 py-1.5 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 border border-blue-600 dark:border-blue-400 rounded hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+                      >
+                        View Certificate →
+                      </a>
+                    )}
                   </div>
                 </div>
               </motion.div>
