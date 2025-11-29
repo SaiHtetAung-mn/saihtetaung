@@ -95,10 +95,10 @@ export function Portfolio() {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ y: -10 }}
-                className="bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+                className="h-full flex flex-col bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
               >
                 {/* Image with Skeleton Loading */}
-                <div className="relative h-40 bg-slate-300 dark:bg-slate-700 overflow-hidden">
+                <div className="relative h-60 bg-slate-300 dark:bg-slate-700 overflow-hidden">
                   {!loadedImages.has(project.image) && (
                     <motion.div
                       animate={{ backgroundPosition: ['200% 0', '-200% 0'] }}
@@ -127,19 +127,19 @@ export function Portfolio() {
                   </div>
                   
                   {/* Tech Stack - Highlighted with colorful chips */}
-                  {/* <div className="flex gap-2 flex-wrap mb-6 flex-grow">
+                  <div className="flex gap-2 flex-wrap">
                     {project.tech_stack.map((tech, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1 text-xs font-semibold bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 text-white rounded-full shadow-md hover:shadow-lg transition-shadow"
+                        className="px-3 py-1 text-xs text-gray-600 bg-gray-200 dark:text-gray-600 dark:bg-gray-300 rounded rounded-full"
                       >
                         {tech}
                       </span>
                     ))}
-                  </div> */}
+                  </div>
 
                   {/* Links - Aligned to bottom */}
-                  <div className="flex gap-3 pt-4 border-t border-gray-200 dark:border-gray-600">
+                  <div className="flex gap-3 mt-auto">
                     {'code_url' in project && project.code_url && (
                       <a
                         href={project.code_url}
