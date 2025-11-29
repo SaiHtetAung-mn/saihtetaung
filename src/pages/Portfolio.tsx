@@ -4,9 +4,9 @@ import portfolioData from '../data/portfolio.json';
 
 export function Portfolio() {
   // Use correct keys from portfolioData
-  const [activeCategory, setActiveCategory] = useState<'work' | 'personal' | 'university'>('work');
+  const [activeCategory, setActiveCategory] = useState<'work' | 'personal'>('work');
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
-  const categories = ['work', 'personal', 'university'] as const;
+  const categories = ['work', 'personal'] as const;
   const handleImageLoad = (imagePath: string) => {
     setLoadedImages(prev => new Set(prev).add(imagePath));
   };
