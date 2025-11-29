@@ -101,10 +101,10 @@ export function Contact() {
 
           {/* Contact Form */}
           <motion.form
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
             onSubmit={handleSubmit}
             className="space-y-4"
           >
