@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import meImage from '../assets/me.jpeg'
+import meImage from '../assets/me2.jpg'
 import { Counter } from '../components/Counter'
 import { MdTimer } from 'react-icons/md'
 import { IoRocketSharp } from 'react-icons/io5'
