@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from 'framer-motion'
 import certificationsData from '../data/certifications'
 import { FaGraduationCap } from "react-icons/fa";
@@ -9,7 +10,7 @@ export function Education() {
     {
       school: 'University Of Information Technology, Yangon',
       degree: 'Bachelor of Computer Science in Software Engineering',
-      year: '2020 - 2024',
+      year: '2016 - 2024',
       link: "https://www.uit.edu.mm/"
     }
   ]
@@ -32,6 +33,8 @@ export function Education() {
     },
   }
 
+  const certifications = certificationsData.certifications;
+  const achievements = certificationsData.achievements;
   return (
     <section
       id="education"
@@ -117,7 +120,7 @@ export function Education() {
             viewport={{ once: true, margin: "-100px" }}
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
-            {certificationsData.map((cert, index) => (
+            {certifications.map((cert, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
@@ -152,7 +155,98 @@ export function Education() {
             ))}
           </motion.div>
         </div>
+
+        {/* Achievements Section */}
+        {achievements && achievements.length > 0 && (
+          <div className="mt-16">
+            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-2">
+              <div className="text-4xl mr-2 flex-shrink-0">
+                <GiAchievement />
+              </div>
+              Achievements
+            </h3>
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
+              {achievements.map((ach, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.04 }}
+                  className="rounded-lg shadow-md hover:shadow-lg transition-shadow border-l-4 border-slate-700 dark:border-slate-500 relative overflow-hidden min-h-[220px] flex items-end"
+                >
+                  {/* Multiple images: crossfade animation */}
+                  {Array.isArray(ach.image) ? (
+                    <CrossfadeImages images={ach.image} />
+                  ) : (
+                    <motion.div
+                      className="absolute inset-0 w-full h-full"
+                      initial={{ scale: 1.1, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 1 }}
+                      style={{
+                        backgroundImage: `linear-gradient(to bottom, rgba(30,30,30,0.3), rgba(0,0,0,0.7)), url(/${ach.image})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        filter: 'grayscale(10%)',
+                        zIndex: 0,
+                      }}
+                    />
+                  )}
+                  <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent w-full p-6 rounded-b-lg relative z-10">
+                    <p className="text-sm font-semibold text-slate-200 uppercase tracking-wide">
+                      {ach.year}
+                    </p>
+                    <h4 className="text-lg font-bold text-white mt-1">
+                      {ach.title}
+                    </h4>
+                    <p className="text-gray-200 mt-1">
+                      {ach.issuer}
+                    </p>
+                  </div>
+                </motion.div>
+
+// Remove duplicate CrossfadeImages implementation
+
+              ))}
+            </motion.div>
+          </div>
+        )}
       </div>
     </section>
-  )
+  );
+}
+
+export function CrossfadeImages({ images }: { images: string[] }) {
+  const [index, setIndex] = React.useState(0);
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((i) => (i + 1) % images.length);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, [images.length]);
+  return (
+    <div className="absolute inset-0 w-full h-full">
+      {images.map((img, i) => (
+        <motion.div
+          key={i}
+          className="absolute inset-0 w-full h-full"
+          initial={false}
+          animate={{ opacity: i === index ? 1 : 0 }}
+          transition={{ duration: 1 }}
+          style={{
+            backgroundImage: `linear-gradient(to bottom, rgba(30,30,30,0.3), rgba(0,0,0,0.7)), url(/${img})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            filter: 'grayscale(10%)',
+            zIndex: 0,
+          }}
+        />
+      ))}
+    </div>
+  );
 }

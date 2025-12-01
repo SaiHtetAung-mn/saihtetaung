@@ -1,7 +1,8 @@
 import { SiAmazon, SiLinuxfoundation } from "react-icons/si"
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
 
-export default [
+export default {
+  "certifications": [
     {
       "title": "AWS Certified Cloud Practitioner",
       "issuer": "Amazon Web Service",
@@ -23,4 +24,17 @@ export default [
       "link": "https://drive.google.com/file/d/1LtTYntZuEG_ojexWmTnLFghS-_KlQOjC/view?usp=drivesdk",
       "icon": AiOutlineSafetyCertificate
     }
-]
+  ],
+  "achievements": [
+    {
+      "title": "Core Value Award - Lego Robotics Challenge",
+      "issuer": "Myanmar STEM Competition",
+      "year": "Jan 2018",
+      "image": [
+        "achievements/msc1.jpg",
+        "achievements/msc2.jpg",
+        "achievements/msc3.jpg"
+      ]
+    },
+  ]
+}
