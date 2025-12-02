@@ -54,7 +54,7 @@ export function Landing() {
                 {/* Image */}
                 <img
                   src={meImage}
-                  alt="Profile"
+                  alt="Sai Htet Aung | Portfolio"
                   className="w-full h-full object-cover"
                 />
               </div>

@@ -1,8 +1,11 @@
 import { ThemeProvider } from './context/ThemeContext'
+import useDisableRightClick from './hooks/useDisableRightClick'
 import { Navigation } from './layouts/Navigation'
 import { Landing, Portfolio, About, Education, Experience, Skills, Contact } from './pages'
 
 function App() {
+  //useDisableRightClick();
+
   return (
     <ThemeProvider>
       <div className="bg-white dark:bg-gray-900 min-h-screen">
