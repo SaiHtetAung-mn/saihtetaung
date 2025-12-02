@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import meImage from '../assets/me2.jpg'
+import ImageWithSkeleton from '../components/ImageWithSkeleton';
 import { Counter } from '../components/Counter'
 import { MdTimer } from 'react-icons/md'
 import { IoRocketSharp } from 'react-icons/io5'
@@ -32,7 +33,7 @@ export function About() {
             transition={{ duration: 0.8 }}
           >
             <div className="relative w-full aspect-square rounded-lg overflow-hidden shadow-xl ring-4 ring-slate-800 dark:ring-slate-600">
-              <img
+              <ImageWithSkeleton
                 src={meImage}
                 alt="About"
                 className="w-full h-full object-cover"

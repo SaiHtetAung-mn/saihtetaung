@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import meImage from '../assets/me-primary.jpg'
+import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
 export function Landing() {
   const containerVariants = {
@@ -50,9 +51,8 @@ export function Landing() {
               
               {/* Main image container with vintage frame */}
               <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden shadow-2xl border-8 border-yellow-50 dark:border-gray-800">
-                
-                {/* Image */}
-                <img
+                {/* Image with skeleton loader */}
+                <ImageWithSkeleton
                   src={meImage}
                   alt="Sai Htet Aung | Portfolio"
                   className="w-full h-full object-cover"

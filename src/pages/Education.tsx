@@ -4,6 +4,7 @@ import certificationsData from '../data/education'
 import { FaGraduationCap } from "react-icons/fa";
 import { GiAchievement } from "react-icons/gi";
 import { MdOpenInNew } from 'react-icons/md';
+import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
 export function Education() {
   const educationItems = certificationsData.educations;
@@ -72,7 +73,7 @@ export function Education() {
               >
                 <div className="relative flex flex-col sm:flex-row items-stretch gap-6 min-h-[140px]">
                   <div className="w-full sm:w-32 md:w-40 h-full rounded-lg overflow-hidden flex items-stretch">
-                    <img
+                    <ImageWithSkeleton
                       src={edu.school_image ? `/${edu.school_image}` : ''}
                       alt={edu.school}
                       className="w-full h-full object-cover"
