@@ -1,19 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion'
-import certificationsData from '../data/certifications'
+import certificationsData from '../data/education'
 import { FaGraduationCap } from "react-icons/fa";
 import { GiAchievement } from "react-icons/gi";
 import { MdOpenInNew } from 'react-icons/md';
 
 export function Education() {
-  const educationItems = [
-    {
-      school: 'University Of Information Technology, Yangon',
-      degree: 'Bachelor of Computer Science in Software Engineering',
-      year: '2016 - 2024',
-      link: "https://www.uit.edu.mm/"
-    }
-  ]
+  const educationItems = certificationsData.educations;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -77,28 +70,47 @@ export function Education() {
                 variants={itemVariants}
                 className="border-l-4 border-slate-700 dark:border-slate-500 sm:pl-8 pl-4 py-4"
               >
-                <div className="relative">
-                  <div className="absolute -left-3.5 sm:-left-6 top-0 w-6 h-6 bg-slate-700 dark:bg-slate-500 rounded-full border-4 border-white dark:border-gray-800" />
-                  <p className="text-sm font-semibold text-slate-700 dark:text-slate-400 uppercase tracking-wide">
-                    {edu.year}
-                  </p>
-                  <h4 className="text-2xl font-bold text-gray-900 dark:text-white mt-2">
-                    {edu.degree}
-                  </h4>
-                  <p className="flex gap-2 items-center text-lg text-gray-600 dark:text-gray-300 mt-1">
-                    {edu.school}
-                    {edu.link && (
+                <div className="relative flex flex-col sm:flex-row items-stretch gap-6 min-h-[140px]">
+                  <div className="w-full sm:w-32 md:w-40 h-full rounded-lg overflow-hidden flex items-stretch">
+                    <img
+                      src={edu.school_image ? `/${edu.school_image}` : ''}
+                      alt={edu.school}
+                      className="w-full h-full object-cover"
+                      style={{ minHeight: '140px', maxHeight: '100%', background: '' }}
+                    />
+                  </div>
+                  <div className="flex-1 flex flex-col justify-center">
+                    <p className="text-sm font-semibold text-slate-700 dark:text-slate-400 uppercase tracking-wide">
+                      {edu.year}
+                    </p>
+                    <h4 className="text-2xl font-bold text-gray-900 dark:text-white mt-2">
+                      {edu.degree}
+                    </h4>
+                    <p className="flex gap-2 items-center text-lg text-gray-600 dark:text-gray-300 mt-1">
+                      {edu.school}
+                      {edu.school_link && (
+                        <a
+                          href={edu.school_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center p-1.5 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-full transition-all"
+                          title={`Visit ${edu.school}`}
+                        >
+                          <MdOpenInNew className="text-sm" />
+                        </a>
+                      )}
+                    </p>
+                    {edu.verify_link && (
                       <a
-                        href={edu.link}
+                        href={edu.verify_link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center p-1.5 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-full transition-all"
-                        title={`Visit ${edu.school}`}
+                        className="w-fit inline-block mt-2 px-3 py-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 border border-blue-600 dark:border-blue-400 rounded hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
                       >
-                        <MdOpenInNew className="text-sm" />
+                        Verify Degree →
                       </a>
                     )}
-                  </p>
+                  </div>
                 </div>
               </motion.div>
             ))}
