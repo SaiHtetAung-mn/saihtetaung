@@ -6,16 +6,18 @@ import { Counter } from '../components/Counter'
 
 export function About() {
   const focusAreas = [
-    'Front-of-frontend: design systems, accessible UI, and polished states.',
-    'Product delivery: translating requirements into reliable features end-to-end.',
-    'Performance and quality: profiling, testing, and keeping releases stable.',
+    'Backend-first: APIs, services, data models, and observability that stay fast and reliable.',
+    'Full-stack delivery: wiring React frontends to resilient backends with clear contracts.',
+    'Quality and performance: testing, profiling, and CI/CD that keeps releases boring.',
   ];
 
   const currentFocus = [
-    'Deepening TypeScript patterns and testing for safer refactors.',
-    'Micro-interactions and motion that make products feel responsive.',
-    'Automation across CI/CD to keep shipping velocity high.',
+    'Scaling Node/TypeScript services and databases without losing reliability.',
+    'Designing event-driven flows with good telemetry for faster debugging.',
+    'Keeping admin tooling usable while the backend evolves underneath.',
   ];
+
+  const techStack = ['Node.js', 'NestJS', 'React', 'MongoDB', 'MySQL', 'AWS'];
 
   const processSteps = [
     { title: 'Discover', detail: 'Clarify goals, constraints, and success metrics with stakeholders.' },
@@ -35,6 +37,10 @@ export function About() {
       </div>
 
       <div className="relative max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mt-3">About Me</h2>
+        </div>
+
         <div className="grid lg:grid-cols-1 gap-10 items-center">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -43,16 +49,52 @@ export function About() {
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
-            <div>
-              <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-3">
-                About Me
-              </h2>
+            <div className="space-y-2 mb-8 text-center">
+              <p className="sm:text-3xl md:text-2xl font-bold tracking-[0.18em] text-slate-500 dark:text-slate-400">Who I am</p>
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                I help teams ship reliable, high-polish web experiences with TypeScript, React, and thoughtful UX. I lean on design systems, performance-minded development, and clear communication to keep projects moving smoothly.
+                I’m a backend-focused full-stack engineer who ships dependable services, clean API and the UI needed to operate them. I care about data models, observability and clear contracts between systems so teams can move faster without surprises—and I love clean code, clear structure, and architecture that stays easy to reason about.
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] md:items-center gap-8 md:gap-14 md:pb-12"
+            >
+              <div className="flex items-center gap-4 md:justify-end md:text-left">
+                <div className="p-3 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm">
+                  <MdTimer className="w-7 h-7" />
+                </div>
+                <div>
+                  <p className="text-sm uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">Experience</p>
+                  <h3 className="text-4xl font-bold text-slate-900 dark:text-white">
+                    <Counter end={4} duration={2} suffix="+" />
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 font-medium">years shipping web products</p>
+                </div>
+              </div>
+
+              <div className="hidden md:flex justify-center">
+                <div className="w-px h-24 bg-gradient-to-b from-transparent via-slate-300 to-transparent dark:via-gray-600" />
+              </div>
+
+              <div className="flex items-center gap-4 md:justify-start">
+                <div className="p-3 rounded-full bg-amber-500 text-slate-900 shadow-sm">
+                  <IoRocketSharp className="w-7 h-7" />
+                </div>
+                <div>
+                  <p className="text-sm uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">Launches</p>
+                  <h3 className="text-4xl font-bold text-slate-900 dark:text-white">
+                    <Counter end={10} duration={2} suffix="+" />
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 font-medium">projects delivered from idea to launch</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="bg-white dark:bg-gray-800 rounded-lg p-5 shadow-md border border-slate-100 dark:border-gray-700">
                 <div className="flex items-center gap-2 text-sm font-semibold text-slate-800 dark:text-gray-100 mb-3">
                   <FiCompass className="h-5 w-5 text-slate-600 dark:text-gray-300" />
@@ -81,47 +123,27 @@ export function About() {
                   ))}
                 </ul>
               </div>
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-5 shadow-md border border-slate-100 dark:border-gray-700">
+                <div className="flex items-center gap-2 text-sm font-semibold text-slate-800 dark:text-gray-100 mb-3">
+                  <FiZap className="h-5 w-5 text-slate-600 dark:text-gray-300" />
+                  Most used tech stack
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  {techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-4 py-2 rounded-full bg-slate-50 text-slate-800 border border-slate-200 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-6"
-        >
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-7 shadow-lg border-l-4 border-slate-700 dark:border-slate-500">
-            <div className="flex items-center gap-4">
-              <div className="p-4 bg-slate-100 dark:bg-slate-700 rounded-lg">
-                <MdTimer className="w-8 h-8 text-slate-700 dark:text-slate-300" />
-              </div>
-              <div>
-                <h3 className="text-4xl font-bold text-slate-800 dark:text-white">
-                  <Counter end={4} duration={2} suffix="+" />
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 font-medium">Years of experience shipping web products</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-7 shadow-lg border-l-4 border-slate-700 dark:border-slate-500">
-            <div className="flex items-center gap-4">
-              <div className="p-4 bg-slate-100 dark:bg-slate-700 rounded-lg">
-                <IoRocketSharp className="w-8 h-8 text-slate-700 dark:text-slate-300" />
-              </div>
-              <div>
-                <h3 className="text-4xl font-bold text-slate-800 dark:text-white">
-                  <Counter end={10} duration={2} suffix="+" />
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 font-medium">Projects delivered from idea to launch</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <div className="mt-14 grid lg:grid-cols-[1.2fr,0.8fr] gap-8">
+        {/* <div className="mt-14 grid lg:grid-cols-2 gap-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -197,7 +219,7 @@ export function About() {
               </p>
             </div>
           </motion.div>
-        </div>
+        </div> */}
       </div>
     </section>
   )

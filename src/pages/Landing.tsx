@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { motion, type TargetAndTransition } from 'framer-motion'
+import { FiDownload, FiGithub } from 'react-icons/fi'
 import meImage from '../assets/me-primary.jpg'
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
 
@@ -23,17 +24,38 @@ export function Landing() {
     },
   }
 
+  const gradientAnimation: TargetAndTransition = {
+    x: [0, 24, -12, 0],
+    y: [0, -18, 12, 0],
+    rotate: [0, 2, -1, 0],
+    transition: { duration: 28, repeat: Infinity, ease: 'easeInOut' },
+  }
+
   return (
     <section
       id="landing"
-      className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900 pt-16"
+      className="relative min-h-screen flex items-center justify-center bg-white dark:bg-gray-900 pt-16 overflow-hidden"
     >
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 z-0 pointer-events-none"
+      >
+        <motion.div
+          animate={gradientAnimation}
+          className="absolute -top-32 -left-24 w-80 h-80 sm:w-96 sm:h-96 bg-gradient-to-br from-amber-200/50 via-white/15 to-slate-200/40 dark:from-slate-900/50 dark:via-slate-800/35 dark:to-amber-900/25 blur-3xl"
+        />
+        <motion.div
+          animate={gradientAnimation}
+          className="absolute -bottom-40 -right-20 w-96 h-96 sm:w-[28rem] sm:h-[28rem] bg-gradient-to-tr from-slate-200/40 via-amber-100/35 to-white/10 dark:from-slate-800/35 dark:via-slate-900/45 dark:to-amber-800/25 blur-3xl"
+        />
+      </div>
+
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full"
+        className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Image - Top on mobile, Right on desktop */}
@@ -108,7 +130,20 @@ export function Landing() {
               transition={{ duration: 0.8, ease: 'easeOut', delay: 4.3 }}
               className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center md:justify-start"
             >
-              
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href='https://github.com/SaiHtetAung-mn'
+                target='__blank'
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white/80 text-slate-900  shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all dark:bg-gray-900/80 dark:text-gray-100 dark:border-gray-700"
+              >
+                <FiGithub className="h-5 w-5" />
+                GitHub
+              </motion.a>
+
+              <div className="hidden sm:block w-px h-10 bg-gradient-to-b from-transparent via-slate-300 to-transparent dark:via-gray-600" />
+
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -124,8 +159,9 @@ export function Landing() {
                 download
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 bg-slate-800 dark:bg-slate-700 text-white font-semibold rounded-lg hover:bg-slate-900 dark:hover:bg-slate-600 transition-colors shadow-lg hover:shadow-xl"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 dark:bg-slate-700 text-white font-semibold rounded-lg hover:bg-slate-900 dark:hover:bg-slate-600 transition-colors shadow-lg hover:shadow-xl"
               >
+                <FiDownload className="h-5 w-5" />
                 Get Resume
               </motion.a>
             </motion.div>
