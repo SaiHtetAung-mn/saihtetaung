@@ -23,7 +23,8 @@ import {
   SiAmazon,
   SiRedis,
   SiNginx,
-  SiSocketdotio
+  SiSocketdotio,
+  SiPostman
 } from 'react-icons/si'
 import { GrDeploy } from "react-icons/gr";
 
@@ -67,6 +68,7 @@ export function Skills() {
         { name: 'Git', icon: SiGit },
         { name: 'CI/CD', icon: GrDeploy },
         { name: 'Jira', icon: SiJira },
+        { name: 'Postman', icon: SiPostman },
       ],
     }
   ]

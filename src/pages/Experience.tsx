@@ -88,11 +88,11 @@ export function Experience() {
                 {/* Header with period and type */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-3">
                   <div>
-                    <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                       {exp.title}
                     </h3>
                     <div className="flex items-center gap-2 mt-1">
-                      <p className="text-lg text-slate-700 dark:text-slate-300 font-semibold">
+                      <p className="text-md font-semibold text-slate-700 dark:text-slate-300 ">
                         {exp.company}
                       </p>
                       {exp.link && (
@@ -111,12 +111,12 @@ export function Experience() {
                   
                   {/* Right side info */}
                   <div className="flex flex-col items-start sm:items-end gap-2">
-                    <p className="text-sm font-bold text-slate-700 dark:text-slate-400 uppercase tracking-wider">
+                    <p className="text-sm font-bold text-slate-700 dark:text-slate-400 tracking-wider">
                       {exp.period}
                     </p>
                     <motion.span
                       whileHover={{ scale: 1.05 }}
-                      className={`px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide flex items-center gap-2 ${
+                      className={`px-4 py-2 rounded-full text-sm font-bold tracking-wide flex items-center gap-2 ${
                         exp.type === 'Onsite'
                           ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
                           : exp.type === 'Remote'
@@ -135,9 +135,11 @@ export function Experience() {
                 <div className="h-px bg-gradient-to-r from-slate-300 to-transparent dark:from-slate-600 my-4" />
 
                 {/* Description */}
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-5 text-base">
-                  {exp.description}
-                </p>
+                <ul className="list-disc list-outside pl-5 text-gray-600 dark:text-gray-300 leading-relaxed text-base space-y-3 mb-5">
+                  {exp.description.map((d, idx) => (
+                    <li key={idx}>{d}</li>
+                  ))}
+                </ul>
 
                 {/* Tech tags */}
                 <div className="flex flex-wrap gap-2">
