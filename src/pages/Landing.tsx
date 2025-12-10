@@ -88,7 +88,7 @@ export function Landing() {
               transition={{ duration: 1.5, ease: 'easeInOut', delay: 2 }}
               className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-3 overflow-hidden whitespace-nowrap"
             >
-              Full Stack Software Engineer
+              Full‑Stack Engineer
             </motion.div>
 
             {/* Animated Description */}
@@ -96,9 +96,9 @@ export function Landing() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: 'easeOut', delay: 3.5 }}
-              className="text-base sm:text-lg text-gray-500 dark:text-gray-500 mb-8 leading-relaxed"
+              className="text-base sm:text-lg text-gray-500 dark:text-gray-400 mb-8 leading-relaxed"
             >
-              I build beautiful, responsive web applications with modern technologies. Passionate about creating seamless user experiences and writing clean code.
+              I ship full-stack solutions—from robust backends to polished frontends.
             </motion.p>
 
             {/* Animated Buttons */}

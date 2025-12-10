@@ -63,9 +63,12 @@ export function Portfolio() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
             </svg>
           </button>
-          <div ref={scrollRef} className="w-full overflow-x-auto pb-4 portfolio-scrollbar-hide relative pr-8 sm:pr-0">
+          <div
+            ref={scrollRef}
+            className={`w-full overflow-x-auto pb-4 portfolio-scrollbar-hide relative ${currentProjects.length === 1 ? '' : 'pr-8 sm:pr-0'}`}
+          >
             <div
-              className="flex gap-4 sm:gap-8 snap-x snap-mandatory touch-pan-x pl-2"
+              className={`flex ${currentProjects.length === 1 ? 'justify-center' : ''} ${currentProjects.length === 1 ? '' : 'gap-4 sm:gap-8 pl-2'} snap-x snap-mandatory touch-pan-x`}
               style={{ WebkitOverflowScrolling: 'touch' }}
             >
               {currentProjects.length > 0 ? (
