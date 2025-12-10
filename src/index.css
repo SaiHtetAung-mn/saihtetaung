@@ -17,3 +17,20 @@ body {
   line-height: 1.5;
   font-weight: 400;
 }
+
+/* Hide horizontal scrollbar for all browsers */
+.portfolio-scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.portfolio-scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+@keyframes bounce-x {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(12px); }
+}
+.animate-bounce-x {
+  animation: bounce-x 1.2s infinite;
+}
