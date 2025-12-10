@@ -4,7 +4,7 @@ import { Navigation } from './layouts/Navigation'
 import { Landing, Portfolio, About, Education, Experience, Skills, Contact } from './pages'
 
 function App() {
-  useDisableRightClick();
+  //useDisableRightClick();
 
   return (
     <ThemeProvider>

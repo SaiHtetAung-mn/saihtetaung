@@ -1,4 +1,3 @@
-
 export default function ImageSkeleton({ className = '' }: { className?: string }) {
   return (
     <div
