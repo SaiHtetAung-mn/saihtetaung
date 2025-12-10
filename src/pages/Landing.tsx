@@ -106,24 +106,28 @@ export function Landing() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: 'easeOut', delay: 4.3 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
+              className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center md:justify-start"
             >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 bg-slate-800 dark:bg-slate-700 text-white font-semibold rounded-lg hover:bg-slate-900 dark:hover:bg-slate-600 transition-colors shadow-lg hover:shadow-xl"
-              >
-                View My Work
-              </motion.button>
+              
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-4 border-2 border-slate-800 dark:border-slate-600 text-slate-800 dark:text-slate-300 font-semibold rounded-lg hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors"
               >
-                Get In Touch
+                Hire Me
               </motion.button>
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="/resume.pdf"
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 bg-slate-800 dark:bg-slate-700 text-white font-semibold rounded-lg hover:bg-slate-900 dark:hover:bg-slate-600 transition-colors shadow-lg hover:shadow-xl"
+              >
+                Get Resume
+              </motion.a>
             </motion.div>
           </motion.div>
         </div>

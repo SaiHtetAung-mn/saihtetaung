@@ -2,8 +2,6 @@ import { motion } from 'framer-motion'
 import { FiCheckCircle, FiCompass, FiTarget, FiZap } from 'react-icons/fi'
 import { IoRocketSharp } from 'react-icons/io5'
 import { MdTimer } from 'react-icons/md'
-import ImageWithSkeleton from '../components/ImageWithSkeleton';
-import meImage from '../assets/me2.jpg'
 import { Counter } from '../components/Counter'
 
 export function About() {
@@ -37,24 +35,7 @@ export function About() {
       </div>
 
       <div className="relative max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-[1fr,1.05fr] gap-10 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
-            <div className="absolute -top-6 -left-6 h-16 w-16 rounded-full bg-slate-200 dark:bg-slate-800 blur-2xl" />
-            <div className="relative w-full aspect-square rounded-xl overflow-hidden shadow-2xl ring-4 ring-slate-800 dark:ring-slate-600">
-              <ImageWithSkeleton
-                src={meImage}
-                alt="Portrait"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </motion.div>
-
+        <div className="grid lg:grid-cols-1 gap-10 items-center">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
