@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { MdEmail } from 'react-icons/md'
-import { SiLinkedin, SiGithub } from 'react-icons/si'
+import { MdEmail, MdLocationOn } from 'react-icons/md'
+import { SiLinkedin, SiLine } from 'react-icons/si'
 import personalInfo from '../data/personal-info.json'
 
 export function Contact() {
@@ -29,7 +29,8 @@ export function Contact() {
   const contactLinks = [
     { icon: MdEmail, label: 'Email', value: personalInfo.email },
     { icon: SiLinkedin, label: 'LinkedIn', value: personalInfo.linkedin },
-    { icon: SiGithub, label: 'GitHub', value: personalInfo.github },
+    { icon: MdLocationOn, label: 'Address', value: personalInfo.address },
+    { icon: SiLine, label: 'LINE', value: personalInfo.line },
   ]
 
   const containerVariants = {
