@@ -19,12 +19,12 @@ export function About() {
 
   const techStack = ['Node.js', 'NestJS', 'React', 'MongoDB', 'MySQL', 'AWS'];
 
-  const processSteps = [
-    { title: 'Discover', detail: 'Clarify goals, constraints, and success metrics with stakeholders.' },
-    { title: 'Design & plan', detail: 'Map flows, prototypes, and technical approaches before build.' },
-    { title: 'Build & validate', detail: 'Ship iteratively with code review, testing, and instrumentation.' },
-    { title: 'Launch & support', detail: 'Measure, refine, and keep the experience reliable post-release.' },
-  ];
+  // const processSteps = [
+  //   { title: 'Discover', detail: 'Clarify goals, constraints, and success metrics with stakeholders.' },
+  //   { title: 'Design & plan', detail: 'Map flows, prototypes, and technical approaches before build.' },
+  //   { title: 'Build & validate', detail: 'Ship iteratively with code review, testing, and instrumentation.' },
+  //   { title: 'Launch & support', detail: 'Measure, refine, and keep the experience reliable post-release.' },
+  // ];
 
   return (
     <section
