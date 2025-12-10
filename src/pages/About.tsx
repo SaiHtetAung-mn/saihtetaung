@@ -48,7 +48,7 @@ export function About() {
             <div className="space-y-2 mb-8 text-center">
               <p className="sm:text-3xl md:text-2xl font-bold tracking-[0.18em] text-slate-500 dark:text-slate-400">Who I am</p>
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                I’m a backend-focused full-stack engineer who ships dependable services, clean API and the UI needed to operate them. I care about data models, observability and clear contracts between systems so teams can move faster without surprises—and I love clean code, clear structure, and architecture that stays easy to reason about.
+                I’m a backend-focused full-stack engineer and a computer science graduate who ships dependable services, clean APIs and the UI needed to operate them. I obsess over data models, observability, and clear contracts between systems so teams can move faster without surprises. I like code that stays readable months later and architecture that anyone on the team can reason about.
               </p>
             </div>
 

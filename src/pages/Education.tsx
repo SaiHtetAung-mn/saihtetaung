@@ -143,7 +143,7 @@ export function Education() {
                 <div className="flex items-start gap-4">
                   <div className="text-4xl font-bold dark:text-white text-slate-700 dark:text-slate-300">{<cert.icon />}</div>
                   <div className="flex-1">
-                    <p className="text-sm font-semibold text-slate-700 dark:text-slate-400 uppercase tracking-wide">
+                    <p className="text-sm font-semibold text-slate-700 dark:text-slate-400 tracking-wide">
                       {cert.year}
                     </p>
                     <h4 className="text-lg font-bold text-gray-900 dark:text-white mt-1">
@@ -211,7 +211,7 @@ export function Education() {
                     />
                   )}
                   <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent w-full p-6 rounded-b-lg relative z-10">
-                    <p className="text-sm font-semibold text-slate-200 uppercase tracking-wide">
+                    <p className="text-sm font-semibold text-slate-200 tracking-wide">
                       {ach.year}
                     </p>
                     <h4 className="text-lg font-bold text-white mt-1">
@@ -222,9 +222,6 @@ export function Education() {
                     </p>
                   </div>
                 </motion.div>
-
-// Remove duplicate CrossfadeImages implementation
-
               ))}
             </motion.div>
           </div>

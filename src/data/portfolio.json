@@ -1,7 +1,7 @@
 {
   "work": [
     {
-      "title": "PayB One-Stop Payment Gateway",
+      "title": "PayB One - Stop Payment Gateway",
       "image": "projects/payb.png",
       "description": "A single, unified payment gateway that supports all major digital wallets in Myanmar. It simplifies integration for businesses by providing one API connection to process payments across multiple wallet providers.",
       "tech_stack": [
@@ -9,6 +9,16 @@
         "NodeJs"
       ],
       "link": "https://blueoceanmm.com/solutions/payb"
+    },
+    {
+      "title": "Boss ERP - Multi-Tenant ERP System",
+      "image": "projects/boss-erp.png",
+      "description": "I contributed to the development of a scalable, multi-tenant ERP platform that allows different businesses to manage their operations in one unified system. The application includes modules for sales, inventory, accounting and reporting with secure data isolation for each tenant.",
+      "tech_stack": [
+        "NodeJs",
+        "ReactJs",
+        "MongoDb"
+      ]
     },
     {
       "title": "OHM Astrology And Spiritual Content Digital Service",
@@ -61,8 +71,9 @@
       "image": "projects/portfolio.png",
       "description": "My personal portfolio website.",
       "tech_stack": [
-        "Tytpescript",
+        "Typescript",
         "ReactJs",
+        "Tailwind",
         "Vite"
       ],
       "code_url": "https://github.com/SaiHtetAung-mn/sai-htet-aung",
