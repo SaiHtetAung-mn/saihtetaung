@@ -3,17 +3,20 @@
     {
       "title": "PayB One - Stop Payment Gateway",
       "image": "projects/payb.png",
-      "description": "A single, unified payment gateway that supports all major digital wallets in Myanmar. It simplifies integration for businesses by providing one API connection to process payments across multiple wallet providers.",
+      "description": "A unified payment gateway that connects all major Myanmar digital wallets through one simple API.",
+      "responsibility": "Onboarded new merchants and kept the payment gateway running smoothly through regular maintenance.",
       "tech_stack": [
         "Laravel",
-        "NodeJs"
+        "NodeJs",
+        "MySql"
       ],
       "link": "https://blueoceanmm.com/solutions/payb"
     },
     {
       "title": "Boss ERP - Multi-Tenant ERP System",
       "image": "projects/boss-erp.png",
-      "description": "I contributed to the development of a scalable, multi-tenant ERP platform that allows different businesses to manage their operations in one unified system. The application includes modules for sales, inventory, accounting and reporting with secure data isolation for each tenant.",
+      "description": "A cloud-based, multi-tenant ERP system that brings all core business operations into one easy-to-manage platform.",
+      "responsibility": "Contributed to system architecture and worked on both frontend and backend development from the early concept stage through launch.",
       "tech_stack": [
         "NodeJs",
         "ReactJs",
@@ -21,9 +24,34 @@
       ]
     },
     {
-      "title": "OHM Astrology And Spiritual Content Digital Service",
+      "title": "Myanmar Distribution Group - Digital Campaign",
+      "image": "projects/mdg-campaign.png",
+      "description": "A digital campaign platform with a customer lucky draw system and an admin portal for managing entries and winners.",
+      "responsibility": "Designed and developed the backend architecture, implemented lucky draw mechanics, and built APIs for the admin portal.",
+      "tech_stack": [
+        "NestJs",
+        "PostgreSql",
+        "NextJs"
+      ],
+      "link": "https://dev.mdgproducts.com/"
+    },
+    {
+      "title": "Suu Buu - Agricultural Marketplace and Funding Platform ",
+      "image": "projects/tunyat.png",
+      "description": "A marketplace and funding platform designed to support Myanmar farmers with better market access and financing.",
+      "responsibility": "Worked across the full development cycle—from idea to launch—building both the frontend and backend.",
+      "tech_stack": [
+        "ExpressJs",
+        "ReactJs",
+        "MongoDb"
+      ],
+      "link": "https://play.google.com/store/apps/details?id=com.tunyat.subuu"
+    },
+    {
+      "title": "OHM - Astrology And Spiritual Content Digital Service",
       "image": "projects/ohm.png",
-      "description": "A digital platform offering astrology insights and spiritual guidance. Users can subscribe to access premium features, with subscription payments conveniently handled through USSD.",
+      "description": "A digital platform that provides astrology insights and spiritual guidance, with premium features available through convenient USSD-based subscriptions.",
+      "responsibility": "Developed the entire platform end-to-end—from concept to launch—playing a key role in its successful adoption.",
       "tech_stack": [
         "Laravel",
         "USSD Subscription",

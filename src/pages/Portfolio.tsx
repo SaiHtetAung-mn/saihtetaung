@@ -1,22 +1,78 @@
-import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import portfolioData from '../data/portfolio.json';
 
 
 export function Portfolio() {
   const [activeCategory, setActiveCategory] = useState<'work' | 'personal'>('work');
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  const [dotCount, setDotCount] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const categories = ['work', 'personal'] as const;
   const handleImageLoad = (imagePath: string) => {
     setLoadedImages(prev => new Set(prev).add(imagePath));
   };
-  const currentProjects = portfolioData[activeCategory] ?? [];
+  const currentProjects = Array.isArray(portfolioData[activeCategory])
+    ? portfolioData[activeCategory]
+    : [];
 
   const scrollByAmount = (amount: number) => {
     if (scrollRef.current) {
       scrollRef.current.scrollBy({ left: amount, behavior: 'smooth' });
     }
   };
+
+  const scrollToCard = (index: number) => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const cards = container.querySelectorAll<HTMLDivElement>('[data-portfolio-card]');
+    const card = cards[index];
+    if (!card) return;
+    const containerRect = container.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const offset = cardRect.left - containerRect.left;
+    const target = container.scrollLeft + offset - (container.clientWidth - cardRect.width) / 2;
+    container.scrollTo({ left: target, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const cards = container.querySelectorAll<HTMLDivElement>('[data-portfolio-card]');
+    setDotCount(cards.length);
+    setActiveProjectIndex((prev) => {
+      if (!cards.length) return 0;
+      return Math.min(prev, cards.length - 1);
+    });
+
+    const handleScroll = () => {
+      const cards = Array.from(container.querySelectorAll<HTMLDivElement>('[data-portfolio-card]'));
+      if (!cards.length) return;
+      const containerRect = container.getBoundingClientRect();
+      const containerCenter = containerRect.left + container.clientWidth / 2;
+      let closestIdx = 0;
+      let minDistance = Number.MAX_VALUE;
+      cards.forEach((card, idx) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const distance = Math.abs(cardCenter - containerCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIdx = idx;
+        }
+      });
+      setActiveProjectIndex(closestIdx);
+    };
+
+    handleScroll();
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [activeCategory, currentProjects.length]);
+
+  useEffect(() => {
+    setActiveProjectIndex(0);
+    scrollToCard(0);
+  }, [activeCategory]);
 
   return (
     <section
@@ -74,16 +130,16 @@ export function Portfolio() {
               {currentProjects.length > 0 ? (
                 currentProjects.map((project, idx) => {
                   const cardWidth = currentProjects.length === 1 ? 'w-full' : 'w-72 sm:w-80';
-                  const categoryLabel = activeCategory === 'work' ? 'Client Work' : 'Personal Build';
                   return (
                     <div
                       key={project.title + idx}
+                      data-portfolio-card
                       className={`flex-shrink-0 ${cardWidth} animate-portfolio-fade snap-center`}
                       style={{ animationDelay: `${idx * 0.1}s` }}
                     >
                       <div className="group relative h-full rounded-2xl bg-gradient-to-b from-slate-900/10 via-slate-900/5 to-white dark:from-slate-100/15 dark:via-slate-100/5 dark:to-slate-900/50 p-[1px] shadow-lg shadow-slate-900/5 dark:shadow-black/40 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
                         <div className="flex flex-col h-full bg-white/90 dark:bg-gray-800/90 rounded-2xl overflow-hidden backdrop-blur">
-                          <div className="relative h-56 bg-slate-200 dark:bg-slate-700">
+                          <div className="relative h-48 sm:h-52">
                             {!loadedImages.has(project.image) && (
                               <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 dark:from-gray-700 dark:via-gray-600 dark:to-gray-700" />
                             )}
@@ -94,20 +150,28 @@ export function Portfolio() {
                               className={`w-full h-full object-cover transition-opacity duration-300 ${loadedImages.has(project.image) ? 'opacity-100' : 'opacity-0'}`}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            <span className="absolute top-3 right-3 px-3 py-1 text-xs font-semibold rounded-full backdrop-blur bg-white/85 text-slate-800 dark:bg-gray-900/75 dark:text-gray-100 border border-white/60 dark:border-gray-700">
+                            {/* <span className="absolute top-3 right-3 px-3 py-1 text-xs font-semibold rounded-full backdrop-blur bg-white/85 text-slate-800 dark:bg-gray-900/75 dark:text-gray-100 border border-white/60 dark:border-gray-700">
                               {categoryLabel}
-                            </span>
+                            </span> */}
                           </div>
 
-                          <div className="p-6 flex flex-col h-full gap-4">
-                            <div className="flex items-start justify-between gap-3">
-                              <h4 className="font-semibold text-md text-gray-900 dark:text-white leading-tight">
-                                {project.title}
-                              </h4>
-                            </div>
-                            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                          <div className="p-5 flex flex-col h-full gap-3">
+                            <h4 className="font-semibold text-md text-gray-900 dark:text-white leading-tight">
+                              {project.title}
+                            </h4>
+                            <p
+                              className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
+                            >
                               {project.description}
                             </p>
+                            {'responsibility' in project && project.responsibility && (
+                              <p
+                                className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed"
+                              >
+                                <span className="font-semibold text-gray-700 dark:text-gray-200">Role:</span>{' '}
+                                {project.responsibility}
+                              </p>
+                            )}
 
                             <div className="flex gap-2 flex-wrap">
                               {project.tech_stack.map((tech, idx) => (
@@ -180,6 +244,19 @@ export function Portfolio() {
             </svg>
           </button>
         </div>
+        {dotCount > 0 && (
+          <div className="flex justify-center mt-6 gap-2">
+            {Array.from({ length: dotCount }).map((_, idx) => (
+              <button
+                key={`dot-${idx}`}
+                type="button"
+                aria-label={`Go to project ${idx + 1}`}
+                onClick={() => scrollToCard(idx)}
+                className={`h-2.5 w-2.5 rounded-full transition-all ${activeProjectIndex === idx ? 'bg-slate-800 dark:bg-slate-200 scale-110' : 'bg-gray-300 dark:bg-gray-600'}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )
