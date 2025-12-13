@@ -61,10 +61,22 @@
       "link": "https://play.google.com/store/apps/details?id=com.tunyat.subuu"
     },
     {
-      "title": "OHM - Astrology And Spiritual Content Digital Service",
+      "title": "1875 Baydin",
+      "image": "projects/1875.png",
+      "description": "A well-known Myanmar astrology service offering traditional Baydin and horoscope guidance through phone hotlines, digital platforms and payment wallets app like KBZ Pay",
+      "responsibility": "Helped build new features, expand the service to new platforms and keep everything running smoothly.",
+      "tech_stack": [
+        "Laravel",
+        "NodeJs",
+        "MySql"
+      ],
+      "link": "https://api.kbzpay.com/api/interface/facebook/share?server=newMacle&channel=prod&language=en&shareTitle=KBZPay%20Mini%20App%20-%201875%20Bay%20Din&appId=8ba6fcb5d06e3b9bac3bf997a70484f9%2Fpages%2Findex%2Findex%3FstartUpFrom%3DSharing"
+    },
+    {
+      "title": "OHM - Myanmar Occult & Mystery Content Service",
       "image": "projects/ohm.png",
-      "description": "A digital platform that provides astrology insights and spiritual guidance, with premium features available through convenient USSD-based subscriptions.",
-      "responsibility": "Developed the entire platform end-to-end—from concept to launch—playing a key role in its successful adoption.",
+      "description": "A mobile content subscription service in Myanmar that delivers exclusive supernatural stories, traditional mantras, and videos through USSD/SMS and a mini app inside a major telecom platform.",
+      "responsibility": "I developed the entire platform and a custom admin portal for easy content and subscription management.",
       "tech_stack": [
         "Laravel",
         "USSD Subscription",
