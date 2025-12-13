@@ -27,13 +27,26 @@
       "title": "Myanmar Distribution Group - Digital Campaign",
       "image": "projects/mdg-campaign.png",
       "description": "A digital campaign platform with a customer lucky draw system and an admin portal for managing entries and winners.",
-      "responsibility": "Designed and developed the backend architecture, implemented lucky draw mechanics, and built APIs for the admin portal.",
+      "responsibility": "Designed and developed the backend architecture, implemented lucky draw mechanics, and built APIs for the admin portal and campaign.",
       "tech_stack": [
         "NestJs",
         "PostgreSql",
         "NextJs"
       ],
       "link": "https://dev.mdgproducts.com/"
+    },
+    {
+      "title": "Spy Wine Myanmar - Digital Campaign",
+      "image": "projects/spy-campaign.png",
+      "description": "A digital campaign platform with a customer lucky draw(daily, weekly, final) system and an admin portal for managing entries and winners.",
+      "responsibility": "Developed both frontend and backend including UI, APIs and campaign logic.",
+      "tech_stack": [
+        "Laravel",
+        "MySql",
+        "Viber Bot",
+        "Messenger Bot"
+      ],
+      "link": "https://spymyanmarcampaign.com/campaign/RTV1Y2FIUk14Z3R5TndURmZwalNQWU9EYk9LRG1sZUNqUk9OMHhieHNsND0=/messenger"
     },
     {
       "title": "Suu Buu - Agricultural Marketplace and Funding Platform ",
