@@ -56,7 +56,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] md:items-center gap-8 md:gap-14 md:pb-12"
+              className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] md:items-center gap-8 md:gap-14 md:pb-12 sm:mb-3"
             >
               <div className="flex items-center gap-4 md:justify-end md:text-left">
                 <div className="p-3 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm">
