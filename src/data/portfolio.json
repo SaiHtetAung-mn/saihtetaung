@@ -1,7 +1,7 @@
 {
   "work": [
     {
-      "title": "PayB One - Stop Payment Gateway",
+      "title": "PayB - One Stop Payment Gateway",
       "image": "projects/payb.png",
       "description": "A unified payment gateway that connects all major Myanmar digital wallets through one simple API.",
       "responsibility": "Onboarded new merchants and kept the payment gateway running smoothly through regular maintenance.",
@@ -33,7 +33,7 @@
         "PostgreSql",
         "NextJs"
       ],
-      "link": "https://dev.mdgproducts.com/"
+      "link": ""
     },
     {
       "title": "Spy Wine Myanmar - Digital Campaign",

@@ -15,9 +15,8 @@ export function About() {
 
   const currentFocus = [
     'Diving deeper into more advanced backend concepts to improve how I design and ship production-ready features',
-    'Learning through guided online programs',
-    'Building personal projects to strengthen architecture skills',
-    'Practicing clean code & performance optimization'
+    'Contines learning through guided online programs',
+    'Taking a system-level view of problems, improving architecture where it matters, and keeping the codebase clean and efficient as it evolves.'
   ];
 
   const techStack = ['Node.js', 'NestJS', 'React', 'MongoDB', 'MySQL', 'AWS'];
@@ -48,7 +47,7 @@ export function About() {
             <div className="space-y-2 mb-8 text-center">
               <p className="sm:text-3xl md:text-2xl font-bold tracking-[0.18em] text-slate-500 dark:text-slate-400">Who I am</p>
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                I’m a backend-focused full-stack engineer and a computer science graduate who ships dependable services, clean APIs and the UI needed to operate them. I obsess over data models, observability, and clear contracts between systems so teams can move faster without surprises. I like code that stays readable months later and architecture that anyone on the team can reason about.
+                I’m a backend-focused full-stack engineer with a computer science background. I spend most of my time building reliable services and clean APIs along with the UI needed to run and debug them. I care a lot about data models, observability, and clear boundaries between systems, and I prefer code and architecture that stay understandable long after they’re written.
               </p>
             </div>
 
