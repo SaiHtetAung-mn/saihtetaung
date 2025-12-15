@@ -10,6 +10,11 @@ export function Contact() {
     email: '',
     message: '',
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [feedback, setFeedback] = useState<string | null>(null)
+
+  const formspreeFormId = import.meta.env.VITE_FORMSPREE_FORM_ID
+  const formspreeEndpoint = formspreeFormId ? `https://formspree.io/f/${formspreeFormId}` : null
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -19,11 +24,37 @@ export function Contact() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Add your form submission logic here
-    console.log('Form submitted:', formData)
-    setFormData({ name: '', email: '', message: '' })
+    if (!formspreeEndpoint) {
+      setFeedback('Oops, something went wrong. Please try again in a moment.')
+      return
+    }
+
+    setIsSubmitting(true)
+    setFeedback(null)
+    try {
+      const response = await fetch(formspreeEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Form submission failed')
+      }
+
+      setFeedback('Thanks! Your message is on its way to my inbox.')
+      setFormData({ name: '', email: '', message: '' })
+    } catch (error) {
+      console.error(error)
+      setFeedback('Oops, something went wrong. Please try again in a moment.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactLinks = [
@@ -158,10 +189,12 @@ export function Contact() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               type="submit"
-              className="w-full px-8 py-3 bg-slate-800 dark:bg-slate-700 text-white font-semibold rounded-lg hover:bg-slate-900 dark:hover:bg-slate-600 transition-colors shadow-lg hover:shadow-xl"
+              disabled={isSubmitting}
+              className="w-full px-8 py-3 bg-slate-800 dark:bg-slate-700 text-white font-semibold rounded-lg hover:bg-slate-900 dark:hover:bg-slate-600 transition-colors shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              Send Message
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </motion.button>
+            {feedback && <p className="text-center text-sm text-gray-600 dark:text-gray-300">{feedback}</p>}
           </motion.form>
         </div>
       </div>
