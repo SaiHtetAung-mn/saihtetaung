@@ -39,7 +39,7 @@
       "title": "Spy Wine Myanmar - Digital Campaign",
       "image": "projects/spy-campaign.png",
       "description": "A digital campaign platform with a customer lucky draw(daily, weekly, final) system and an admin portal for managing entries and winners.",
-      "responsibility": "Developed both frontend and backend including UI, APIs and campaign logic.",
+      "responsibility": "Collaborated on the development of frontend UI, backend APIs and parts of the lucky draw logic, along with admin portal features.",
       "tech_stack": [
         "Laravel",
         "MySql",
