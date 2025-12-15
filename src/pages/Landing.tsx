@@ -55,7 +55,7 @@ export function Landing() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full"
+        className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full pb-24"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Image - Top on mobile, Right on desktop */}
@@ -172,7 +172,7 @@ export function Landing() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="mt-16 flex justify-center"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex justify-center pointer-events-none"
         >
           <svg className="w-6 h-6 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
