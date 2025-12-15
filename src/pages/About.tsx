@@ -56,7 +56,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] md:items-center gap-8 md:gap-14 md:pb-12 sm:mb-3"
+              className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] md:items-center gap-10 md:gap-14 pb-10 md:pb-12"
             >
               <div className="flex items-center gap-4 md:justify-end md:text-left">
                 <div className="p-3 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm">
@@ -89,7 +89,7 @@ export function About() {
               </div>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 sm:mt-12">
               <div className="bg-white dark:bg-gray-800 rounded-lg p-5 shadow-md border border-slate-100 dark:border-gray-700">
                 <div className="flex items-center gap-2 font-bold text-slate-800 dark:text-gray-100 mb-3">
                   <FiCompass className="h-5 w-5 text-slate-600 dark:text-gray-300" />
