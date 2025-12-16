@@ -19,7 +19,7 @@ export function About() {
     'Taking a system-level view of problems, improving architecture where it matters, and keeping the codebase clean and efficient as it evolves.'
   ];
 
-  const techStack = ['Node.js', 'NestJS', 'React', 'MongoDB', 'MySQL', 'AWS'];
+  const techStack = ['Node.js', 'NestJS', 'ExpressJs', 'React', 'MongoDB', 'MySQL', 'AWS'];
 
   return (
     <section
