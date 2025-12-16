@@ -19,16 +19,16 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className="bg-white dark:bg-gray-900 min-h-screen">
+      <div className="bg-white dark:bg-gray-900 min-h-screen transition-colors duration-500 ease-in-out">
         <Navigation />
-        <main>
+        <main className="transition-colors duration-500 ease-in-out">
           {sections.map(({ id, Component }, idx) => (
             <StackSection key={id} idx={idx}>
               <Component />
             </StackSection>
           ))}
         </main>
-        <footer className="bg-gray-100 dark:bg-gray-900 py-8 text-center text-gray-600 dark:text-gray-400">
+        <footer className="bg-gray-100 dark:bg-gray-900 py-8 text-center text-gray-600 dark:text-gray-400 transition-colors duration-500 ease-in-out">
           <p>© { new Date().getFullYear() } Sai Htet Aung. All rights reserved.</p>
         </footer>
       </div>
