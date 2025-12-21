@@ -48,7 +48,10 @@ export function Navigation() {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-md transition-colors duration-300 ease-in-out">
+    <nav
+      aria-label="Primary"
+      className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-md transition-colors duration-300 ease-in-out"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -58,12 +61,16 @@ export function Navigation() {
             transition={{ duration: 0.5 }}
             className="flex-shrink-0"
           >
-            <button
-              onClick={() => scrollToSection('landing')}
-              className="text-2xl font-bold text-slate-800 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition-colors"
+            <a
+              href="#landing"
+              onClick={(event) => {
+                event.preventDefault()
+                scrollToSection('landing')
+              }}
+              className="text-2xl font-bold text-slate-800 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 rounded"
             >
-              
-            </button>
+              Sai Htet Aung
+            </a>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -71,19 +78,24 @@ export function Navigation() {
             <div className="ml-10 flex items-baseline space-x-4">
               {navItems.map((item, index) => (
                 <div key={item.id} className="relative">
-                  <motion.button
+                  <motion.a
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.05 }}
-                    onClick={() => scrollToSection(item.id)}
+                    href={`#${item.id}`}
+                    onClick={(event) => {
+                      event.preventDefault()
+                      scrollToSection(item.id)
+                    }}
                     className={`px-3 py-2 text-sm font-medium transition-colors ${
                       activeSection === item.id
                         ? 'text-slate-900 dark:text-white'
                         : 'text-gray-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white'
                     }`}
+                    aria-current={activeSection === item.id ? 'page' : undefined}
                   >
                     {item.label}
-                  </motion.button>
+                  </motion.a>
                   {activeSection === item.id && (
                     <motion.div
                       layoutId="activeIndicator"
@@ -104,6 +116,7 @@ export function Navigation() {
               onClick={toggleTheme}
               className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               aria-label="Toggle theme"
+              type="button"
             >
               {theme === 'light' ? (
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -127,6 +140,9 @@ export function Navigation() {
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300"
               aria-label="Toggle menu"
+              aria-expanded={isOpen}
+              aria-controls="mobile-navigation"
+              type="button"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isOpen ? (
@@ -146,20 +162,26 @@ export function Navigation() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden overflow-hidden"
+            id="mobile-navigation"
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
-                <button
+                <a
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  href={`#${item.id}`}
+                  onClick={(event) => {
+                    event.preventDefault()
+                    scrollToSection(item.id)
+                  }}
                   className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     activeSection === item.id
                       ? 'bg-slate-800 dark:bg-slate-700 text-white'
                       : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                   }`}
+                  aria-current={activeSection === item.id ? 'page' : undefined}
                 >
                   {item.label}
-                </button>
+                </a>
               ))}
             </div>
           </motion.div>

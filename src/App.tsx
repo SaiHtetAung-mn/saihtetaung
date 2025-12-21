@@ -20,8 +20,11 @@ function App() {
   return (
     <ThemeProvider>
       <div className="bg-white dark:bg-gray-900 min-h-screen transition-colors duration-500 ease-in-out">
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
         <Navigation />
-        <main className="transition-colors duration-500 ease-in-out">
+        <main id="main-content" tabIndex={-1} className="transition-colors duration-500 ease-in-out">
           {sections.map(({ id, Component }, idx) => (
             <StackSection key={id} idx={idx}>
               <Component />
