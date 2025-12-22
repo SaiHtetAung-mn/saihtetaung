@@ -54,24 +54,6 @@ export function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex-shrink-0"
-          >
-            <a
-              href="#landing"
-              onClick={(event) => {
-                event.preventDefault()
-                scrollToSection('landing')
-              }}
-              className="text-2xl font-bold text-slate-800 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 rounded"
-            >
-              Sai Htet Aung
-            </a>
-          </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
