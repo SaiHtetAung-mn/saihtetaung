@@ -54,7 +54,7 @@ export function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-
+          <div></div>
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
@@ -81,7 +81,7 @@ export function Navigation() {
                   {activeSection === item.id && (
                     <motion.div
                       layoutId="activeIndicator"
-                      className="absolute bottom-0 left-0 right-0 h-1 bg-slate-800 dark:bg-slate-400 rounded-full"
+                      className="absolute inset-x-0 -bottom-2 h-1 bg-slate-800 dark:bg-slate-400 rounded-full"
                       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                     />
                   )}
