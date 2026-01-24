@@ -1,4 +1,4 @@
-import { SiAmazon, SiLinuxfoundation } from "react-icons/si"
+import { SiAmazon, SiLinuxfoundation, SiMongodb } from "react-icons/si"
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
 
 export default {
@@ -19,6 +19,13 @@ export default {
       "year": "May 2025",
       "link": "https://www.credly.com/badges/285bf194-e4af-45f1-99bc-c8303602847e/linked_in_profile",
       "icon": SiAmazon
+    },
+    {
+      "title": "MongoDB Certified Developer Associate",
+      "issuer": "MongoDB",
+      "year": "Jan 2026",
+      "link": "https://www.credly.com/badges/16af23da-58d3-41bd-a30b-c51af1095c93/public_url",
+      "icon": SiMongodb
     },
     {
       "title": "Understanding the OWASP® Top 10 Security Threats (SKF100)",
