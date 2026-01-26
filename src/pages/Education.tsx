@@ -141,7 +141,19 @@ export function Education() {
                 className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border-l-4 border-slate-700 dark:border-slate-500"
               >
                 <div className="flex items-start gap-4">
-                  <div className="text-4xl font-bold dark:text-white text-slate-700 dark:text-slate-300">{<cert.icon />}</div>
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden bg-white/70 dark:bg-gray-600 flex items-center justify-center flex-shrink-0">
+                    {cert.imageUrl ? (
+                      <ImageWithSkeleton
+                        src={cert.imageUrl}
+                        alt={`${cert.title} badge`}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span className="text-sm font-bold text-slate-700 dark:text-slate-200">
+                        {cert.title?.slice(0, 2).toUpperCase()}
+                      </span>
+                    )}
+                  </div>
                   <div className="flex-1">
                     <p className="text-sm font-semibold text-slate-700 dark:text-slate-400 tracking-wide">
                       {cert.year}

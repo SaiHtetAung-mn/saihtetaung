@@ -1,6 +1,3 @@
-import { SiAmazon, SiLinuxfoundation, SiMongodb } from "react-icons/si"
-import { AiOutlineSafetyCertificate } from "react-icons/ai";
-
 export default {
   "educations": [
     {
@@ -18,28 +15,28 @@ export default {
       "issuer": "Amazon Web Service",
       "year": "May 2025",
       "link": "https://www.credly.com/badges/285bf194-e4af-45f1-99bc-c8303602847e/linked_in_profile",
-      "icon": SiAmazon
+      "imageUrl": "https://images.credly.com/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png"
     },
     {
       "title": "MongoDB Certified Developer Associate",
       "issuer": "MongoDB",
       "year": "Jan 2026",
       "link": "https://www.credly.com/badges/16af23da-58d3-41bd-a30b-c51af1095c93/public_url",
-      "icon": SiMongodb
+      "imageUrl": "https://images.credly.com/size/680x680/images/650ebdbe-d526-4b47-b186-c1ab516b5a7c/image.png"
     },
     {
       "title": "Understanding the OWASP® Top 10 Security Threats (SKF100)",
       "issuer": "The Linux Foundation",
       "year": "Apr 2025",
       "link": "https://www.credly.com/badges/43f0d93a-2ec2-44d7-8fbb-2b7e96af4028",
-      "icon": SiLinuxfoundation
+      "imageUrl": "https://images.credly.com/images/18d8c64f-cf68-4259-b0ef-2a116e9224f1/blob"
     },
     {
-      "title": "Fundamental Information Technology Engineer Examination ( FE )",
+      "title": "Fundamental Information Technology Engineer Examination",
       "issuer": "IT Professional Examination Council",
       "year": "Feb 2020",
       "link": "https://drive.google.com/file/d/1LtTYntZuEG_ojexWmTnLFghS-_KlQOjC/view?usp=drivesdk",
-      "icon": AiOutlineSafetyCertificate
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5_GAKjtOCdBUMBvDAQLQz9fcBLA_rY0SzOA&s"
     }
   ],
   "achievements": [
