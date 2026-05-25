@@ -13,7 +13,7 @@ export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [feedback, setFeedback] = useState<string | null>(null)
 
-  const formspreeFormId = import.meta.env.VITE_FORMSPREE_FORM_ID
+  const formspreeFormId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID
   const formspreeEndpoint = formspreeFormId ? `https://formspree.io/f/${formspreeFormId}` : null
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

@@ -2,7 +2,7 @@ import type { Config } from 'tailwindcss'
 
 export default {
   content: [
-    './index.html',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx}',
   ],
   darkMode: 'class',

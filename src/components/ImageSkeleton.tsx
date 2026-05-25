@@ -1,8 +1,16 @@
-export default function ImageSkeleton({ className = '' }: { className?: string }) {
+import type { CSSProperties } from 'react'
+
+export default function ImageSkeleton({
+  className = '',
+  style,
+}: {
+  className?: string
+  style?: CSSProperties
+}) {
   return (
     <div
       className={`animate-pulse bg-gray-200 dark:bg-gray-700 rounded-lg w-full h-full flex items-center justify-center ${className}`}
-      style={{ minHeight: '100px' }}
+      style={{ minHeight: '100px', ...style }}
     >
       <div className="w-2/3 h-2/3 bg-gray-300 dark:bg-gray-600 rounded-full" />
     </div>

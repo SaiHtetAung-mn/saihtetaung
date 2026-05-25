@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 function useDisableRightClick() {
   useEffect(() => {
-    const handleContextMenu = (e: any) => {
+    const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault();
     };
 
