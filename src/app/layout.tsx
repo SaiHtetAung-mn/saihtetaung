@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import '../src/index.css'
+import '../index.css'
 
 const siteUrl = 'https://saihtetaung.vercel.app'
 const siteName = 'Sai Htet Aung'
