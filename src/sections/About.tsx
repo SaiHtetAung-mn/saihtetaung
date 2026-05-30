@@ -42,7 +42,7 @@ export function About() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
+            viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
@@ -56,7 +56,7 @@ export function About() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
+              viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
               transition={{ duration: 0.8, delay: 0.1 }}
               className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] md:items-center gap-10 md:gap-14 pb-10 md:pb-12"
             >

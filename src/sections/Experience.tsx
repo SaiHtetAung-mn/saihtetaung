@@ -45,7 +45,7 @@ export function Experience() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="text-center mb-16"
         >
@@ -66,7 +66,7 @@ export function Experience() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
           className="space-y-12 relative"
         >
           {/* Vertical line - Left side (hidden on mobile) */}
@@ -162,7 +162,7 @@ export function Experience() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
           transition={{ duration: 0.45, ease: 'easeOut', delay: 0.2 }}
           className="mt-16 text-center"
         >

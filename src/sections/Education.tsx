@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import certificationsData from '../data/education'
 import { FaGraduationCap } from "react-icons/fa";
 import { GiAchievement } from "react-icons/gi";
@@ -8,24 +8,32 @@ import ImageWithSkeleton from '../components/ImageWithSkeleton';
 import ScrollFloatTitle from '../components/ScrollFloatTitle';
 
 export function Education() {
+  const prefersReducedMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = React.useState(false);
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    setIsMobile(window.matchMedia('(max-width: 767px)').matches);
+  }, []);
+  const useLightMotion = prefersReducedMotion || isMobile;
+
   const educationItems = certificationsData.educations;
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: useLightMotion ? 1 : 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: useLightMotion ? 0.06 : 0.2,
       },
     },
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 12 },
+    hidden: { opacity: useLightMotion ? 1 : 0, y: useLightMotion ? 0 : 12 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.45 },
+      transition: { duration: useLightMotion ? 0.28 : 0.45 },
     },
   }
 
@@ -38,9 +46,9 @@ export function Education() {
     >
       <div className="max-w-4xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          initial={useLightMotion ? false : { opacity: 0, y: -20 }}
+          whileInView={useLightMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="text-center mb-12"
         >
@@ -70,9 +78,9 @@ export function Education() {
           </div>
           <motion.div
             variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            initial={useLightMotion ? false : 'hidden'}
+            whileInView={useLightMotion ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
             className="space-y-8"
           >
             {educationItems.map((edu, index) => (
@@ -142,16 +150,16 @@ export function Education() {
           </div>
           <motion.div
             variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            initial={useLightMotion ? false : 'hidden'}
+            whileInView={useLightMotion ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
             {certifications.map((cert, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ y: -4 }}
+                whileHover={useLightMotion ? undefined : { y: -4 }}
                 className="rounded-lg border border-border/60 bg-surface p-6 transition-colors"
               >
                 <div className="flex items-start gap-4">
@@ -210,21 +218,21 @@ export function Education() {
             </div>
             <motion.div
               variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              initial={useLightMotion ? false : 'hidden'}
+              whileInView={useLightMotion ? undefined : 'visible'}
+              viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
               className="grid grid-cols-1 md:grid-cols-2 gap-6"
             >
               {achievements.map((ach, idx) => (
                 <motion.div
                   key={idx}
                   variants={itemVariants}
-                  whileHover={{ y: -4 }}
+                  whileHover={useLightMotion ? undefined : { y: -4 }}
                   className="relative flex min-h-[220px] items-end overflow-hidden rounded-lg border border-border/60 transition-colors"
                 >
                   {/* Multiple images: crossfade animation */}
                   {Array.isArray(ach.image) ? (
-                    <CrossfadeImages images={ach.image} />
+                    <CrossfadeImages images={ach.image} staticMode={useLightMotion} />
                   ) : (
                     <motion.div
                       className="absolute inset-0 w-full h-full"
@@ -262,14 +270,31 @@ export function Education() {
   );
 }
 
-export function CrossfadeImages({ images }: { images: string[] }) {
+export function CrossfadeImages({ images, staticMode = false }: { images: string[]; staticMode?: boolean }) {
   const [index, setIndex] = React.useState(0);
   React.useEffect(() => {
+    if (staticMode || images.length <= 1) return;
     const timer = setInterval(() => {
       setIndex((i) => (i + 1) % images.length);
     }, 3500);
     return () => clearInterval(timer);
-  }, [images.length]);
+  }, [images.length, staticMode]);
+
+  if (staticMode || images.length <= 1) {
+    return (
+      <div
+        className="absolute inset-0 w-full h-full"
+        style={{
+          backgroundImage: `url(/${images[0]})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'grayscale(10%)',
+          zIndex: 0,
+        }}
+      />
+    );
+  }
+
   return (
     <div className="absolute inset-0 w-full h-full">
       {images.map((img, i) => (

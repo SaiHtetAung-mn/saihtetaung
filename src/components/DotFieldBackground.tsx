@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, memo } from 'react';
+import { useEffect, useId, useRef, memo, useState } from 'react';
 
 const TWO_PI = Math.PI * 2;
 
@@ -44,7 +44,10 @@ const DotField = memo(({
   glowColor = '#120F17',
   ...rest
 }: DotFieldProps) => {
+  const [isSupported, setIsSupported] = useState(true);
+  const [isInView, setIsInView] = useState(true);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const hostRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const glowRef = useRef<SVGCircleElement>(null);
   const dotsRef = useRef<Dot[]>([]);
@@ -60,6 +63,31 @@ const DotField = memo(({
   const glowIdRef = useRef(`dot-field-glow-${glowId}`);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const isSmallScreen = window.innerWidth < 768;
+    setIsSupported(!(reducedMotion || coarsePointer || isSmallScreen));
+  }, []);
+
+  useEffect(() => {
+    const host = hostRef.current;
+    if (!host || !isSupported || typeof IntersectionObserver === 'undefined') return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { root: null, threshold: 0.01 }
+    );
+
+    observer.observe(host);
+    return () => observer.disconnect();
+  }, [isSupported]);
+
+  useEffect(() => {
+    if (!isSupported || !isInView) return;
     const canvas = canvasRef.current;
     const glowEl = glowRef.current;
     if (!canvas) return;
@@ -250,14 +278,18 @@ const DotField = memo(({
       window.removeEventListener('mousemove', onMouseMove);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isSupported, isInView]);
 
   useEffect(() => {
     rebuildRef.current?.();
   }, [dotRadius, dotSpacing]);
 
+  if (!isSupported) {
+    return <div ref={hostRef} className="w-full h-full relative" {...rest} />;
+  }
+
   return (
-    <div className="w-full h-full relative" {...rest}>
+    <div ref={hostRef} className="w-full h-full relative" {...rest}>
       <canvas
         ref={canvasRef}
         style={{

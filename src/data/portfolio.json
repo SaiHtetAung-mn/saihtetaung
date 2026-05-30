@@ -125,15 +125,12 @@
       "description": "My personal portfolio website.",
       "tech_stack": [
         "Typescript",
-        "ReactJs",
+        "NextJs",
         "Tailwind",
         "Vite"
       ],
       "code_url": "https://github.com/SaiHtetAung-mn/sai-htet-aung",
       "demo_url": "https://sai-htet-aung-pxv9.vercel.app/"
     }
-  ],
-  "university": [
-    
   ]
 }

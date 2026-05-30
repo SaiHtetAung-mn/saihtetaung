@@ -101,7 +101,7 @@ export function Skills() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="text-center mb-12"
         >
@@ -121,7 +121,7 @@ export function Skills() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
           {skillCategories.map((categoryData, index) => (

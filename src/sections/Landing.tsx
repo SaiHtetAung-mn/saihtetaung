@@ -5,7 +5,7 @@ import BlurText from '../components/BlurText';
 import DotFieldBackground from '../components/DotFieldBackground';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
 import RotatingText from '../components/RotatingText';
-import TextType from '../components/TextType';
+import TextType from '@/components/TextType';
 import { useTheme } from '../context/ThemeContext';
 
 export function Landing() {
@@ -46,31 +46,31 @@ export function Landing() {
   return (
     <section
       id="landing"
-      className={`hero-landing relative min-h-screen flex items-center justify-center pt-16 overflow-hidden ${isDark ? 'hero-landing--dark' : 'hero-landing--light'}`}
+      className={`hero-landing relative min-h-screen flex items-center justify-center pt-24 sm:pt-16 overflow-hidden ${isDark ? 'hero-landing--dark' : 'hero-landing--light'}`}
     >
       <DotFieldBackground
         className="pointer-events-none absolute inset-0 opacity-100"
         dotRadius={1.9}
-        dotSpacing={30}
+        dotSpacing={20}
         cursorRadius={420}
         bulgeOnly={true}
         bulgeStrength={72}
         glowRadius={220}
         sparkle={false}
-        waveAmplitude={4}
+        waveAmplitude={1}
         {...dotFieldTheme}
       />
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, amount: 0.1, margin: '0px 0px -10% 0px' }}
         className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full pb-24"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <motion.div
             variants={itemVariants}
-            className="flex justify-center order-first md:order-last"
+            className="mt-4 flex justify-center order-first md:order-last md:mt-0"
           >
             <motion.div
               initial="initial"

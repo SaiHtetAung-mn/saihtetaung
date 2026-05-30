@@ -1,4 +1,5 @@
-import { motion, type Variants } from 'framer-motion'
+import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 
 type TitleSegment = {
   text: string
@@ -40,14 +41,25 @@ export default function ScrollFloatTitle({
   className = '',
   as = 'h2',
 }: ScrollFloatTitleProps) {
+  const prefersReducedMotion = useReducedMotion()
+  const ref = useRef<HTMLHeadingElement | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
+  const isInView = useInView(ref, { once: true, amount: 0.12, margin: '0px 0px -6% 0px' })
   const MotionTag = as === 'h3' ? motion.h3 : motion.h2
+  const shouldAnimate = !prefersReducedMotion
+  const shouldShow = isMobile || isInView
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    setIsMobile(window.matchMedia('(max-width: 767px)').matches)
+  }, [])
 
   return (
     <MotionTag
+      ref={ref}
       className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-80px' }}
+      initial={shouldAnimate ? 'hidden' : 'visible'}
+      animate={shouldAnimate ? (shouldShow ? 'visible' : 'hidden') : 'visible'}
       variants={titleVariants}
     >
       {segments.map((segment, segmentIndex) => {
