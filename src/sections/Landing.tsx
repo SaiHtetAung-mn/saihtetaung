@@ -3,7 +3,7 @@ import { FiDownload, FiGithub } from 'react-icons/fi'
 import meImage from '../assets/me-primary.jpg'
 import BlurText from '../components/BlurText';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
-import TextType from '../components/TextType';
+import RotatingText from '../components/RotatingText';
 import { useTheme } from '../context/ThemeContext';
 
 export function Landing() {
@@ -48,15 +48,16 @@ export function Landing() {
             className="flex justify-center order-first md:order-last"
           >
             <motion.div
-              initial="rest"
+              initial="initial"
               animate="rest"
               whileHover="hover"
               className="hero-portrait"
               variants={{
-                rest: { y: 0, scale: 1 },
+                initial: { opacity: 0, scale: 0.9 },
+                rest: { opacity: 1, y: 0, scale: 1 },
                 hover: { y: -6, scale: 1.015 },
               }}
-              transition={{ type: 'spring', stiffness: 240, damping: 24 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="hero-portrait__image">
                 <ImageWithSkeleton
@@ -89,12 +90,12 @@ export function Landing() {
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: 0.85 }}
               className="hero-role text-lg sm:text-xl mb-3"
             >
-              <TextType
-                texts={['Full-Stack Engineer']}
-                typingSpeed={60}
-                startDelay={1500}
-                cursorCharacter="_"
+              <RotatingText
+                texts={['Fullstack Developer', 'Software Engineer']}
                 className="text-accent font-mono"
+                rotationInterval={2400}
+                staggerDuration={0.03}
+                splitBy="characters"
               />
             </motion.div>
 
