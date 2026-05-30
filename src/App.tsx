@@ -21,7 +21,7 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-white text-black transition-colors duration-300 ease-out dark:bg-black dark:text-white">
+      <div className="min-h-screen bg-background text-primary transition-colors duration-300 ease-out">
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>
@@ -33,7 +33,7 @@ function App() {
             </StackSection>
           ))}
         </main>
-        <footer className="bg-white py-8 text-center text-black/70 transition-colors duration-300 ease-out dark:bg-black dark:text-white/70">
+        <footer className="bg-background py-8 text-center text-primary/70 transition-colors duration-300 ease-out">
           <p>© { new Date().getFullYear() } Sai Htet Aung. All rights reserved.</p>
         </footer>
       </div>

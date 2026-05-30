@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { FiDownload, FiGithub } from 'react-icons/fi'
 import meImage from '../assets/me-primary.jpg'
+import BlurText from '../components/BlurText';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
 import TextType from '../components/TextType';
 import { useTheme } from '../context/ThemeContext';
@@ -47,11 +48,16 @@ export function Landing() {
             className="flex justify-center order-first md:order-last"
           >
             <motion.div
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
+              initial="rest"
+              animate="rest"
+              whileHover="hover"
               className="hero-portrait"
+              variants={{
+                rest: { y: 0, scale: 1 },
+                hover: { y: -6, scale: 1.015 },
+              }}
+              transition={{ type: 'spring', stiffness: 240, damping: 24 }}
             >
-              <div className="hero-portrait__ring" />
               <div className="hero-portrait__image">
                 <ImageWithSkeleton
                   src={meImage}
@@ -63,18 +69,17 @@ export function Landing() {
           </motion.div>
 
           <motion.div variants={itemVariants} className="text-center md:text-left order-last md:order-first">
-            <p className="hero-kicker">Full-stack portfolio</p>
             <h1 className="hero-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-4">
               Hi, I'm
             </h1>
             
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 overflow-hidden whitespace-nowrap font-mono">
-              <TextType
-                texts={['Sai Htet Aung']}
-                typingSpeed={85}
-                startDelay={350}
-                className="hero-name-type"
-                renderText={(text) => <span className="hero-name">{text || '\u00A0'}</span>}
+              <BlurText
+                text="Sai Htet Aung"
+                by="character"
+                delay={0.35}
+                stagger={0.035}
+                className="hero-name"
               />
             </h2>
 
@@ -89,6 +94,7 @@ export function Landing() {
                 typingSpeed={60}
                 startDelay={1500}
                 cursorCharacter="_"
+                className="text-accent font-mono"
               />
             </motion.div>
 

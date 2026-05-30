@@ -9,10 +9,10 @@ export default function ImageSkeleton({
 }) {
   return (
     <div
-      className={`flex h-full w-full animate-pulse items-center justify-center rounded-lg bg-black/10 dark:bg-white/10 ${className}`}
+      className={`flex h-full w-full animate-pulse items-center justify-center rounded-lg bg-border/35 ${className}`}
       style={{ minHeight: '100px', ...style }}
     >
-      <div className="h-2/3 w-2/3 rounded-full bg-black/10 dark:bg-white/10" />
+      <div className="h-2/3 w-2/3 rounded-full bg-border/35" />
     </div>
   );
 }

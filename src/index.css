@@ -3,21 +3,25 @@
 @tailwind utilities;
 
 :root {
-  --color-background: 255 251 244;
-  --color-surface: 255 251 244;
-  --color-primary: 17 18 13;
-  --color-secondary: 86 84 73;
-  --color-muted: 86 84 73;
-  --color-border: 216 207 188;
+  --color-background: 255 255 255;
+  --color-surface: 247 247 247;
+  --color-accent: 255 59 92;
+  --color-accent-foreground: 255 255 255;
+  --color-primary: 17 17 17;
+  --color-secondary: 102 102 102;
+  --color-muted: 138 138 138;
+  --color-border: 229 229 229;
 }
 
 .dark {
-  --color-background: 17 18 13;
-  --color-surface: 17 18 13;
-  --color-primary: 255 251 244;
-  --color-secondary: 216 207 188;
-  --color-muted: 216 207 188;
-  --color-border: 216 207 188;
+  --color-background: 20 20 20;
+  --color-surface: 24 24 24;
+  --color-accent: 255 59 92;
+  --color-accent-foreground: 255 255 255;
+  --color-primary: 255 255 255;
+  --color-secondary: 163 163 163;
+  --color-muted: 138 138 138;
+  --color-border: 42 42 42;
 }
 
 * {
@@ -110,31 +114,6 @@ body {
   height: 100%;
 }
 
-.hero-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1.25rem;
-  padding: 0.5rem 0.8rem;
-  border: 1px solid currentColor;
-  border-radius: 9999px;
-  background: transparent;
-  color: currentColor;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  opacity: 0.76;
-}
-
-.hero-kicker::before {
-  content: "";
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 9999px;
-  background: currentColor;
-}
-
 .hero-heading {
   color: currentColor;
 }
@@ -170,56 +149,49 @@ body {
 }
 
 .hero-button--primary {
-  background: rgb(var(--color-primary));
-  color: rgb(var(--color-background));
+  background: rgb(var(--color-accent));
+  color: rgb(var(--color-accent-foreground));
 }
 
 .hero-landing--dark .hero-button--primary {
-  color: rgb(var(--color-background));
-  background: rgb(var(--color-primary));
-  border: 1px solid rgb(var(--color-primary));
+  color: rgb(var(--color-accent-foreground));
+  background: rgb(var(--color-accent));
+  border: 1px solid rgb(var(--color-accent));
 }
 
 .hero-button--ghost,
 .hero-button--outline {
-  border: 1px solid currentColor;
-  background: transparent;
-  color: currentColor;
+  border: 1px solid rgb(var(--color-border));
+  background: rgb(var(--color-surface));
+  color: rgb(var(--color-primary));
 }
 
 .hero-button--ghost:hover,
 .hero-button--outline:hover {
-  background: rgb(var(--color-primary));
-  color: rgb(var(--color-background));
+  background: rgb(var(--color-accent));
+  color: rgb(var(--color-accent-foreground));
 }
 
 .hero-landing--dark .hero-button--ghost:hover,
 .hero-landing--dark .hero-button--outline:hover {
-  background: rgb(var(--color-primary));
-  color: rgb(var(--color-background));
+  background: rgb(var(--color-accent));
+  color: rgb(var(--color-accent-foreground));
 }
 
 .hero-portrait {
   position: relative;
   width: min(76vw, 24rem);
   aspect-ratio: 1;
-}
-
-.hero-portrait__ring {
-  position: absolute;
-  inset: -1.1rem;
-  border-radius: 2rem;
-  border: 1px solid currentColor;
-  opacity: 0.24;
+  border-radius: 1.125rem;
 }
 
 .hero-portrait__image {
-  position: absolute;
-  inset: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  border: 1px solid currentColor;
-  border-radius: 1.5rem;
-  background: currentColor;
+  border: 1px solid rgb(var(--color-border));
+  border-radius: inherit;
+  background: rgb(var(--color-background));
 }
 
 .text-type {

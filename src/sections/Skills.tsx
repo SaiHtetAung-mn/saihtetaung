@@ -94,7 +94,7 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="min-h-screen bg-white px-4 py-20 text-black sm:px-6 lg:px-8 dark:bg-black dark:text-white"
+      className="min-h-screen bg-background px-4 py-20 text-primary sm:px-6 lg:px-8"
     >
       <div className="max-w-6xl mx-auto">
         <motion.div
@@ -104,10 +104,10 @@ export function Skills() {
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="text-center mb-12"
         >
-          <h2 className="mb-4 text-4xl font-bold text-black sm:text-5xl dark:text-white">
-            My Skills
+          <h2 className="mb-4 text-4xl font-bold text-primary sm:text-5xl">
+            My <span className="text-accent">Skills</span>
           </h2>
-          <p className="text-xl text-black/65 dark:text-white/65">
+          <p className="text-xl text-secondary">
             Technologies and tools I work with
           </p>
         </motion.div>
@@ -124,10 +124,10 @@ export function Skills() {
               key={index}
               variants={itemVariants}
               whileHover={{ y: -4 }}
-              className="rounded-lg border border-black/10 bg-white p-8 transition-colors dark:border-white/15 dark:bg-black"
+              className="rounded-lg border border-border/60 bg-surface p-8 transition-colors"
             >
               {/* Header */}
-              <h3 className="mb-6 text-2xl font-bold text-black dark:text-white">
+              <h3 className="mb-6 text-2xl font-bold text-primary">
                 {categoryData.category}
               </h3>
 
@@ -143,12 +143,12 @@ export function Skills() {
                       className="group relative flex flex-col items-center gap-2"
                     >
                       {/* Icon */}
-                      <div className="rounded-lg border border-black/15 bg-white p-3 text-black transition-colors group-hover:bg-black group-hover:text-white dark:border-white/20 dark:bg-black dark:text-white dark:group-hover:bg-white dark:group-hover:text-black">
+                      <div className="rounded-lg border border-border/70 bg-surface p-3 text-primary transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
                         <IconComponent className="text-2xl" />
                       </div>
                       
                       {/* Skill name */}
-                      <span className="whitespace-nowrap text-center text-xs font-bold text-black dark:text-white">
+                      <span className="whitespace-nowrap text-center text-xs font-bold text-primary">
                         {skillData.name}
                       </span>
                     </motion.div>

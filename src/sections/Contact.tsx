@@ -87,7 +87,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="min-h-screen bg-white px-4 py-20 text-black sm:px-6 lg:px-8 dark:bg-black dark:text-white"
+      className="min-h-screen bg-background px-4 py-20 text-primary sm:px-6 lg:px-8"
     >
       <div className="max-w-4xl mx-auto">
         <motion.div
@@ -97,10 +97,10 @@ export function Contact() {
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="text-center mb-12"
         >
-          <h2 className="mb-4 text-4xl font-bold text-black sm:text-5xl dark:text-white">
-            Get In Touch
+          <h2 className="mb-4 text-4xl font-bold text-primary sm:text-5xl">
+            Get In <span className="text-accent">Touch</span>
           </h2>
-          <p className="text-xl text-black/65 dark:text-white/65">
+          <p className="text-xl text-secondary">
             I'd love to hear from you. Feel free to reach out!
           </p>
         </motion.div>
@@ -113,7 +113,7 @@ export function Contact() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            <h3 className="mb-6 text-2xl font-bold text-black dark:text-white">
+            <h3 className="mb-6 text-2xl font-bold text-primary">
               Contact Information
             </h3>
             <div className="space-y-4">
@@ -123,8 +123,8 @@ export function Contact() {
                     <link.icon />
                   </div>
                   <div>
-                    <p className="font-semibold text-black dark:text-white">{link.label}</p>
-                    <p className="text-black/65 dark:text-white/65">{link.value}</p>
+                    <p className="font-semibold text-primary">{link.label}</p>
+                    <p className="text-secondary">{link.value}</p>
                   </div>
                 </motion.div>
               ))}
@@ -141,7 +141,7 @@ export function Contact() {
             className="space-y-4"
           >
             <div>
-              <label htmlFor="name" className="mb-2 block text-sm font-medium text-black/70 dark:text-white/70">
+              <label htmlFor="name" className="mb-2 block text-sm font-medium text-secondary">
                 Name
               </label>
               <input
@@ -151,12 +151,12 @@ export function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full rounded-lg border border-black/15 bg-white px-4 py-2 text-black outline-none transition-colors focus:border-black dark:border-white/20 dark:bg-black dark:text-white dark:focus:border-white"
+                className="w-full rounded-lg border border-border/70 bg-surface px-4 py-2 text-primary outline-none transition-colors placeholder:text-muted focus:border-accent"
                 placeholder="Your name"
               />
             </div>
             <div>
-              <label htmlFor="email" className="mb-2 block text-sm font-medium text-black/70 dark:text-white/70">
+              <label htmlFor="email" className="mb-2 block text-sm font-medium text-secondary">
                 Email
               </label>
               <input
@@ -166,12 +166,12 @@ export function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full rounded-lg border border-black/15 bg-white px-4 py-2 text-black outline-none transition-colors focus:border-black dark:border-white/20 dark:bg-black dark:text-white dark:focus:border-white"
+                className="w-full rounded-lg border border-border/70 bg-surface px-4 py-2 text-primary outline-none transition-colors placeholder:text-muted focus:border-accent"
                 placeholder="your@email.com"
               />
             </div>
             <div>
-              <label htmlFor="message" className="mb-2 block text-sm font-medium text-black/70 dark:text-white/70">
+              <label htmlFor="message" className="mb-2 block text-sm font-medium text-secondary">
                 Message
               </label>
               <textarea
@@ -181,7 +181,7 @@ export function Contact() {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full rounded-lg border border-black/15 bg-white px-4 py-2 text-black outline-none transition-colors focus:border-black dark:border-white/20 dark:bg-black dark:text-white dark:focus:border-white"
+                className="w-full rounded-lg border border-border/70 bg-surface px-4 py-2 text-primary outline-none transition-colors placeholder:text-muted focus:border-accent"
                 placeholder="Your message"
               />
             </div>
@@ -190,11 +190,11 @@ export function Contact() {
               whileTap={{ y: 0 }}
               type="submit"
               disabled={isSubmitting}
-              className="w-full rounded-lg border border-black bg-black px-8 py-3 font-semibold text-white transition-colors hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-60 dark:border-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white"
+              className="w-full rounded-lg border border-accent bg-accent px-8 py-3 font-semibold text-accent-foreground transition-colors hover:bg-accent hover:text-accent-foreground disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </motion.button>
-            {feedback && <p className="text-center text-sm text-black/65 dark:text-white/65">{feedback}</p>}
+            {feedback && <p className="text-center text-sm text-secondary">{feedback}</p>}
           </motion.form>
         </div>
       </div>

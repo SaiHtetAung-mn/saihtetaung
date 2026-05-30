@@ -50,7 +50,7 @@ export function Navigation() {
   return (
     <nav
       aria-label="Primary"
-      className="fixed top-0 left-0 right-0 z-50 border-b border-black/10 bg-white/95 text-black backdrop-blur transition-colors duration-300 ease-out dark:border-white/15 dark:bg-black/95 dark:text-white"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-border/60 bg-background/95 text-primary backdrop-blur transition-colors duration-300 ease-out"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -71,8 +71,8 @@ export function Navigation() {
                     }}
                     className={`px-3 py-2 text-sm font-medium transition-colors ${
                       activeSection === item.id
-                        ? 'text-black dark:text-white'
-                        : 'text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white'
+                        ? 'text-accent'
+                        : 'text-primary/60 hover:text-accent'
                     }`}
                     aria-current={activeSection === item.id ? 'page' : undefined}
                   >
@@ -81,7 +81,7 @@ export function Navigation() {
                   {activeSection === item.id && (
                     <motion.div
                       layoutId="activeIndicator"
-                      className="absolute inset-x-0 -bottom-2 h-px bg-current"
+                      className="absolute inset-x-0 -bottom-2 h-px bg-accent"
                       transition={{ type: 'spring', stiffness: 360, damping: 34 }}
                     />
                   )}
@@ -96,7 +96,7 @@ export function Navigation() {
               whileHover={{ y: -1 }}
               whileTap={{ y: 0 }}
               onClick={toggleTheme}
-              className="rounded-lg border border-black/15 p-2 text-black transition-colors hover:bg-black hover:text-white dark:border-white/20 dark:text-white dark:hover:bg-white dark:hover:text-black"
+              className="rounded-lg border border-border/70 bg-surface p-2 text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
               aria-label="Toggle theme"
               type="button"
             >
@@ -120,7 +120,7 @@ export function Navigation() {
               whileHover={{ y: -1 }}
               whileTap={{ y: 0 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="rounded-lg border border-black/15 p-2 text-black dark:border-white/20 dark:text-white md:hidden"
+              className="rounded-lg border border-border/70 bg-surface p-2 text-primary md:hidden"
               aria-label="Toggle menu"
               aria-expanded={isOpen}
               aria-controls="mobile-navigation"
@@ -157,8 +157,8 @@ export function Navigation() {
                   }}
                   className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     activeSection === item.id
-                      ? 'bg-black text-white dark:bg-white dark:text-black'
-                      : 'text-black/70 hover:bg-black/5 hover:text-black dark:text-white/70 dark:hover:bg-white/10 dark:hover:text-white'
+                      ? 'bg-accent text-accent-foreground'
+                      : 'text-primary/70 hover:bg-accent/10 hover:text-accent'
                   }`}
                   aria-current={activeSection === item.id ? 'page' : undefined}
                 >
