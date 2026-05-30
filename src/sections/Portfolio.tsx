@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import ScrollFloatTitle from '../components/ScrollFloatTitle';
 import portfolioData from '../data/portfolio.json';
 
 
@@ -81,9 +82,13 @@ export function Portfolio() {
     >
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="mb-4 text-4xl font-bold text-primary sm:text-5xl">
-            My <span className="text-accent">Portfolio</span>
-          </h2>
+          <ScrollFloatTitle
+            className="mb-4 text-4xl font-bold text-primary sm:text-5xl"
+            segments={[
+              { text: 'My' },
+              { text: 'Portfolio', accent: true },
+            ]}
+          />
           <p className="text-xl text-secondary">
             Showcasing my best work and projects
           </p>

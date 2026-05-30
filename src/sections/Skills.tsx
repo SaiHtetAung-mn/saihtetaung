@@ -26,6 +26,7 @@ import {
   SiPostman
 } from 'react-icons/si'
 import { GrDeploy } from "react-icons/gr";
+import ScrollFloatTitle from '../components/ScrollFloatTitle';
 
 export function Skills() {
   const skillCategories = [
@@ -104,9 +105,13 @@ export function Skills() {
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="text-center mb-12"
         >
-          <h2 className="mb-4 text-4xl font-bold text-primary sm:text-5xl">
-            My <span className="text-accent">Skills</span>
-          </h2>
+          <ScrollFloatTitle
+            className="mb-4 text-4xl font-bold text-primary sm:text-5xl"
+            segments={[
+              { text: 'My' },
+              { text: 'Skills', accent: true },
+            ]}
+          />
           <p className="text-xl text-secondary">
             Technologies and tools I work with
           </p>
@@ -127,9 +132,11 @@ export function Skills() {
               className="rounded-lg border border-border/60 bg-surface p-8 transition-colors"
             >
               {/* Header */}
-              <h3 className="mb-6 text-2xl font-bold text-primary">
-                {categoryData.category}
-              </h3>
+              <ScrollFloatTitle
+                as="h3"
+                className="mb-6 text-2xl font-bold text-primary"
+                segments={[{ text: categoryData.category }]}
+              />
 
               {/* Skills grid */}
               <div className="flex flex-wrap gap-2 sm:gap-4">

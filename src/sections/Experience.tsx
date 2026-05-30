@@ -3,6 +3,7 @@ import { MdLocationOn } from 'react-icons/md'
 import { BiSolidBuildingHouse } from 'react-icons/bi'
 import { MdOpenInNew } from 'react-icons/md'
 import experienceData from '../data/experience.json'
+import ScrollFloatTitle from '../components/ScrollFloatTitle'
 
 export function Experience() {
   const experiences = experienceData.map((exp, index) => ({
@@ -48,9 +49,13 @@ export function Experience() {
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="text-center mb-16"
         >
-          <h2 className="mb-4 text-4xl font-bold text-primary sm:text-5xl">
-            Work <span className="text-accent">Experience</span>
-          </h2>
+          <ScrollFloatTitle
+            className="mb-4 text-4xl font-bold text-primary sm:text-5xl"
+            segments={[
+              { text: 'Work' },
+              { text: 'Experience', accent: true },
+            ]}
+          />
           <p className="text-xl text-secondary">
             My professional journey and career milestones
           </p>

@@ -5,6 +5,7 @@ import { FaGraduationCap } from "react-icons/fa";
 import { GiAchievement } from "react-icons/gi";
 import { MdOpenInNew } from 'react-icons/md';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
+import ScrollFloatTitle from '../components/ScrollFloatTitle';
 
 export function Education() {
   const educationItems = certificationsData.educations;
@@ -43,9 +44,13 @@ export function Education() {
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="text-center mb-12"
         >
-          <h2 className="mb-4 text-4xl font-bold text-primary sm:text-5xl">
-            Education & <span className="text-accent">Certifications</span>
-          </h2>
+          <ScrollFloatTitle
+            className="mb-4 text-4xl font-bold text-primary sm:text-5xl"
+            segments={[
+              { text: 'Education &' },
+              { text: 'Achievements', accent: true },
+            ]}
+          />
           <p className="text-xl text-secondary">
             My academic background and professional certifications
           </p>
@@ -53,12 +58,16 @@ export function Education() {
 
         {/* Education Section */}
         <div className="mb-16">
-          <h3 className="mb-8 flex items-center gap-2 text-2xl font-bold text-primary sm:text-3xl">
+          <div className="mb-8 flex items-center gap-2">
             <div className="text-4xl mr-2 flex-shrink-0">
-              <FaGraduationCap />
+              <FaGraduationCap className='text-accent'/>
             </div>
-            Education
-          </h3>
+            <ScrollFloatTitle
+              as="h3"
+              className="text-2xl font-bold text-primary sm:text-3xl"
+              segments={[{ text: 'Education' }]}
+            />
+          </div>
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -121,12 +130,16 @@ export function Education() {
 
         {/* Certifications Section */}
         <div>
-          <h3 className="mb-8 flex items-center gap-2 text-2xl font-bold text-primary sm:text-3xl">
+          <div className="mb-8 flex items-center gap-2">
             <div className="text-4xl mr-2 flex-shrink-0">
-              <GiAchievement />
+              <GiAchievement className="text-accent" />
             </div>
-            Certifications
-          </h3>
+            <ScrollFloatTitle
+              as="h3"
+              className="text-2xl font-bold text-primary sm:text-3xl"
+              segments={[{ text: 'Certifications' }]}
+            />
+          </div>
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -185,12 +198,16 @@ export function Education() {
         {/* Achievements Section */}
         {achievements && achievements.length > 0 && (
           <div className="mt-16">
-            <h3 className="mb-8 flex items-center gap-2 text-2xl font-bold text-primary sm:text-3xl">
+            <div className="mb-8 flex items-center gap-2">
               <div className="text-4xl mr-2 flex-shrink-0">
-                <GiAchievement />
+                <GiAchievement className='text-accent'/>
               </div>
-              Achievements
-            </h3>
+              <ScrollFloatTitle
+                as="h3"
+                className="text-2xl font-bold text-primary sm:text-3xl"
+                segments={[{ text: 'Achievements' }]}
+              />
+            </div>
             <motion.div
               variants={containerVariants}
               initial="hidden"

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { MdEmail, MdLocationOn } from 'react-icons/md'
 import { SiLinkedin, SiLine } from 'react-icons/si'
 import personalInfo from '../data/personal-info.json'
+import ScrollFloatTitle from '../components/ScrollFloatTitle'
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -97,9 +98,13 @@ export function Contact() {
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="text-center mb-12"
         >
-          <h2 className="mb-4 text-4xl font-bold text-primary sm:text-5xl">
-            Get In <span className="text-accent">Touch</span>
-          </h2>
+          <ScrollFloatTitle
+            className="mb-4 text-4xl font-bold text-primary sm:text-5xl"
+            segments={[
+              { text: 'Get In' },
+              { text: 'Touch', accent: true },
+            ]}
+          />
           <p className="text-xl text-secondary">
             I'd love to hear from you. Feel free to reach out!
           </p>
@@ -113,9 +118,11 @@ export function Contact() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            <h3 className="mb-6 text-2xl font-bold text-primary">
-              Contact Information
-            </h3>
+            <ScrollFloatTitle
+              as="h3"
+              className="mb-6 text-2xl font-bold text-primary"
+              segments={[{ text: 'Contact Information' }]}
+            />
             <div className="space-y-4">
               {contactLinks.map((link, index) => (
                 <motion.div key={index} variants={itemVariants} className="flex items-start">

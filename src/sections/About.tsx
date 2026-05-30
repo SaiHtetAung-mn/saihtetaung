@@ -3,6 +3,7 @@ import { FiCheckCircle, FiCompass, FiTarget, FiZap } from 'react-icons/fi'
 import { IoRocketSharp } from 'react-icons/io5'
 import { MdTimer } from 'react-icons/md'
 import { Counter } from '../components/Counter'
+import ScrollFloatTitle from '../components/ScrollFloatTitle'
 
 export function About() {
   const focusAreas = [
@@ -28,7 +29,13 @@ export function About() {
     >
       <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="mt-3 text-4xl font-bold text-primary sm:text-5xl">About <span className="text-accent">Me</span></h2>
+          <ScrollFloatTitle
+            className="mt-3 text-4xl font-bold text-primary sm:text-5xl"
+            segments={[
+              { text: 'About' },
+              { text: 'Me', accent: true },
+            ]}
+          />
         </div>
 
         <div className="grid lg:grid-cols-1 gap-10 items-center">
