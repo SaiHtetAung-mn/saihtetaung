@@ -2,8 +2,8 @@ import { motion } from 'framer-motion'
 import { FiCheckCircle, FiCompass, FiTarget, FiZap } from 'react-icons/fi'
 import { IoRocketSharp } from 'react-icons/io5'
 import { MdTimer } from 'react-icons/md'
-import { Counter } from '../components/Counter'
-import ScrollFloatTitle from '../components/ScrollFloatTitle'
+import { Counter } from '@/components/Counter'
+import ScrollFloatTitle from '@/components/ScrollFloatTitle'
 
 export function About() {
   const focusAreas = [

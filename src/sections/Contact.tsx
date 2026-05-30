@@ -2,8 +2,8 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { MdEmail, MdLocationOn } from 'react-icons/md'
 import { SiLinkedin, SiLine } from 'react-icons/si'
-import personalInfo from '../data/personal-info.json'
-import ScrollFloatTitle from '../components/ScrollFloatTitle'
+import personalInfo from '@/data/personal-info.json'
+import ScrollFloatTitle from '@/components/ScrollFloatTitle'
 
 export function Contact() {
   const [formData, setFormData] = useState({

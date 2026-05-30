@@ -2,8 +2,8 @@ import { motion } from 'framer-motion'
 import { MdLocationOn } from 'react-icons/md'
 import { BiSolidBuildingHouse } from 'react-icons/bi'
 import { MdOpenInNew } from 'react-icons/md'
-import experienceData from '../data/experience.json'
-import ScrollFloatTitle from '../components/ScrollFloatTitle'
+import experienceData from '@/data/experience.json'
+import ScrollFloatTitle from '@/components/ScrollFloatTitle'
 
 export function Experience() {
   const experiences = experienceData.map((exp, index) => ({

@@ -26,7 +26,7 @@ import {
   SiPostman
 } from 'react-icons/si'
 import { GrDeploy } from "react-icons/gr";
-import ScrollFloatTitle from '../components/ScrollFloatTitle';
+import ScrollFloatTitle from '@/components/ScrollFloatTitle';
 
 export function Skills() {
   const skillCategories = [

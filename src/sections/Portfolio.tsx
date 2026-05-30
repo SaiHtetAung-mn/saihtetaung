@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FiArrowUpRight, FiExternalLink, FiGithub, FiX } from 'react-icons/fi'
-import ScrollFloatTitle from '../components/ScrollFloatTitle'
-import portfolioData from '../data/portfolio.json'
+import ScrollFloatTitle from '@/components/ScrollFloatTitle'
+import portfolioData from '@/data/portfolio.json'
 
 type Category = 'work' | 'personal'
 

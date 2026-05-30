@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion'
-import certificationsData from '../data/education'
+import certificationsData from '@/data/education'
 import { FaGraduationCap } from "react-icons/fa";
 import { GiAchievement } from "react-icons/gi";
 import { MdOpenInNew } from 'react-icons/md';
-import ImageWithSkeleton from '../components/ImageWithSkeleton';
-import ScrollFloatTitle from '../components/ScrollFloatTitle';
+import ImageWithSkeleton from '@/components/ImageWithSkeleton';
+import ScrollFloatTitle from '@/components/ScrollFloatTitle';
 
 export function Education() {
   const prefersReducedMotion = useReducedMotion();

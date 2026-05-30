@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import type { StaticImageData } from 'next/image';
-import ImageSkeleton from './ImageSkeleton';
+import ImageSkeleton from '@/components/ImageSkeleton';
 
 interface Props extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   src: string | StaticImageData;

@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
 import { FiDownload, FiGithub } from 'react-icons/fi'
-import meImage from '../assets/me-primary.jpg'
-import BlurText from '../components/BlurText';
-import DotFieldBackground from '../components/DotFieldBackground';
-import ImageWithSkeleton from '../components/ImageWithSkeleton';
-import RotatingText from '../components/RotatingText';
+import meImage from '@/assets/me-primary.jpg'
+import BlurText from '@/components/BlurText';
+import DotFieldBackground from '@/components/DotFieldBackground';
+import ImageWithSkeleton from '@/components/ImageWithSkeleton';
+import RotatingText from '@/components/RotatingText';
 import TextType from '@/components/TextType';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '@/context/ThemeContext';
 
 export function Landing() {
   const { theme } = useTheme()

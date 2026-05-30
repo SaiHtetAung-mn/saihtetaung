@@ -1,10 +1,10 @@
 'use client'
 
-import { ThemeProvider } from './context/ThemeContext'
-import useDisableRightClick from './hooks/useDisableRightClick'
-import { Navigation } from './layouts/Navigation'
-import { Landing, Portfolio, About, Education, Experience, Skills, Contact } from './sections'
-import StackSection from './components/StackSection'
+import { ThemeProvider } from '@/context/ThemeContext'
+import useDisableRightClick from '@/hooks/useDisableRightClick'
+import { Navigation } from '@/layouts/Navigation'
+import { Landing, Portfolio, About, Education, Experience, Skills, Contact } from '@/sections'
+import StackSection from '@/components/StackSection'
 
 const sections = [
   { id: 'landing', Component: Landing },
@@ -17,7 +17,7 @@ const sections = [
 ]
 
 function App() {
-  //useDisableRightClick();
+  useDisableRightClick();
 
   return (
     <ThemeProvider>
