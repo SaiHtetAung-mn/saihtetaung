@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sai-htet-aung-pxv9.vercel.app/sitemap.xml
+Sitemap: https://saihtetaung.vercel.app/sitemap.xml

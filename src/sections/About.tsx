@@ -61,7 +61,7 @@ export function About() {
               className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] md:items-center gap-10 md:gap-14 pb-10 md:pb-12"
             >
               <div className="flex items-center gap-4 md:justify-end md:text-left">
-                <div className="rounded-full bg-primary p-3 text-background">
+                <div className="rounded-full bg-surface p-3 text-accent">
                   <MdTimer className="w-7 h-7" />
                 </div>
                 <div>
@@ -78,7 +78,7 @@ export function About() {
               </div>
 
               <div className="flex items-center gap-4 md:justify-start">
-                <div className="rounded-full border border-border bg-surface p-3 text-primary">
+                <div className="rounded-full border border-border bg-surface p-3 text-accent">
                   <IoRocketSharp className="w-7 h-7" />
                 </div>
                 <div>
@@ -94,13 +94,13 @@ export function About() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 sm:mt-12">
               <div className="rounded-lg border border-border/60 bg-surface p-5">
                 <div className="mb-3 flex items-center gap-2 font-bold text-primary">
-                  <FiCompass className="h-5 w-5 text-current opacity-70" />
+                  {/* <FiCompass className="h-5 w-5 text-accent" /> */}
                   What I do
                 </div>
                 <ul className="space-y-3 text-secondary">
                   {focusAreas.map((item) => (
-                    <li key={item} className="flex gap-2">
-                      <FiCheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-current" />
+                    <li key={item} className="flex gap-2 text-sm">
+                      <FiCheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-current" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -108,13 +108,13 @@ export function About() {
               </div>
               <div className="rounded-lg border border-border/60 bg-surface p-5">
                 <div className="mb-3 flex items-center gap-2 font-bold text-primary">
-                  <FiTarget className="h-5 w-5 text-current opacity-70" />
+                  {/* <FiTarget className="h-5 w-5 text-accent" /> */}
                   Currently focused on
                 </div>
                 <ul className="space-y-3 text-secondary">
                   {currentFocus.map((item) => (
-                    <li key={item} className="flex gap-2">
-                      <FiCheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-current" />
+                    <li key={item} className="flex gap-2 text-sm">
+                      <FiCheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-current" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -122,14 +122,14 @@ export function About() {
               </div>
               <div className="rounded-lg border border-border/60 bg-surface p-5">
                 <div className="mb-3 flex items-center gap-2 font-bold text-primary">
-                  <FiZap className="h-5 w-5 text-current opacity-70" />
+                  {/* <FiZap className="h-5 w-5 text-accent" /> */}
                   Most used tech stack
                 </div>
                 <div className="flex flex-wrap gap-3">
                   {techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="rounded-full border border-border/70 bg-surface px-4 py-2 text-primary"
+                      className="rounded-full border border-border/70 bg-surface px-4 py-2 flex-shrink-0 text-sm text-current"
                     >
                       {tech}
                     </span>

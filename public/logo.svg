@@ -1,0 +1,23 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left bracket < -->
+  <path d="M200 128 L80 256 L200 384" 
+        stroke="rgb(255, 59, 92)" 
+        stroke-width="48" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        fill="none"/>
+  
+  <!-- Forward slash / -->
+  <line x1="280" y1="384" x2="232" y2="128" 
+        stroke="rgb(255, 59, 92)" 
+        stroke-width="48" 
+        stroke-linecap="round"/>
+  
+  <!-- Right bracket > -->
+  <path d="M312 128 L432 256 L312 384" 
+        stroke="rgb(255, 59, 92)" 
+        stroke-width="48" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        fill="none"/>
+</svg>

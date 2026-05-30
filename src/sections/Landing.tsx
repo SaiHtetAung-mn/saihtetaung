@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { FiDownload, FiGithub } from 'react-icons/fi'
 import meImage from '../assets/me-primary.jpg'
 import BlurText from '../components/BlurText';
+import DotFieldBackground from '../components/DotFieldBackground';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
 import RotatingText from '../components/RotatingText';
 import TextType from '../components/TextType';
@@ -10,6 +11,17 @@ import { useTheme } from '../context/ThemeContext';
 export function Landing() {
   const { theme } = useTheme()
   const isDark = theme === 'dark'
+  const dotFieldTheme = isDark
+    ? {
+        gradientFrom: 'rgba(255, 255, 255, 0.45)',
+        gradientTo: 'rgba(231, 226, 227, 0.35)',
+        glowColor: '#0b1220',
+      }
+    : {
+        gradientFrom: 'rgba(56, 189, 248, 0.45)',
+        gradientTo: 'rgba(244, 63, 94, 0.35)',
+        glowColor: '#ffffff',
+      }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -36,6 +48,18 @@ export function Landing() {
       id="landing"
       className={`hero-landing relative min-h-screen flex items-center justify-center pt-16 overflow-hidden ${isDark ? 'hero-landing--dark' : 'hero-landing--light'}`}
     >
+      <DotFieldBackground
+        className="pointer-events-none absolute inset-0 opacity-100"
+        dotRadius={1.9}
+        dotSpacing={30}
+        cursorRadius={420}
+        bulgeOnly={true}
+        bulgeStrength={72}
+        glowRadius={220}
+        sparkle={false}
+        waveAmplitude={4}
+        {...dotFieldTheme}
+      />
       <motion.div
         variants={containerVariants}
         initial="hidden"

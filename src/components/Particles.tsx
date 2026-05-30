@@ -13,6 +13,7 @@ type ParticlesProps = {
   sizeRandomness?: number
   cameraDistance?: number
   disableRotation?: boolean
+  pixelRatio?: number
   className?: string
 }
 
@@ -41,12 +42,17 @@ const vertex = `
   uniform float uHoverFactor;
 
   varying vec3 vColor;
+  varying float vRandom;
   varying float vAlpha;
 
   void main() {
     vec3 pos = position;
-    float wave = sin(uTime * 0.6 + random * 9.0) * 0.12;
+    float wave = sin(uTime * 0.9 + random * 9.0) * 0.22;
+    float driftX = sin(uTime * 0.45 + random * 6.0) * 0.3;
+    float driftY = cos(uTime * 0.38 + random * 4.0) * 0.26;
     pos.z += wave;
+    pos.x += driftX;
+    pos.y += driftY;
 
     vec2 mouseOffset = pos.xy - uMouse;
     float dist = length(mouseOffset);
@@ -58,6 +64,7 @@ const vertex = `
     gl_PointSize = uBaseSize * (1.0 + random * uSizeRandomness) * uPixelRatio / -mvPosition.z;
 
     vColor = color;
+    vRandom = random;
     vAlpha = 0.42 + random * 0.58;
   }
 `
@@ -65,18 +72,27 @@ const vertex = `
 const fragment = `
   precision highp float;
 
+  uniform float uTime;
   uniform bool uAlphaParticles;
 
   varying vec3 vColor;
+  varying float vRandom;
   varying float vAlpha;
 
   void main() {
-    vec2 uv = gl_PointCoord - vec2(0.5);
-    float circle = 1.0 - smoothstep(0.32, 0.5, length(uv));
-    float glow = 1.0 - smoothstep(0.0, 0.5, length(uv));
-    float alpha = uAlphaParticles ? circle * vAlpha : circle;
+    vec2 uv = gl_PointCoord.xy;
+    float d = length(uv - vec2(0.5));
+    float shimmer = 0.18 * sin(uTime + vRandom * 6.28 + uv.x * 6.0);
 
-    gl_FragColor = vec4(vColor + glow * 0.15, alpha);
+    if (!uAlphaParticles) {
+      if (d > 0.5) {
+        discard;
+      }
+      gl_FragColor = vec4(vColor + shimmer, 1.0);
+    } else {
+      float circle = smoothstep(0.5, 0.4, d) * 0.8;
+      gl_FragColor = vec4(vColor + shimmer, circle * vAlpha);
+    }
   }
 `
 
@@ -113,17 +129,18 @@ function createParticles(count: number, spread: number, colors: string[], baseSi
 }
 
 export default function Particles({
-  particleCount = 700,
+  particleCount = 200,
   particleSpread = 10,
-  speed = 0.16,
+  speed = 0.1,
   particleColors = ['#fbbf24', '#38bdf8', '#ffffff'],
-  moveParticlesOnHover = true,
-  particleHoverFactor = 0.9,
-  alphaParticles = true,
-  particleBaseSize = 95,
-  sizeRandomness = 1.25,
-  cameraDistance = 18,
+  moveParticlesOnHover = false,
+  particleHoverFactor = 1,
+  alphaParticles = false,
+  particleBaseSize = 100,
+  sizeRandomness = 1,
+  cameraDistance = 20,
   disableRotation = false,
+  pixelRatio,
   className = '',
 }: ParticlesProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -133,15 +150,20 @@ export default function Particles({
     const container = containerRef.current
     if (!container) return
 
-    const renderer = new Renderer({ alpha: true, antialias: true, dpr: Math.min(window.devicePixelRatio, 2) })
+    const renderer = new Renderer({
+      alpha: true,
+      antialias: true,
+      depth: false,
+      dpr: pixelRatio ?? Math.min(window.devicePixelRatio, 2),
+    })
     const gl = renderer.gl
     gl.clearColor(0, 0, 0, 0)
     gl.enable(gl.BLEND)
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE)
     container.appendChild(gl.canvas)
 
-    const camera = new Camera(gl, { fov: 42 })
-    camera.position.z = cameraDistance
+    const camera = new Camera(gl, { fov: 15 })
+    camera.position.set(0, 0, cameraDistance)
 
     const particles = createParticles(particleCount, particleSpread, particleColors, particleBaseSize)
     const positions = new Float32Array(particles.length * 3)
@@ -170,7 +192,7 @@ export default function Particles({
       depthTest: false,
       uniforms: {
         uTime: { value: 0 },
-        uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
+        uPixelRatio: { value: pixelRatio ?? Math.min(window.devicePixelRatio, 2) },
         uBaseSize: { value: particleBaseSize },
         uSizeRandomness: { value: sizeRandomness },
         uMouse: { value: [0, 0] },
@@ -185,25 +207,27 @@ export default function Particles({
       const width = container.clientWidth
       const height = container.clientHeight
       renderer.setSize(width, height)
-      camera.perspective({ aspect: width / height })
+      camera.perspective({ aspect: gl.canvas.width / gl.canvas.height })
     }
 
     const pointerMove = (event: PointerEvent) => {
       const rect = container.getBoundingClientRect()
-      mouseRef.current.x = ((event.clientX - rect.left) / rect.width - 0.5) * particleSpread
-      mouseRef.current.y = -((event.clientY - rect.top) / rect.height - 0.5) * particleSpread
+      mouseRef.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+      mouseRef.current.y = -(((event.clientY - rect.top) / rect.height) * 2 - 1)
     }
 
     resize()
     window.addEventListener('resize', resize)
-    container.addEventListener('pointermove', pointerMove)
+    if (moveParticlesOnHover) {
+      container.addEventListener('pointermove', pointerMove)
+    }
 
     let frame = 0
     let animationFrame = 0
     const animate = (time: number) => {
       frame = time * 0.001
       program.uniforms.uTime.value = frame * speed
-      program.uniforms.uMouse.value = [mouseRef.current.x, mouseRef.current.y]
+      program.uniforms.uMouse.value = [mouseRef.current.x * particleSpread, mouseRef.current.y * particleSpread]
 
       if (!disableRotation) {
         mesh.rotation.y = Math.sin(frame * speed * 0.22) * 0.12
@@ -219,7 +243,9 @@ export default function Particles({
     return () => {
       cancelAnimationFrame(animationFrame)
       window.removeEventListener('resize', resize)
-      container.removeEventListener('pointermove', pointerMove)
+      if (moveParticlesOnHover) {
+        container.removeEventListener('pointermove', pointerMove)
+      }
       gl.canvas.remove()
     }
   }, [
@@ -232,6 +258,7 @@ export default function Particles({
     particleCount,
     particleHoverFactor,
     particleSpread,
+    pixelRatio,
     sizeRandomness,
     speed,
   ])

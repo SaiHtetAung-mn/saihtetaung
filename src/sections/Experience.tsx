@@ -122,7 +122,7 @@ export function Experience() {
                     </p>
                     <motion.span
                       whileHover={{ y: -1 }}
-                      className="flex items-center gap-2 rounded-full border border-border/70 bg-surface px-4 py-2 text-sm font-bold tracking-wide text-primary"
+                      className="flex items-center gap-2 rounded-full text-sm font-bold tracking-wide text-accent text-opacity-70 transition-colors hover:bg-accent hover:text-accent-foreground"
                     >
                       {exp.type === 'Onsite' && <BiSolidBuildingHouse className="text-lg" />}
                       {exp.type === 'Remote' && <MdLocationOn className="text-lg" />}
