@@ -71,7 +71,6 @@ export function Skills() {
       ],
     }
   ]
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -84,11 +83,11 @@ export function Skills() {
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 12 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 },
+      transition: { duration: 0.42 },
     },
   }
 
@@ -122,48 +121,40 @@ export function Skills() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="space-y-10"
         >
-          {skillCategories.map((categoryData, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ y: -4 }}
-              className="rounded-lg border border-border/60 bg-surface p-8 transition-colors"
-            >
-              {/* Header */}
-              <ScrollFloatTitle
-                as="h3"
-                className="mb-6 text-2xl font-bold text-primary"
-                segments={[{ text: categoryData.category }]}
-              />
+          {skillCategories.map((categoryData, index) => {
+            return (
+              <motion.div key={index} variants={itemVariants} className="space-y-4">
+                <ScrollFloatTitle
+                  as="h3"
+                  className="text-xl font-bold text-primary sm:text-2xl"
+                  segments={[{ text: categoryData.category }]}
+                />
 
-              {/* Skills grid */}
-              <div className="flex flex-wrap gap-2 sm:gap-4">
-                {categoryData.skills.map((skillData, skillIndex) => {
-                  const IconComponent = skillData.icon
-                  return (
-                    <motion.div
-                      key={skillIndex}
-                      whileHover={{ y: -3 }}
-                      whileTap={{ y: 0 }}
-                      className="group relative flex flex-col items-center gap-2"
-                    >
-                      {/* Icon */}
-                      <div className="rounded-lg border border-border/70 bg-surface p-3 text-primary transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
-                        <IconComponent className="text-2xl" />
-                      </div>
-                      
-                      {/* Skill name */}
-                      <span className="whitespace-nowrap text-center text-xs font-bold text-primary">
-                        {skillData.name}
-                      </span>
-                    </motion.div>
-                  )
-                })}
-              </div>
-            </motion.div>
-          ))}
+                <div>
+                  <div className="flex flex-wrap gap-2.5 sm:gap-3">
+                    {categoryData.skills.map((skillData, skillIndex) => {
+                      const IconComponent = skillData.icon
+                      return (
+                        <motion.div
+                          key={skillIndex}
+                          whileHover={{ y: -2, scale: 1.015 }}
+                          whileTap={{ y: 0 }}
+                          className="group inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface px-3 py-1.5 transition-colors duration-200 hover:border-accent/55 hover:bg-accent/10"
+                        >
+                          <IconComponent className="text-sm text-accent transition-transform duration-200 group-hover:scale-110 sm:text-base" />
+                          <span className="whitespace-nowrap text-sm font-medium text-primary transition-colors duration-200 group-hover:text-primary">
+                            {skillData.name}
+                          </span>
+                        </motion.div>
+                      )
+                    })}
+                  </div>
+                </div>
+              </motion.div>
+            )
+          })}
         </motion.div>
       </div>
     </section>

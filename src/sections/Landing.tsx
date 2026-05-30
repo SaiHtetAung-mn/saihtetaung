@@ -78,11 +78,11 @@ export function Landing() {
               whileHover="hover"
               className="hero-portrait"
               variants={{
-                initial: { opacity: 0, scale: 0.9 },
-                rest: { opacity: 1, y: 0, scale: 1 },
-                hover: { y: -6, scale: 1.015 },
+                initial: { opacity: 0, scale: 0.86, y: 18 },
+                rest: { opacity: 1, scale: 1, y: 0 },
+                hover: { y: -4, scale: 1.012 },
               }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
             >
               <div className="hero-portrait__image">
                 <ImageWithSkeleton

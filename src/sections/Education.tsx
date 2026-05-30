@@ -248,15 +248,15 @@ export function Education() {
                       }}
                     />
                   )}
-                  <div className="absolute inset-0 z-[1] bg-primary/45" />
-                  <div className="relative z-10 w-full rounded-b-lg bg-primary/70 p-6">
-                    <p className="text-sm font-semibold tracking-wide text-background/75">
+                  <div className="absolute inset-0 z-[1] bg-black/65" />
+                  <div className="relative z-10 w-full p-6" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.7)' }}>
+                    <p className="text-sm font-semibold tracking-wide text-white/75">
                       {ach.year}
                     </p>
-                    <h4 className="text-lg font-bold text-background mt-1">
+                    <h4 className="text-lg font-bold text-white mt-1">
                       {ach.title}
                     </h4>
-                    <p className="mt-1 text-background/80">
+                    <p className="mt-1 text-white/80">
                       {ach.issuer}
                     </p>
                   </div>

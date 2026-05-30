@@ -17,7 +17,7 @@ const sections = [
 ]
 
 function App() {
-  useDisableRightClick();
+  //useDisableRightClick();
 
   return (
     <ThemeProvider>

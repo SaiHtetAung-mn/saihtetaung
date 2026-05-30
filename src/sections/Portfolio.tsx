@@ -1,87 +1,52 @@
-import { useEffect, useState, useRef } from 'react';
-import ScrollFloatTitle from '../components/ScrollFloatTitle';
-import portfolioData from '../data/portfolio.json';
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { FiArrowUpRight, FiExternalLink, FiGithub, FiX } from 'react-icons/fi'
+import ScrollFloatTitle from '../components/ScrollFloatTitle'
+import portfolioData from '../data/portfolio.json'
 
+type Category = 'work' | 'personal'
+
+type Project = {
+  title: string
+  image: string
+  description: string
+  responsibility?: string
+  tech_stack: string[]
+  link?: string
+  code_url?: string
+  demo_url?: string
+}
 
 export function Portfolio() {
-  const [activeCategory, setActiveCategory] = useState<'work' | 'personal'>('work');
-  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
-  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
-  const [dotCount, setDotCount] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const categories = ['work', 'personal'] as const;
-  const handleImageLoad = (imagePath: string) => {
-    setLoadedImages(prev => new Set(prev).add(imagePath));
-  };
-  const currentProjects = Array.isArray(portfolioData[activeCategory])
-    ? portfolioData[activeCategory]
-    : [];
+  const [activeCategory, setActiveCategory] = useState<Category>('work')
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const categories: Category[] = ['work', 'personal']
+  const currentProjects = (portfolioData[activeCategory] ?? []) as Project[]
 
-  const scrollByAmount = (amount: number) => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: amount, behavior: 'smooth' });
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedProject(null)
     }
-  };
-
-  const scrollToCard = (index: number) => {
-    const container = scrollRef.current;
-    if (!container) return;
-    const cards = container.querySelectorAll<HTMLDivElement>('[data-portfolio-card]');
-    const card = cards[index];
-    if (!card) return;
-    const containerRect = container.getBoundingClientRect();
-    const cardRect = card.getBoundingClientRect();
-    const offset = cardRect.left - containerRect.left;
-    const target = container.scrollLeft + offset - (container.clientWidth - cardRect.width) / 2;
-    container.scrollTo({ left: target, behavior: 'smooth' });
-  };
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [])
 
   useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
-    const cards = container.querySelectorAll<HTMLDivElement>('[data-portfolio-card]');
-    setDotCount(cards.length);
-    setActiveProjectIndex((prev) => {
-      if (!cards.length) return 0;
-      return Math.min(prev, cards.length - 1);
-    });
-
-    const handleScroll = () => {
-      const cards = Array.from(container.querySelectorAll<HTMLDivElement>('[data-portfolio-card]'));
-      if (!cards.length) return;
-      const containerRect = container.getBoundingClientRect();
-      const containerCenter = containerRect.left + container.clientWidth / 2;
-      let closestIdx = 0;
-      let minDistance = Number.MAX_VALUE;
-      cards.forEach((card, idx) => {
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.left + rect.width / 2;
-        const distance = Math.abs(cardCenter - containerCenter);
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestIdx = idx;
-        }
-      });
-      setActiveProjectIndex(closestIdx);
-    };
-
-    handleScroll();
-    container.addEventListener('scroll', handleScroll, { passive: true });
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, [activeCategory, currentProjects.length]);
-
-  useEffect(() => {
-    setActiveProjectIndex(0);
-    scrollToCard(0);
-  }, [activeCategory]);
+    if (!selectedProject) return
+    const { overflow } = document.body.style
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = overflow
+    }
+  }, [selectedProject])
 
   return (
     <section
       id="portfolio"
       className="min-h-screen bg-background px-4 py-20 text-primary sm:px-6 lg:px-8"
     >
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-12 text-center">
           <ScrollFloatTitle
             className="mb-4 text-4xl font-bold text-primary sm:text-5xl"
             segments={[
@@ -89,21 +54,18 @@ export function Portfolio() {
               { text: 'Portfolio', accent: true },
             ]}
           />
-          <p className="text-xl text-secondary">
-            Showcasing my best work and projects
-          </p>
+          <p className="text-xl text-secondary">Selected projects and product work</p>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex gap-4 justify-center mb-12 flex-wrap">
+        <div className="mb-10 flex flex-wrap justify-center gap-3">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2 rounded-lg font-semibold capitalize transition-all ${
+              className={`rounded-full border px-5 py-2 text-sm font-semibold capitalize transition-colors ${
                 activeCategory === category
-                  ? 'bg-accent text-accent-foreground'
-                  : 'border border-border/70 bg-surface text-primary hover:bg-accent hover:text-accent-foreground'
+                  ? 'border-accent bg-accent text-accent-foreground'
+                  : 'border-border/70 bg-surface text-primary hover:border-accent/50 hover:bg-accent/10'
               }`}
             >
               {category}
@@ -111,155 +73,148 @@ export function Portfolio() {
           ))}
         </div>
 
-        <div className="relative w-full flex items-center">
-          {/* Navigation arrows for medium+ screens, outside scroll area */}
-          <button
-            type="button"
-            className="z-20 mx-2 hidden h-12 w-12 items-center justify-center rounded-full border border-border/70 bg-surface text-primary transition-colors hover:bg-accent hover:text-accent-foreground md:flex"
-            style={{ position: 'relative' }}
-            onClick={() => scrollByAmount(-320)}
-            aria-label="Scroll left"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="h-7 w-7">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-            </svg>
-          </button>
-          <div
-            ref={scrollRef}
-            className={`w-full overflow-x-auto pb-4 portfolio-scrollbar-hide relative ${currentProjects.length === 1 ? '' : 'pr-8 sm:pr-0'}`}
-          >
-            <div
-              className={`flex ${currentProjects.length === 1 ? 'justify-center' : ''} ${currentProjects.length === 1 ? '' : 'gap-4 sm:gap-8 pl-2'} snap-x snap-mandatory touch-pan-x`}
-              style={{ WebkitOverflowScrolling: 'touch' }}
-            >
-              {currentProjects.length > 0 ? (
-                currentProjects.map((project, idx) => {
-                  const cardWidth = currentProjects.length === 1 ? 'w-full' : 'w-72 sm:w-80';
-                  return (
-                    <div
-                      key={project.title + idx}
-                      data-portfolio-card
-                      className={`flex-shrink-0 ${cardWidth} animate-portfolio-fade snap-center`}
-                      style={{ animationDelay: `${idx * 0.1}s` }}
-                    >
-                      <div className="group relative h-full rounded-lg border border-border/60 bg-surface transition-transform duration-300 hover:-translate-y-1">
-                        <div className="flex h-full flex-col overflow-hidden rounded-lg bg-surface">
-                          <div className="relative h-48 sm:h-52">
-                            {!loadedImages.has(project.image) && (
-                              <div className="absolute inset-0 animate-pulse bg-border/35" />
-                            )}
-                            <img
-                              src={project.image}
-                              alt={project.title}
-                              onLoad={() => handleImageLoad(project.image)}
-                              className={`w-full h-full object-cover transition-opacity duration-300 ${loadedImages.has(project.image) ? 'opacity-100' : 'opacity-0'}`}
-                            />
-                            <div className="absolute inset-0 bg-primary/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                          </div>
+        <div key={activeCategory}>
+          {currentProjects.length === 0 ? (
+            <div className="rounded-lg border border-border/60 bg-surface px-6 py-12 text-center text-secondary">
+              No projects in this category yet.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              {currentProjects.map((project, index) => (
+                <motion.article
+                  key={`${activeCategory}-${project.title}`}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.34, delay: Math.min(index * 0.05, 0.2), ease: 'easeOut' }}
+                  whileHover={{ y: -2 }}
+                  className="group relative overflow-hidden rounded-lg border border-border/60 bg-surface transition-colors hover:border-accent/45"
+                >
+                  <div className="bg-surface p-1.5">
+                    <div className="relative aspect-[16/10] w-full overflow-hidden rounded-md bg-background/40">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+                        loading="lazy"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,rgba(0,0,0,0.14)_26%,rgba(0,0,0,0.68)_66%,rgba(0,0,0,0.92)_100%)]" />
+                      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.75)' }}>
+                        <h4 className="mb-1 text-base font-semibold leading-tight text-white sm:text-lg">
+                          {project.title}
+                        </h4>
+                        <p className="text-sm leading-relaxed text-white/90">{project.description}</p>
 
-                          <div className="p-5 flex flex-col h-full gap-3">
-                            <h4 className="text-md font-semibold leading-tight text-primary">
-                              {project.title}
-                            </h4>
-                            <p
-                              className="text-sm leading-relaxed text-secondary"
-                            >
-                              {project.description}
-                            </p>
-                            {'responsibility' in project && project.responsibility && (
-                              <p
-                                className="text-xs leading-relaxed text-secondary/80"
-                              >
-                                <span className="font-semibold text-primary">Role:</span>{' '}
-                                {project.responsibility}
-                              </p>
-                            )}
-
-                            <div className="flex gap-2 flex-wrap">
-                              {project.tech_stack.map((tech, idx) => (
-                                <span
-                                  key={idx as number}
-                                  className="rounded-full border border-border/70 bg-surface px-3 py-1 text-[11px] font-semibold tracking-wide text-primary"
-                                >
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
-
-                            <div className="flex gap-3 mt-auto pt-2">
-                              {'code_url' in project && project.code_url && (
-                                <a
-                                  href={project.code_url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 rounded-lg border border-border/70 bg-surface px-3 py-2 text-sm font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
-                                >
-                                  Code
-                                  <span aria-hidden>↗</span>
-                                </a>
-                              )}
-                              {'demo_url' in project && project.demo_url && (
-                                <a
-                                  href={project.demo_url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 rounded-lg border border-border/70 bg-surface px-3 py-2 text-sm font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
-                                >
-                                  Demo
-                                  <span aria-hidden>↗</span>
-                                </a>
-                              )}
-                              {'link' in project && project.link && (
-                                <a
-                                  href={project.link}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 rounded-lg border border-border/70 bg-surface px-3 py-2 text-sm font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
-                                >
-                                  Visit
-                                  <span aria-hidden>↗</span>
-                                </a>
-                              )}
-                            </div>
-                          </div>
-                        </div>
+                        <button
+                          onClick={() => setSelectedProject(project)}
+                          className="mt-3 inline-flex items-center gap-1 rounded-full border border-white/45 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground"
+                        >
+                          Detail
+                          <FiArrowUpRight className="h-3.5 w-3.5" />
+                        </button>
                       </div>
                     </div>
-                  );
-                })
-              ) : (
-                <div className="w-full text-center py-12">
-                  <p className="text-lg text-secondary">No projects in this category yet.</p>
-                </div>
-              )}
+                  </div>
+                </motion.article>
+              ))}
             </div>
-          </div>
-          <button
-            type="button"
-            className="z-20 mx-2 hidden h-12 w-12 items-center justify-center rounded-full border border-border/70 bg-surface text-primary transition-colors hover:bg-accent hover:text-accent-foreground md:flex"
-            style={{ position: 'relative' }}
-            onClick={() => scrollByAmount(320)}
-            aria-label="Scroll right"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="h-7 w-7">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
-          </button>
+          )}
         </div>
-        {dotCount > 0 && (
-          <div className="flex justify-center mt-6 gap-2">
-            {Array.from({ length: dotCount }).map((_, idx) => (
-              <button
-                key={`dot-${idx}`}
-                type="button"
-                aria-label={`Go to project ${idx + 1}`}
-                onClick={() => scrollToCard(idx)}
-                className={`h-2.5 w-2.5 rounded-full transition-all ${activeProjectIndex === idx ? 'scale-110 bg-accent' : 'bg-border'}`}
-              />
-            ))}
-          </div>
-        )}
       </div>
+
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            className="fixed inset-0 z-[100] flex items-end justify-center bg-black/55 p-0 backdrop-blur-[2px] sm:items-center sm:p-6"
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${selectedProject.title} project details`}
+              initial={{ opacity: 0, y: 20, scale: 0.985 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.99 }}
+              transition={{ duration: 0.18, ease: 'easeOut' }}
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-[92vh] w-full overflow-hidden rounded-t-2xl border border-border/70 bg-surface shadow-2xl sm:max-h-[85vh] sm:max-w-3xl sm:rounded-xl"
+            >
+              <div className="sm:hidden pt-2">
+                <div className="mx-auto h-1.5 w-10 rounded-full bg-border/80" />
+              </div>
+
+              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border/60 bg-surface/95 px-4 py-3 sm:px-5">
+                <h3 className="pr-3 text-base font-semibold text-primary sm:text-lg">{selectedProject.title}</h3>
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border/70 bg-background text-primary transition-colors hover:border-accent/60 hover:text-accent"
+                  aria-label="Close project details"
+                >
+                  <FiX className="h-4 w-4" />
+                </button>
+              </div>
+
+              <div className="max-h-[calc(92vh-56px)] overflow-y-auto p-4 sm:max-h-[calc(85vh-60px)] sm:p-5">
+                <div className="overflow-hidden rounded-lg border border-border/60 bg-background/40">
+                  <img
+                    src={selectedProject.image}
+                    alt={selectedProject.title}
+                    className="h-auto max-h-[320px] w-full object-cover sm:max-h-[380px]"
+                    loading="lazy"
+                  />
+                </div>
+
+                <p className="mt-4 text-sm leading-relaxed text-secondary sm:text-[15px]">{selectedProject.description}</p>
+
+                {selectedProject.responsibility && (
+                  <p className="mt-3 text-sm leading-relaxed text-secondary sm:text-[15px]">
+                    <span className="font-semibold text-primary">Role:</span> {selectedProject.responsibility}
+                  </p>
+                )}
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {selectedProject.tech_stack.map((tech) => (
+                    <span
+                      key={`${selectedProject.title}-${tech}`}
+                      className="rounded-full border border-border/70 bg-background px-2.5 py-1 text-xs font-medium text-primary"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {selectedProject.code_url && (
+                    <a
+                      href={selectedProject.code_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-background px-3 py-1.5 text-sm font-medium text-primary transition-colors hover:border-accent/60 hover:bg-accent/10 hover:text-accent"
+                    >
+                      <FiGithub className="h-4 w-4" />
+                      Code
+                    </a>
+                  )}
+                  {(selectedProject.demo_url || selectedProject.link) && (
+                    <a
+                      href={selectedProject.demo_url ?? selectedProject.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-background px-3 py-1.5 text-sm font-medium text-primary transition-colors hover:border-accent/60 hover:bg-accent/10 hover:text-accent"
+                    >
+                      <FiExternalLink className="h-4 w-4" />
+                      Visit
+                    </a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
