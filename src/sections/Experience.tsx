@@ -27,30 +27,31 @@ export function Experience() {
   }
 
   const itemVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, y: 12 },
     visible: {
       opacity: 1,
-      transition: { duration: 0.6 },
+      y: 0,
+      transition: { duration: 0.45 },
     },
   }
 
   return (
     <section
       id="experience"
-      className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900"
+      className="min-h-screen bg-white px-4 py-20 text-black sm:px-6 lg:px-8 dark:bg-black dark:text-white"
     >
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="mb-4 text-4xl font-bold text-black sm:text-5xl dark:text-white">
             Work Experience
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
+          <p className="text-xl text-black/65 dark:text-white/65">
             My professional journey and career milestones
           </p>
         </motion.div>
@@ -64,7 +65,7 @@ export function Experience() {
           className="space-y-12 relative"
         >
           {/* Vertical line - Left side (hidden on mobile) */}
-          <div className="hidden sm:block absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-slate-700 via-slate-600 to-slate-500 dark:from-slate-500 dark:via-slate-600 dark:to-slate-700" />
+          <div className="absolute bottom-0 left-8 top-0 hidden w-px bg-black/20 dark:bg-white/20 sm:block" />
 
           {experiences.map((exp) => (
             <motion.div
@@ -74,25 +75,25 @@ export function Experience() {
             >
               {/* Timeline dot */}
               <motion.div
-                whileHover={{ scale: 1.3 }}
-                className="hidden sm:flex absolute left-2 top-2 w-12 h-12 bg-gradient-to-r from-slate-700 to-slate-600 dark:from-slate-500 dark:to-slate-600 rounded-full border-4 border-white dark:border-gray-900 items-center justify-center text-white font-bold text-lg shadow-lg"
+                whileHover={{ y: -2 }}
+                className="absolute left-2 top-2 hidden h-12 w-12 items-center justify-center rounded-full border border-black bg-white text-lg font-bold text-black dark:border-white dark:bg-black dark:text-white sm:flex"
               >
                 {exp.id}
               </motion.div>
 
               {/* Content card */}
               <motion.div
-                whileHover={{ scale: 1.02, translateY: -5 }}
-                className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg hover:shadow-2xl transition-all"
+                whileHover={{ y: -4 }}
+                className="rounded-lg border border-black/10 bg-white p-8 transition-colors dark:border-white/15 dark:bg-black"
               >
                 {/* Header with period and type */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-3">
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+                    <h3 className="text-xl font-bold text-black sm:text-2xl dark:text-white">
                       {exp.title}
                     </h3>
                     <div className="flex items-center gap-2 mt-1">
-                      <p className="text-md font-semibold text-slate-700 dark:text-slate-300 ">
+                      <p className="text-md font-semibold text-black/75 dark:text-white/75">
                         {exp.company}
                       </p>
                       {exp.link && (
@@ -100,7 +101,7 @@ export function Experience() {
                           href={exp.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center p-1.5 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-full transition-all"
+                          className="inline-flex items-center justify-center rounded-full p-1.5 text-black/60 transition-colors hover:bg-black hover:text-white dark:text-white/60 dark:hover:bg-white dark:hover:text-black"
                           title={`Visit ${exp.company}`}
                         >
                           <MdOpenInNew className="text-sm" />
@@ -111,18 +112,12 @@ export function Experience() {
                   
                   {/* Right side info */}
                   <div className="flex flex-col items-start sm:items-end gap-2">
-                    <p className="text-sm font-bold text-slate-700 dark:text-slate-400 tracking-wider">
+                    <p className="text-sm font-bold tracking-wider text-black/60 dark:text-white/60">
                       {exp.period}
                     </p>
                     <motion.span
-                      whileHover={{ scale: 1.05 }}
-                      className={`px-4 py-2 rounded-full text-sm font-bold tracking-wide flex items-center gap-2 ${
-                        exp.type === 'Onsite'
-                          ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
-                          : exp.type === 'Remote'
-                          ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300'
-                          : 'bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300'
-                      }`}
+                      whileHover={{ y: -1 }}
+                      className="flex items-center gap-2 rounded-full border border-black/15 bg-white px-4 py-2 text-sm font-bold tracking-wide text-black dark:border-white/20 dark:bg-black dark:text-white"
                     >
                       {exp.type === 'Onsite' && <BiSolidBuildingHouse className="text-lg" />}
                       {exp.type === 'Remote' && <MdLocationOn className="text-lg" />}
@@ -132,10 +127,10 @@ export function Experience() {
                 </div>
 
                 {/* Divider */}
-                <div className="h-px bg-gradient-to-r from-slate-300 to-transparent dark:from-slate-600 my-4" />
+                <div className="my-4 h-px bg-black/10 dark:bg-white/15" />
 
                 {/* Description */}
-                <ul className="list-disc list-outside pl-5 text-gray-600 dark:text-gray-300 leading-relaxed text-base space-y-3 mb-5">
+                <ul className="mb-5 list-outside list-disc space-y-3 pl-5 text-base leading-relaxed text-black/70 dark:text-white/70">
                   {exp.description.map((d, idx) => (
                     <li key={idx}>{d}</li>
                   ))}
@@ -146,8 +141,8 @@ export function Experience() {
                   {exp.highlights.map((tech, idx) => (
                     <motion.span
                       key={idx}
-                      whileHover={{ scale: 1.1 }}
-                      className="px-3 py-1.5 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-full text-sm font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+                      whileHover={{ y: -1 }}
+                      className="rounded-full border border-black/15 bg-white px-3 py-1.5 text-sm font-semibold text-black transition-colors hover:bg-black hover:text-white dark:border-white/20 dark:bg-black dark:text-white dark:hover:bg-white dark:hover:text-black"
                     >
                       {tech}
                     </motion.span>
@@ -163,10 +158,10 @@ export function Experience() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          transition={{ duration: 0.45, ease: 'easeOut', delay: 0.2 }}
           className="mt-16 text-center"
         >
-          <p className="text-lg text-gray-600 dark:text-gray-400">
+          <p className="text-lg text-black/65 dark:text-white/65">
             Continuously learning and growing with each project and challenge
           </p>
         </motion.div>

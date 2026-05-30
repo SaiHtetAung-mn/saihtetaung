@@ -8,6 +8,14 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      colors: {
+        background: 'rgb(var(--color-background) / <alpha-value>)',
+        surface: 'rgb(var(--color-surface) / <alpha-value>)',
+        primary: 'rgb(var(--color-primary) / <alpha-value>)',
+        secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
+        muted: 'rgb(var(--color-muted) / <alpha-value>)',
+        border: 'rgb(var(--color-border) / <alpha-value>)',
+      },
       keyframes: {
         'portfolio-fade': {
           '0%': { opacity: '0', transform: 'translateY(30px)' },

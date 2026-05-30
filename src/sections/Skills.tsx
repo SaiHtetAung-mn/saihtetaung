@@ -94,20 +94,20 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900"
+      className="min-h-screen bg-white px-4 py-20 text-black sm:px-6 lg:px-8 dark:bg-black dark:text-white"
     >
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="mb-4 text-4xl font-bold text-black sm:text-5xl dark:text-white">
             My Skills
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300">
+          <p className="text-xl text-black/65 dark:text-white/65">
             Technologies and tools I work with
           </p>
         </motion.div>
@@ -123,11 +123,11 @@ export function Skills() {
             <motion.div
               key={index}
               variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
-              className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all border-t-4 border-slate-700 dark:border-slate-500"
+              whileHover={{ y: -4 }}
+              className="rounded-lg border border-black/10 bg-white p-8 transition-colors dark:border-white/15 dark:bg-black"
             >
               {/* Header */}
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+              <h3 className="mb-6 text-2xl font-bold text-black dark:text-white">
                 {categoryData.category}
               </h3>
 
@@ -138,20 +138,17 @@ export function Skills() {
                   return (
                     <motion.div
                       key={skillIndex}
-                      whileHover={{ scale: 1.12, y: -6 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileHover={{ y: -3 }}
+                      whileTap={{ y: 0 }}
                       className="group relative flex flex-col items-center gap-2"
                     >
-                      {/* Glow background on hover */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-slate-400 to-slate-300 dark:from-slate-600 dark:to-slate-700 rounded-lg blur opacity-0 group-hover:opacity-40 transition-opacity duration-300 -z-10" />
-                      
                       {/* Icon */}
-                      <div className="p-3 bg-gradient-to-r from-slate-700 to-slate-600 dark:from-slate-600 dark:to-slate-700 rounded-lg shadow-lg group-hover:shadow-xl transition-shadow">
-                        <IconComponent className="text-2xl text-white" />
+                      <div className="rounded-lg border border-black/15 bg-white p-3 text-black transition-colors group-hover:bg-black group-hover:text-white dark:border-white/20 dark:bg-black dark:text-white dark:group-hover:bg-white dark:group-hover:text-black">
+                        <IconComponent className="text-2xl" />
                       </div>
                       
                       {/* Skill name */}
-                      <span className="text-xs font-bold text-gray-900 dark:text-white text-center whitespace-nowrap">
+                      <span className="whitespace-nowrap text-center text-xs font-bold text-black dark:text-white">
                         {skillData.name}
                       </span>
                     </motion.div>

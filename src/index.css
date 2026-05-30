@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-background: 255 251 244;
+  --color-surface: 255 251 244;
+  --color-primary: 17 18 13;
+  --color-secondary: 86 84 73;
+  --color-muted: 86 84 73;
+  --color-border: 216 207 188;
+}
+
+.dark {
+  --color-background: 17 18 13;
+  --color-surface: 17 18 13;
+  --color-primary: 255 251 244;
+  --color-secondary: 216 207 188;
+  --color-muted: 216 207 188;
+  --color-border: 216 207 188;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +34,14 @@ body {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-primary));
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-primary));
 }
 
 #root {
@@ -28,8 +53,8 @@ body {
   top: 0;
   left: 0;
   transform: translateY(-100%);
-  background-color: #0f172a;
-  color: #fff;
+  background-color: rgb(var(--color-primary));
+  color: rgb(var(--color-background));
   padding: 0.75rem 1rem;
   border-radius: 0 0.5rem 0.5rem 0;
   z-index: 100;
@@ -39,7 +64,7 @@ body {
 
 .skip-to-content:focus {
   transform: translateY(0);
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 /* Hide horizontal scrollbar for all browsers */
@@ -60,33 +85,17 @@ body {
 }
 
 .hero-landing {
-  color: #fff;
+  color: rgb(var(--color-primary));
 }
 
 .hero-landing--dark {
-  background: #000000;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-primary));
 }
 
 .hero-landing--light {
-  background:
-    radial-gradient(circle at 18% 20%, rgba(17, 24, 39, 0.06), transparent 26%),
-    #ffffff;
-  color: #111827;
-}
-
-.hero-landing__background::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.28) 48%, rgba(0, 0, 0, 0.72)),
-    radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.46) 76%);
-}
-
-.hero-landing--light .hero-landing__background::after {
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.48) 48%, rgba(255, 255, 255, 0.78)),
-    radial-gradient(circle at center, transparent 0%, rgba(255, 255, 255, 0.36) 72%);
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-primary));
 }
 
 .particles-canvas {
@@ -107,21 +116,15 @@ body {
   gap: 0.5rem;
   margin-bottom: 1.25rem;
   padding: 0.5rem 0.8rem;
-  border: 1px solid rgba(148, 163, 184, 0.34);
+  border: 1px solid currentColor;
   border-radius: 9999px;
-  background: rgba(15, 23, 42, 0.58);
-  color: #cbd5e1;
+  background: transparent;
+  color: currentColor;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  backdrop-filter: blur(14px);
-}
-
-.hero-landing--light .hero-kicker {
-  border-color: rgba(217, 119, 6, 0.28);
-  background: rgba(255, 255, 255, 0.68);
-  color: #92400e;
+  opacity: 0.76;
 }
 
 .hero-kicker::before {
@@ -129,8 +132,7 @@ body {
   width: 0.45rem;
   height: 0.45rem;
   border-radius: 9999px;
-  background: #94a3b8;
-  box-shadow: 0 0 18px #94a3b8;
+  background: currentColor;
 }
 
 .hero-heading {
@@ -138,32 +140,21 @@ body {
 }
 
 .hero-name {
-  color: #e2e8f0;
-  text-shadow: 0 0 40px rgba(148, 163, 184, 0.24);
-}
-
-.hero-landing--light .hero-name {
-  color: #0f172a;
+  color: currentColor;
   text-shadow: none;
 }
 
 .hero-role {
-  color: #cbd5e1;
+  color: currentColor;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.hero-landing--light .hero-role {
-  color: #334155;
+  opacity: 0.76;
 }
 
 .hero-description {
-  color: #cbd5e1;
-}
-
-.hero-landing--light .hero-description {
-  color: #475569;
+  color: currentColor;
+  opacity: 0.76;
 }
 
 .hero-button {
@@ -175,46 +166,37 @@ body {
   border-radius: 9999px;
   padding: 0.9rem 1.45rem;
   font-weight: 800;
-  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .hero-button--primary {
-  background: #ffffff;
-  color: #111827;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+  background: rgb(var(--color-primary));
+  color: rgb(var(--color-background));
 }
 
-.hero-landing--light .hero-button--primary {
-  background: #111827;
-  color: #ffffff;
-  box-shadow: 0 16px 36px rgba(17, 24, 39, 0.16);
+.hero-landing--dark .hero-button--primary {
+  color: rgb(var(--color-background));
+  background: rgb(var(--color-primary));
+  border: 1px solid rgb(var(--color-primary));
 }
 
 .hero-button--ghost,
 .hero-button--outline {
-  border: 1px solid rgba(226, 232, 240, 0.22);
-  background: rgba(15, 23, 42, 0.52);
-  color: #e2e8f0;
-  backdrop-filter: blur(14px);
-}
-
-.hero-landing--light .hero-button--ghost,
-.hero-landing--light .hero-button--outline {
-  border-color: rgba(15, 23, 42, 0.14);
-  background: rgba(255, 255, 255, 0.68);
-  color: #0f172a;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: currentColor;
 }
 
 .hero-button--ghost:hover,
 .hero-button--outline:hover {
-  border-color: rgba(251, 191, 36, 0.45);
-  background: rgba(30, 41, 59, 0.68);
+  background: rgb(var(--color-primary));
+  color: rgb(var(--color-background));
 }
 
-.hero-landing--light .hero-button--ghost:hover,
-.hero-landing--light .hero-button--outline:hover {
-  border-color: rgba(217, 119, 6, 0.38);
-  background: rgba(255, 255, 255, 0.88);
+.hero-landing--dark .hero-button--ghost:hover,
+.hero-landing--dark .hero-button--outline:hover {
+  background: rgb(var(--color-primary));
+  color: rgb(var(--color-background));
 }
 
 .hero-portrait {
@@ -227,40 +209,17 @@ body {
   position: absolute;
   inset: -1.1rem;
   border-radius: 2rem;
-  background:
-    radial-gradient(circle at 30% 20%, rgba(251, 191, 36, 0.58), transparent 25%),
-    radial-gradient(circle at 76% 82%, rgba(56, 189, 248, 0.48), transparent 28%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04));
-  filter: blur(0.1px);
-  opacity: 0.95;
-  animation: hero-portrait-glow 8s ease-in-out infinite;
+  border: 1px solid currentColor;
+  opacity: 0.24;
 }
 
 .hero-portrait__image {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.20);
+  border: 1px solid currentColor;
   border-radius: 1.5rem;
-  background: #0f172a;
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.42);
-}
-
-.hero-portrait__image::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 34%, rgba(5, 8, 22, 0.18));
-  pointer-events: none;
-}
-
-@keyframes hero-portrait-glow {
-  0%, 100% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(2deg) scale(1.025);
-  }
+  background: currentColor;
 }
 
 .text-type {
@@ -293,27 +252,7 @@ body {
 }
 
 .shiny-text::after {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  color: transparent;
-  background: linear-gradient(
-    110deg,
-    transparent 0%,
-    transparent 35%,
-    #ffffff 48%,
-    #fef3c7 54%,
-    transparent 68%,
-    transparent 100%
-  );
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation-name: shiny-text-sweep;
-  animation-duration: var(--shine-duration, 4s);
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
+  content: none;
 }
 
 @keyframes shiny-text-sweep {
@@ -327,8 +266,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .shiny-text::after,
-  .text-type__cursor,
-  .hero-portrait__ring {
+  .text-type__cursor {
     animation: none;
   }
 }

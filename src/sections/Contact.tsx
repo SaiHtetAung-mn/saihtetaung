@@ -76,31 +76,31 @@ export function Contact() {
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 12 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 },
+      transition: { duration: 0.45 },
     },
   }
 
   return (
     <section
       id="contact"
-      className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800"
+      className="min-h-screen bg-white px-4 py-20 text-black sm:px-6 lg:px-8 dark:bg-black dark:text-white"
     >
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="mb-4 text-4xl font-bold text-black sm:text-5xl dark:text-white">
             Get In Touch
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300">
+          <p className="text-xl text-black/65 dark:text-white/65">
             I'd love to hear from you. Feel free to reach out!
           </p>
         </motion.div>
@@ -113,18 +113,18 @@ export function Contact() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            <h3 className="mb-6 text-2xl font-bold text-black dark:text-white">
               Contact Information
             </h3>
             <div className="space-y-4">
               {contactLinks.map((link, index) => (
                 <motion.div key={index} variants={itemVariants} className="flex items-start">
-                  <div className="text-4xl mr-4 text-slate-600 dark:text-slate-400 flex-shrink-0">
+                  <div className="mr-4 flex-shrink-0 text-4xl text-current opacity-70">
                     <link.icon />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900 dark:text-white">{link.label}</p>
-                    <p className="text-gray-600 dark:text-gray-300">{link.value}</p>
+                    <p className="font-semibold text-black dark:text-white">{link.label}</p>
+                    <p className="text-black/65 dark:text-white/65">{link.value}</p>
                   </div>
                 </motion.div>
               ))}
@@ -141,7 +141,7 @@ export function Contact() {
             className="space-y-4"
           >
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="name" className="mb-2 block text-sm font-medium text-black/70 dark:text-white/70">
                 Name
               </label>
               <input
@@ -151,12 +151,12 @@ export function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full rounded-lg border border-black/15 bg-white px-4 py-2 text-black outline-none transition-colors focus:border-black dark:border-white/20 dark:bg-black dark:text-white dark:focus:border-white"
                 placeholder="Your name"
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="email" className="mb-2 block text-sm font-medium text-black/70 dark:text-white/70">
                 Email
               </label>
               <input
@@ -166,12 +166,12 @@ export function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full rounded-lg border border-black/15 bg-white px-4 py-2 text-black outline-none transition-colors focus:border-black dark:border-white/20 dark:bg-black dark:text-white dark:focus:border-white"
                 placeholder="your@email.com"
               />
             </div>
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="message" className="mb-2 block text-sm font-medium text-black/70 dark:text-white/70">
                 Message
               </label>
               <textarea
@@ -181,20 +181,20 @@ export function Contact() {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full rounded-lg border border-black/15 bg-white px-4 py-2 text-black outline-none transition-colors focus:border-black dark:border-white/20 dark:bg-black dark:text-white dark:focus:border-white"
                 placeholder="Your message"
               />
             </div>
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ y: -2 }}
+              whileTap={{ y: 0 }}
               type="submit"
               disabled={isSubmitting}
-              className="w-full px-8 py-3 bg-slate-800 dark:bg-slate-700 text-white font-semibold rounded-lg hover:bg-slate-900 dark:hover:bg-slate-600 transition-colors shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full rounded-lg border border-black bg-black px-8 py-3 font-semibold text-white transition-colors hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-60 dark:border-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white"
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </motion.button>
-            {feedback && <p className="text-center text-sm text-gray-600 dark:text-gray-300">{feedback}</p>}
+            {feedback && <p className="text-center text-sm text-black/65 dark:text-white/65">{feedback}</p>}
           </motion.form>
         </div>
       </div>

@@ -77,14 +77,14 @@ export function Portfolio() {
   return (
     <section
       id="portfolio"
-      className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800"
+      className="min-h-screen bg-white px-4 py-20 text-black sm:px-6 lg:px-8 dark:bg-black dark:text-white"
     >
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="mb-4 text-4xl font-bold text-black sm:text-5xl dark:text-white">
             My Portfolio
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
+          <p className="text-xl text-black/65 dark:text-white/65">
             Showcasing my best work and projects
           </p>
         </div>
@@ -97,8 +97,8 @@ export function Portfolio() {
               onClick={() => setActiveCategory(category)}
               className={`px-6 py-2 rounded-lg font-semibold capitalize transition-all ${
                 activeCategory === category
-                  ? 'bg-slate-800 dark:bg-slate-700 text-white shadow-lg'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                  ? 'bg-black text-white dark:bg-white dark:text-black'
+                  : 'border border-black/15 bg-white text-black hover:bg-black hover:text-white dark:border-white/20 dark:bg-black dark:text-white dark:hover:bg-white dark:hover:text-black'
               }`}
             >
               {category}
@@ -110,12 +110,12 @@ export function Portfolio() {
           {/* Navigation arrows for medium+ screens, outside scroll area */}
           <button
             type="button"
-            className="hidden md:flex items-center justify-center rounded-full z-20 w-12 h-12  bg-white dark:bg-gray-800 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition mx-2"
+            className="z-20 mx-2 hidden h-12 w-12 items-center justify-center rounded-full border border-black/15 bg-white text-black transition-colors hover:bg-black hover:text-white dark:border-white/20 dark:bg-black dark:text-white dark:hover:bg-white dark:hover:text-black md:flex"
             style={{ position: 'relative' }}
             onClick={() => scrollByAmount(-320)}
             aria-label="Scroll left"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-7 h-7 text-gray-700 dark:text-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="h-7 w-7">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
             </svg>
           </button>
@@ -137,11 +137,11 @@ export function Portfolio() {
                       className={`flex-shrink-0 ${cardWidth} animate-portfolio-fade snap-center`}
                       style={{ animationDelay: `${idx * 0.1}s` }}
                     >
-                      <div className="group relative h-full rounded-2xl bg-gradient-to-b from-slate-900/10 via-slate-900/5 to-white dark:from-slate-100/15 dark:via-slate-100/5 dark:to-slate-900/50 p-[1px] shadow-lg shadow-slate-900/5 dark:shadow-black/40 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
-                        <div className="flex flex-col h-full bg-white/90 dark:bg-gray-800/90 rounded-2xl overflow-hidden backdrop-blur">
+                      <div className="group relative h-full rounded-lg border border-black/10 bg-white transition-transform duration-300 hover:-translate-y-1 dark:border-white/15 dark:bg-black">
+                        <div className="flex h-full flex-col overflow-hidden rounded-lg bg-white dark:bg-black">
                           <div className="relative h-48 sm:h-52">
                             {!loadedImages.has(project.image) && (
-                              <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 dark:from-gray-700 dark:via-gray-600 dark:to-gray-700" />
+                              <div className="absolute inset-0 animate-pulse bg-black/10 dark:bg-white/10" />
                             )}
                             <img
                               src={project.image}
@@ -149,26 +149,23 @@ export function Portfolio() {
                               onLoad={() => handleImageLoad(project.image)}
                               className={`w-full h-full object-cover transition-opacity duration-300 ${loadedImages.has(project.image) ? 'opacity-100' : 'opacity-0'}`}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            {/* <span className="absolute top-3 right-3 px-3 py-1 text-xs font-semibold rounded-full backdrop-blur bg-white/85 text-slate-800 dark:bg-gray-900/75 dark:text-gray-100 border border-white/60 dark:border-gray-700">
-                              {categoryLabel}
-                            </span> */}
+                            <div className="absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                           </div>
 
                           <div className="p-5 flex flex-col h-full gap-3">
-                            <h4 className="font-semibold text-md text-gray-900 dark:text-white leading-tight">
+                            <h4 className="text-md font-semibold leading-tight text-black dark:text-white">
                               {project.title}
                             </h4>
                             <p
-                              className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
+                              className="text-sm leading-relaxed text-black/70 dark:text-white/70"
                             >
                               {project.description}
                             </p>
                             {'responsibility' in project && project.responsibility && (
                               <p
-                                className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed"
+                                className="text-xs leading-relaxed text-black/60 dark:text-white/60"
                               >
-                                <span className="font-semibold text-gray-700 dark:text-gray-200">Role:</span>{' '}
+                                <span className="font-semibold text-black dark:text-white">Role:</span>{' '}
                                 {project.responsibility}
                               </p>
                             )}
@@ -177,7 +174,7 @@ export function Portfolio() {
                               {project.tech_stack.map((tech, idx) => (
                                 <span
                                   key={idx as number}
-                                  className="px-3 py-1 text-[11px] font-semibold tracking-wide text-slate-800 dark:text-gray-100 bg-slate-100/80 dark:bg-gray-700/80 border border-slate-200 dark:border-gray-600 rounded-full"
+                                  className="rounded-full border border-black/15 bg-white px-3 py-1 text-[11px] font-semibold tracking-wide text-black dark:border-white/20 dark:bg-black dark:text-white"
                                 >
                                   {tech}
                                 </span>
@@ -190,7 +187,7 @@ export function Portfolio() {
                                   href={project.code_url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 px-3 py-2 text-sm font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-100 dark:border-blue-800 hover:-translate-y-0.5 hover:shadow-sm transition-transform"
+                                  className="inline-flex items-center gap-1 rounded-lg border border-black/15 bg-white px-3 py-2 text-sm font-semibold text-black transition-colors hover:bg-black hover:text-white dark:border-white/20 dark:bg-black dark:text-white dark:hover:bg-white dark:hover:text-black"
                                 >
                                   Code
                                   <span aria-hidden>↗</span>
@@ -201,7 +198,7 @@ export function Portfolio() {
                                   href={project.demo_url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 px-3 py-2 text-sm font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-900/30 rounded-lg border border-emerald-100 dark:border-emerald-800 hover:-translate-y-0.5 hover:shadow-sm transition-transform"
+                                  className="inline-flex items-center gap-1 rounded-lg border border-black/15 bg-white px-3 py-2 text-sm font-semibold text-black transition-colors hover:bg-black hover:text-white dark:border-white/20 dark:bg-black dark:text-white dark:hover:bg-white dark:hover:text-black"
                                 >
                                   Demo
                                   <span aria-hidden>↗</span>
@@ -212,7 +209,7 @@ export function Portfolio() {
                                   href={project.link}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 px-3 py-2 text-sm font-semibold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 hover:-translate-y-0.5 hover:shadow-sm transition-transform"
+                                  className="inline-flex items-center gap-1 rounded-lg border border-black/15 bg-white px-3 py-2 text-sm font-semibold text-black transition-colors hover:bg-black hover:text-white dark:border-white/20 dark:bg-black dark:text-white dark:hover:bg-white dark:hover:text-black"
                                 >
                                   Visit
                                   <span aria-hidden>↗</span>
@@ -227,19 +224,19 @@ export function Portfolio() {
                 })
               ) : (
                 <div className="w-full text-center py-12">
-                  <p className="text-gray-600 dark:text-gray-400 text-lg">No projects in this category yet.</p>
+                  <p className="text-lg text-black/65 dark:text-white/65">No projects in this category yet.</p>
                 </div>
               )}
             </div>
           </div>
           <button
             type="button"
-            className="hidden md:flex items-center rounded-full justify-center z-20 w-12 h-12 bg-white dark:bg-gray-800 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition mx-2"
+            className="z-20 mx-2 hidden h-12 w-12 items-center justify-center rounded-full border border-black/15 bg-white text-black transition-colors hover:bg-black hover:text-white dark:border-white/20 dark:bg-black dark:text-white dark:hover:bg-white dark:hover:text-black md:flex"
             style={{ position: 'relative' }}
             onClick={() => scrollByAmount(320)}
             aria-label="Scroll right"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-7 h-7 text-gray-700 dark:text-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="h-7 w-7">
               <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
             </svg>
           </button>
@@ -252,7 +249,7 @@ export function Portfolio() {
                 type="button"
                 aria-label={`Go to project ${idx + 1}`}
                 onClick={() => scrollToCard(idx)}
-                className={`h-2.5 w-2.5 rounded-full transition-all ${activeProjectIndex === idx ? 'bg-slate-800 dark:bg-slate-200 scale-110' : 'bg-gray-300 dark:bg-gray-600'}`}
+                className={`h-2.5 w-2.5 rounded-full transition-all ${activeProjectIndex === idx ? 'scale-110 bg-black dark:bg-white' : 'bg-black/25 dark:bg-white/30'}`}
               />
             ))}
           </div>

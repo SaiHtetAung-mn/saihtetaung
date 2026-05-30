@@ -50,7 +50,7 @@ export function Navigation() {
   return (
     <nav
       aria-label="Primary"
-      className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-md transition-colors duration-300 ease-in-out"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-black/10 bg-white/95 text-black backdrop-blur transition-colors duration-300 ease-out dark:border-white/15 dark:bg-black/95 dark:text-white"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -63,7 +63,7 @@ export function Navigation() {
                   <motion.a
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                    transition={{ duration: 0.35, ease: 'easeOut', delay: index * 0.035 }}
                     href={`#${item.id}`}
                     onClick={(event) => {
                       event.preventDefault()
@@ -71,8 +71,8 @@ export function Navigation() {
                     }}
                     className={`px-3 py-2 text-sm font-medium transition-colors ${
                       activeSection === item.id
-                        ? 'text-slate-900 dark:text-white'
-                        : 'text-gray-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white'
+                        ? 'text-black dark:text-white'
+                        : 'text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white'
                     }`}
                     aria-current={activeSection === item.id ? 'page' : undefined}
                   >
@@ -81,8 +81,8 @@ export function Navigation() {
                   {activeSection === item.id && (
                     <motion.div
                       layoutId="activeIndicator"
-                      className="absolute inset-x-0 -bottom-2 h-1 bg-slate-800 dark:bg-slate-400 rounded-full"
-                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                      className="absolute inset-x-0 -bottom-2 h-px bg-current"
+                      transition={{ type: 'spring', stiffness: 360, damping: 34 }}
                     />
                   )}
                 </div>
@@ -93,10 +93,10 @@ export function Navigation() {
           {/* Theme Toggle & Mobile Menu */}
           <div className="flex items-center space-x-4">
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ y: -1 }}
+              whileTap={{ y: 0 }}
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className="rounded-lg border border-black/15 p-2 text-black transition-colors hover:bg-black hover:text-white dark:border-white/20 dark:text-white dark:hover:bg-white dark:hover:text-black"
               aria-label="Toggle theme"
               type="button"
             >
@@ -117,10 +117,10 @@ export function Navigation() {
 
             {/* Mobile Menu Button */}
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ y: -1 }}
+              whileTap={{ y: 0 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300"
+              className="rounded-lg border border-black/15 p-2 text-black dark:border-white/20 dark:text-white md:hidden"
               aria-label="Toggle menu"
               aria-expanded={isOpen}
               aria-controls="mobile-navigation"
@@ -157,8 +157,8 @@ export function Navigation() {
                   }}
                   className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     activeSection === item.id
-                      ? 'bg-slate-800 dark:bg-slate-700 text-white'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                      ? 'bg-black text-white dark:bg-white dark:text-black'
+                      : 'text-black/70 hover:bg-black/5 hover:text-black dark:text-white/70 dark:hover:bg-white/10 dark:hover:text-white'
                   }`}
                   aria-current={activeSection === item.id ? 'page' : undefined}
                 >
