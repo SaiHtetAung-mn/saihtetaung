@@ -24,12 +24,10 @@ const wordVariants: Variants = {
   hidden: {
     opacity: 0,
     y: 26,
-    filter: 'blur(8px)',
   },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: {
       duration: 0.6,
       ease: [0.22, 1, 0.36, 1],
@@ -62,7 +60,7 @@ export default function ScrollFloatTitle({
           return (
             <motion.span
               key={`${segment.text}-${word}-${wordIndex}`}
-              className={`inline-block will-change-[transform,filter,opacity] ${
+              className={`inline-block will-change-transform ${
                 segment.accent ? 'text-accent' : ''
               }`}
               variants={wordVariants}

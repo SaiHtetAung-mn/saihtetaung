@@ -4,6 +4,7 @@ import meImage from '../assets/me-primary.jpg'
 import BlurText from '../components/BlurText';
 import ImageWithSkeleton from '../components/ImageWithSkeleton';
 import RotatingText from '../components/RotatingText';
+import TextType from '../components/TextType';
 import { useTheme } from '../context/ThemeContext';
 
 export function Landing() {
@@ -93,7 +94,7 @@ export function Landing() {
               <RotatingText
                 texts={['Fullstack Developer', 'Software Engineer']}
                 className="text-accent font-mono"
-                rotationInterval={2400}
+                rotationInterval={4400}
                 staggerDuration={0.03}
                 splitBy="characters"
               />
@@ -105,7 +106,13 @@ export function Landing() {
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 1 }}
               className="hero-description max-w-xl mx-auto md:mx-0 text-base sm:text-lg mb-8 leading-relaxed"
             >
-              I ship full-stack solutions—from robust backends to polished frontends.
+              <TextType
+                texts={['I ship full-stack solutions from robust backends to polished frontends.']}
+                typingSpeed={36}
+                startDelay={1300}
+                loop={false}
+                showCursor={false}
+              />
             </motion.p>
 
             <motion.div

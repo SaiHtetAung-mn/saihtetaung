@@ -38,7 +38,7 @@ export default function BlurText({
       y: 0,
       filter: 'blur(0px)',
       transition: {
-        duration: 0.55,
+        duration: 0.75,
         ease: [0.22, 1, 0.36, 1],
       },
     },

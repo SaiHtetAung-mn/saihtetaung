@@ -20,7 +20,7 @@ export function About() {
     'Taking a system-level view of problems, improving architecture where it matters, and keeping the codebase clean and efficient as it evolves.'
   ];
 
-  const techStack = ['Node.js', 'NestJS', 'ExpressJs', 'React', 'MongoDB', 'MySQL', 'AWS'];
+  const techStack = ['Node.js', 'NestJS', 'ExpressJs', 'Laravel', 'React', 'MongoDB', 'MySQL', 'PostgreSQL', 'AWS'];
 
   return (
     <section
@@ -49,7 +49,7 @@ export function About() {
             <div className="space-y-2 mb-8 text-center">
               <p className="font-bold tracking-[0.18em] text-primary/60 sm:text-3xl md:text-2xl">Who I am</p>
               <p className="text-lg leading-relaxed text-secondary">
-                I’m a backend-focused full-stack engineer with a computer science background. I spend most of my time building reliable services and clean APIs along with the UI needed to run and debug them. I care a lot about data models, observability, and clear boundaries between systems, and I prefer code and architecture that stay understandable long after they’re written.
+                I am a backend-focused full-stack engineer with a computer science background. For the past years, I've worked on payment integrations, ERP platforms, agri-fintech systems and digital campaign applications. I've contributed across the full software lifecycle: from architecture design and backend development to frontend implementation, deployment and production support.
               </p>
             </div>
 
