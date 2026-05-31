@@ -10,11 +10,13 @@ import ScrollFloatTitle from '@/components/ScrollFloatTitle';
 export function Education() {
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = React.useState(false);
+  const [hasMounted, setHasMounted] = React.useState(false);
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
     setIsMobile(window.matchMedia('(max-width: 767px)').matches);
+    setHasMounted(true);
   }, []);
-  const useLightMotion = prefersReducedMotion || isMobile;
+  const useLightMotion = !hasMounted || prefersReducedMotion || isMobile;
 
   const educationItems = certificationsData.educations;
 
@@ -46,8 +48,8 @@ export function Education() {
     >
       <div className="max-w-4xl mx-auto">
         <motion.div
-          initial={useLightMotion ? false : { opacity: 0, y: -20 }}
-          whileInView={useLightMotion ? undefined : { opacity: 1, y: 0 }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="text-center mb-12"
@@ -78,8 +80,8 @@ export function Education() {
           </div>
           <motion.div
             variants={containerVariants}
-            initial={useLightMotion ? false : 'hidden'}
-            whileInView={useLightMotion ? undefined : 'visible'}
+            initial={false}
+            animate="visible"
             viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
             className="space-y-8"
           >
@@ -150,8 +152,8 @@ export function Education() {
           </div>
           <motion.div
             variants={containerVariants}
-            initial={useLightMotion ? false : 'hidden'}
-            whileInView={useLightMotion ? undefined : 'visible'}
+            initial={false}
+            animate="visible"
             viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
@@ -218,8 +220,8 @@ export function Education() {
             </div>
             <motion.div
               variants={containerVariants}
-              initial={useLightMotion ? false : 'hidden'}
-              whileInView={useLightMotion ? undefined : 'visible'}
+              initial={false}
+              animate="visible"
               viewport={{ once: true, amount: 0.15, margin: '0px 0px -10% 0px' }}
               className="grid grid-cols-1 md:grid-cols-2 gap-6"
             >

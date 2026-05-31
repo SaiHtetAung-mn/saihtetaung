@@ -26,6 +26,7 @@ import {
   SiPostman
 } from 'react-icons/si'
 import { GrDeploy } from "react-icons/gr";
+import Magnet from '@/components/Magnet';
 import ScrollFloatTitle from '@/components/ScrollFloatTitle';
 
 export function Skills() {
@@ -137,17 +138,23 @@ export function Skills() {
                     {categoryData.skills.map((skillData, skillIndex) => {
                       const IconComponent = skillData.icon
                       return (
-                        <motion.div
-                          key={skillIndex}
-                          whileHover={{ y: -2, scale: 1.015 }}
-                          whileTap={{ y: 0 }}
-                          className="group inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface px-3 py-1.5 transition-colors duration-200 hover:border-accent/55 hover:bg-accent/10"
+                        <Magnet
+                          key={skillData.name}
+                          padding={36}
+                          magnetStrength={7}
+                          wrapperClassName="inline-block"
                         >
-                          <IconComponent className="text-sm text-accent transition-transform duration-200 group-hover:scale-110 sm:text-base" />
-                          <span className="whitespace-nowrap text-sm font-medium text-primary transition-colors duration-200 group-hover:text-primary">
-                            {skillData.name}
-                          </span>
-                        </motion.div>
+                          <motion.div
+                            whileHover={{ y: -2, scale: 1.015 }}
+                            whileTap={{ y: 0 }}
+                            className="group inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface px-3 py-1.5 transition-colors duration-200 hover:border-accent/55 hover:bg-accent/10"
+                          >
+                            <IconComponent className="text-sm text-accent transition-transform duration-200 group-hover:scale-110 sm:text-base" />
+                            <span className="whitespace-nowrap text-sm font-medium text-primary transition-colors duration-200 group-hover:text-primary">
+                              {skillData.name}
+                            </span>
+                          </motion.div>
+                        </Magnet>
                       )
                     })}
                   </div>

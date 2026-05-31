@@ -104,7 +104,7 @@ const LightRays: React.FC<LightRaysProps> = ({
   const animationIdRef = useRef<number | null>(null);
   const meshRef = useRef<Mesh | null>(null);
   const cleanupFunctionRef = useRef<(() => void) | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
@@ -115,7 +115,7 @@ const LightRays: React.FC<LightRaysProps> = ({
         const entry = entries[0];
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      { threshold: 0 }
     );
 
     observerRef.current.observe(containerRef.current);
@@ -295,7 +295,10 @@ void main() {
 
         renderer.dpr = Math.min(window.devicePixelRatio, 2);
 
-        const { clientWidth: wCSS, clientHeight: hCSS } = containerRef.current;
+        const rect = containerRef.current.getBoundingClientRect();
+        const wCSS = rect.width || containerRef.current.clientWidth;
+        const hCSS = rect.height || containerRef.current.clientHeight;
+        if (wCSS <= 0 || hCSS <= 0) return;
         renderer.setSize(wCSS, hCSS);
 
         const dpr = renderer.dpr;
@@ -409,7 +412,10 @@ void main() {
     u.noiseAmount.value = noiseAmount;
     u.distortion.value = distortion;
 
-    const { clientWidth: wCSS, clientHeight: hCSS } = containerRef.current;
+    const rect = containerRef.current.getBoundingClientRect();
+    const wCSS = rect.width || containerRef.current.clientWidth;
+    const hCSS = rect.height || containerRef.current.clientHeight;
+    if (wCSS <= 0 || hCSS <= 0) return;
     const dpr = renderer.dpr;
     const { anchor, dir } = getAnchorAndDir(raysOrigin, wCSS * dpr, hCSS * dpr);
     u.rayPos.value = anchor;
@@ -429,7 +435,7 @@ void main() {
   ]);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handlePointerMove = (e: PointerEvent) => {
       if (!containerRef.current || !rendererRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;
@@ -438,8 +444,8 @@ void main() {
     };
 
     if (followMouse) {
-      window.addEventListener('mousemove', handleMouseMove);
-      return () => window.removeEventListener('mousemove', handleMouseMove);
+      window.addEventListener('pointermove', handlePointerMove, { passive: true });
+      return () => window.removeEventListener('pointermove', handlePointerMove);
     }
   }, [followMouse]);
 

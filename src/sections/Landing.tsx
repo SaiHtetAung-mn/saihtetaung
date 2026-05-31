@@ -129,15 +129,15 @@ export function Landing() {
       return (
         <LightRays
           raysOrigin="top-center"
-          raysColor="#ffffff"
+          raysColor={isDark ? '#ffffff' : '#ff3b5c'}
           raysSpeed={1}
-          lightSpread={0.5}
+          lightSpread={0.65}
           rayLength={3}
-          followMouse={false}
-          mouseInfluence={0}
+          followMouse
+          mouseInfluence={0.12}
           noiseAmount={0}
           distortion={0}
-          className="absolute inset-0 h-full w-full custom-rays"
+          className="absolute inset-0 h-[100svh] w-full md:h-full custom-rays"
           pulsating
           fadeDistance={1}
           saturation={1.2}
@@ -148,11 +148,12 @@ export function Landing() {
     if (background === 'tech-icons') {
       return (
         <TechIconBackground
+          className="bottom-auto h-[100svh] md:bottom-0 md:h-full"
           icons={landingTechIcons}
           iconClassName={isDark ? 'text-white/14' : 'text-accent/20'}
           cursorRadius={140}
           cursorForce={0.75}
-          gravity={0.22}
+          gravity={0.1}
           friction={0.991}
           wallBounce={0.55}
           floorFriction={0.985}
