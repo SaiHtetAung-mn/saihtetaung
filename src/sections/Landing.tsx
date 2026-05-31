@@ -4,7 +4,7 @@ import { FiDownload, FiGithub } from 'react-icons/fi'
 import meImage from '@/assets/me-primary.jpg'
 import BlurText from '@/components/BlurText';
 import DotFieldBackground from '@/components/DotFieldBackground';
-import LightRays from '@/components/LightRayBackground';
+import AntigravityBackground from '@/components/AntigravityBackground';
 import TechIconBackground, { type TechIconSeed } from '@/components/TechIconBackground';
 import ImageWithSkeleton from '@/components/ImageWithSkeleton';
 import RotatingText from '@/components/RotatingText';
@@ -37,7 +37,7 @@ import {
   SiPostman
 } from 'react-icons/si'
 
-type LandingBackground = 'dot-field' | 'light-rays' | 'tech-icons'
+type LandingBackground = 'dot-field' | 'antigravity' | 'tech-icons'
 
 const landingTechIcons: TechIconSeed[] = [
   { Icon: SiTypescript, x: 0.08, y: 0.08, size: 42 },
@@ -103,7 +103,7 @@ export function Landing() {
   }
 
   useEffect(() => {
-    const backgrounds: LandingBackground[] = ['dot-field', 'light-rays', 'tech-icons']
+    const backgrounds: LandingBackground[] = ['dot-field', 'antigravity', 'tech-icons']
     setBackground(backgrounds[Math.floor(Math.random() * backgrounds.length)])
   }, [])
 
@@ -125,23 +125,27 @@ export function Landing() {
       )
     }
 
-    if (background === 'light-rays') {
+    if (background === 'antigravity') {
       return (
-        <LightRays
-          raysOrigin="top-center"
-          raysColor={isDark ? '#ffffff' : '#ff3b5c'}
-          raysSpeed={1}
-          lightSpread={0.65}
-          rayLength={3}
-          followMouse
-          mouseInfluence={0.12}
-          noiseAmount={0}
-          distortion={0}
-          className="absolute inset-0 h-[100svh] w-full md:h-full custom-rays"
-          pulsating
-          fadeDistance={1}
-          saturation={1.2}
-        />
+        <div className="absolute inset-0 h-[100svh] w-full md:h-full">
+          <AntigravityBackground
+            count={300}
+            color={isDark ? '#ffffff' : '#ff3b5c'}
+            magnetRadius={6}
+            ringRadius={7}
+            waveSpeed={0.4}
+            waveAmplitude={1}
+            particleSize={1.1}
+            particleVariance={1}
+            lerpSpeed={0.05}
+            autoAnimate={false}
+            rotationSpeed={0}
+            depthFactor={1}
+            pulseSpeed={3}
+            particleShape="sphere"
+            fieldStrength={8}
+          />
+        </div>
       )
     }
 
