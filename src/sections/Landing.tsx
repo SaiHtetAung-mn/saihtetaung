@@ -5,13 +5,66 @@ import meImage from '@/assets/me-primary.jpg'
 import BlurText from '@/components/BlurText';
 import DotFieldBackground from '@/components/DotFieldBackground';
 import LightRays from '@/components/LightRayBackground';
-import Ballpit from '@/components/BallSpitBackground';
+import TechIconBackground, { type TechIconSeed } from '@/components/TechIconBackground';
 import ImageWithSkeleton from '@/components/ImageWithSkeleton';
 import RotatingText from '@/components/RotatingText';
 import TextType from '@/components/TextType';
 import { useTheme } from '@/context/ThemeContext';
+import {
+  SiNodedotjs,
+  SiNestjs,
+  SiExpress,
+  SiLaravel,
+  SiMongodb,
+  SiPostgresql,
+  SiMysql,
+  SiMui,
+  SiJquery,
+  SiRedux,
+  SiHtml5,
+  SiReact,
+  SiVite,
+  SiTypescript,
+  SiTailwindcss,
+  SiDocker,
+  SiLinux,
+  SiJira,
+  SiGit,
+  SiAmazon,
+  SiRedis,
+  SiNginx,
+  SiSocketdotio,
+  SiPostman
+} from 'react-icons/si'
 
-type LandingBackground = 'dot-field' | 'light-rays' | 'ballpit'
+type LandingBackground = 'dot-field' | 'light-rays' | 'tech-icons'
+
+const landingTechIcons: TechIconSeed[] = [
+  { Icon: SiTypescript, x: 0.08, y: 0.08, size: 42 },
+  { Icon: SiNodedotjs, x: 0.18, y: 0.16, size: 42 },
+  { Icon: SiNestjs, x: 0.3, y: 0.08, size: 48 },
+  { Icon: SiExpress, x: 0.42, y: 0.18, size: 38 },
+  { Icon: SiLaravel, x: 0.54, y: 0.1, size: 42 },
+  { Icon: SiSocketdotio, x: 0.66, y: 0.18, size: 36 },
+  { Icon: SiMongodb, x: 0.78, y: 0.1, size: 48 },
+  { Icon: SiPostgresql, x: 0.9, y: 0.2, size: 42 },
+  { Icon: SiMysql, x: 0.12, y: 0.32, size: 42 },
+  { Icon: SiRedis, x: 0.24, y: 0.4, size: 36 },
+  { Icon: SiReact, x: 0.36, y: 0.3, size: 54 },
+  { Icon: SiRedux, x: 0.5, y: 0.38, size: 40 },
+  { Icon: SiVite, x: 0.64, y: 0.3, size: 42 },
+  { Icon: SiMui, x: 0.76, y: 0.42, size: 38 },
+  { Icon: SiJquery, x: 0.88, y: 0.34, size: 38 },
+  { Icon: SiHtml5, x: 0.18, y: 0.56, size: 42 },
+  { Icon: SiTailwindcss, x: 0.34, y: 0.5, size: 52 },
+  { Icon: SiDocker, x: 0.48, y: 0.58, size: 44 },
+  { Icon: SiLinux, x: 0.62, y: 0.52, size: 42 },
+  { Icon: SiGit, x: 0.76, y: 0.6, size: 38 },
+  { Icon: SiAmazon, x: 0.9, y: 0.54, size: 38 },
+  { Icon: SiNginx, x: 0.28, y: 0.7, size: 38 },
+  { Icon: SiJira, x: 0.58, y: 0.72, size: 38 },
+  { Icon: SiPostman, x: 0.82, y: 0.74, size: 38 },
+]
 
 export function Landing() {
   const { theme } = useTheme()
@@ -50,7 +103,7 @@ export function Landing() {
   }
 
   useEffect(() => {
-    const backgrounds: LandingBackground[] = ['dot-field', 'light-rays', 'ballpit']
+    const backgrounds: LandingBackground[] = ['dot-field', 'light-rays', 'tech-icons']
     setBackground(backgrounds[Math.floor(Math.random() * backgrounds.length)])
   }, [])
 
@@ -92,17 +145,22 @@ export function Landing() {
       )
     }
 
-    if (background === 'ballpit') {
+    if (background === 'tech-icons') {
       return (
-        <Ballpit
-          className="pointer-events-none absolute inset-0 h-full w-full opacity-45"
-          count={20}
-          colors={isDark ? [0xffffff] : [0xff3b5c]}
-          ambientColor={0xffffff}
-          gravity={0.1}
-          friction={0.969}
-          wallBounce={0.6}
-          followCursor
+        <TechIconBackground
+          icons={landingTechIcons}
+          iconClassName={isDark ? 'text-white/14' : 'text-accent/20'}
+          cursorRadius={140}
+          cursorForce={0.75}
+          gravity={0.22}
+          friction={0.991}
+          wallBounce={0.55}
+          floorFriction={0.985}
+          collisionStrength={0.48}
+          recycleSettledIcons={false}
+          floatingRatio={0.35}
+          floatStrength={0.045}
+          floatDrift={18}
         />
       )
     }
