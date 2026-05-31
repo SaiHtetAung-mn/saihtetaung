@@ -1,15 +1,21 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { FiDownload, FiGithub } from 'react-icons/fi'
 import meImage from '@/assets/me-primary.jpg'
 import BlurText from '@/components/BlurText';
 import DotFieldBackground from '@/components/DotFieldBackground';
+import LightRays from '@/components/LightRayBackground';
+import Ballpit from '@/components/BallSpitBackground';
 import ImageWithSkeleton from '@/components/ImageWithSkeleton';
 import RotatingText from '@/components/RotatingText';
 import TextType from '@/components/TextType';
 import { useTheme } from '@/context/ThemeContext';
 
+type LandingBackground = 'dot-field' | 'light-rays' | 'ballpit'
+
 export function Landing() {
   const { theme } = useTheme()
+  const [background, setBackground] = useState<LandingBackground | null>(null)
   const isDark = theme === 'dark'
   const dotFieldTheme = isDark
     ? {
@@ -18,8 +24,8 @@ export function Landing() {
         glowColor: '#0b1220',
       }
     : {
-        gradientFrom: 'rgba(243, 245, 245, 0.45)',
-        gradientTo: 'rgba(244, 63, 94, 0.35)',
+        gradientFrom: 'rgba(3, 3, 3, 0.45)',
+        gradientTo: 'rgba(25, 59, 92, 0.35)',
         glowColor: '#ffffff',
       }
 
@@ -43,23 +49,73 @@ export function Landing() {
     },
   }
 
+  useEffect(() => {
+    const backgrounds: LandingBackground[] = ['dot-field', 'light-rays', 'ballpit']
+    setBackground(backgrounds[Math.floor(Math.random() * backgrounds.length)])
+  }, [])
+
+  const renderBackground = () => {
+    if (background === 'dot-field') {
+      return (
+        <DotFieldBackground
+          className="pointer-events-none absolute inset-0 opacity-100"
+          dotRadius={1.9}
+          dotSpacing={20}
+          cursorRadius={420}
+          bulgeOnly
+          bulgeStrength={72}
+          glowRadius={220}
+          sparkle
+          waveAmplitude={1}
+          {...dotFieldTheme}
+        />
+      )
+    }
+
+    if (background === 'light-rays') {
+      return (
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#ffffff"
+          raysSpeed={1}
+          lightSpread={0.5}
+          rayLength={3}
+          followMouse={false}
+          mouseInfluence={0}
+          noiseAmount={0}
+          distortion={0}
+          className="absolute inset-0 h-full w-full custom-rays"
+          pulsating
+          fadeDistance={1}
+          saturation={1.2}
+        />
+      )
+    }
+
+    if (background === 'ballpit') {
+      return (
+        <Ballpit
+          className="pointer-events-none absolute inset-0 h-full w-full opacity-45"
+          count={20}
+          colors={isDark ? [0xffffff] : [0xff3b5c]}
+          ambientColor={0xffffff}
+          gravity={0.1}
+          friction={0.969}
+          wallBounce={0.6}
+          followCursor
+        />
+      )
+    }
+
+    return null
+  }
+
   return (
     <section
       id="landing"
       className={`hero-landing relative min-h-screen flex items-center justify-center pt-24 sm:pt-16 overflow-hidden ${isDark ? 'hero-landing--dark' : 'hero-landing--light'}`}
     >
-      <DotFieldBackground
-        className="pointer-events-none absolute inset-0 opacity-100"
-        dotRadius={1.9}
-        dotSpacing={20}
-        cursorRadius={420}
-        bulgeOnly={true}
-        bulgeStrength={72}
-        glowRadius={220}
-        sparkle={true}
-        waveAmplitude={1}
-        {...dotFieldTheme}
-      />
+      {renderBackground()}
       <motion.div
         variants={containerVariants}
         initial="hidden"
