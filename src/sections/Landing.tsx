@@ -56,7 +56,7 @@ export function Landing() {
         bulgeOnly={true}
         bulgeStrength={72}
         glowRadius={220}
-        sparkle={false}
+        sparkle={true}
         waveAmplitude={1}
         {...dotFieldTheme}
       />

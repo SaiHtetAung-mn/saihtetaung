@@ -66,9 +66,7 @@ const DotField = memo(({
     if (typeof window === 'undefined') return;
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
-    const isSmallScreen = window.innerWidth < 768;
-    setIsSupported(!(reducedMotion || coarsePointer || isSmallScreen));
+    setIsSupported(!reducedMotion);
   }, []);
 
   useEffect(() => {
