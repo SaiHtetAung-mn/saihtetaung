@@ -4,6 +4,7 @@ import { BiSolidBuildingHouse } from 'react-icons/bi'
 import { MdOpenInNew } from 'react-icons/md'
 import experienceData from '@/data/experience.json'
 import ScrollFloatTitle from '@/components/ScrollFloatTitle'
+import StarBorder from '@/components/StarBorder'
 
 export function Experience() {
   const experiences = experienceData.map((exp, index) => ({
@@ -72,24 +73,11 @@ export function Experience() {
           {/* Vertical line - Left side (hidden on mobile) */}
           <div className="absolute bottom-0 left-8 top-0 hidden w-px bg-border/70 sm:block" />
 
-          {experiences.map((exp) => (
-            <motion.div
-              key={exp.id}
-              variants={itemVariants}
-              className="relative sm:pl-24 sm:ml-4 pl-0"
-            >
-              {/* Timeline dot */}
-              <motion.div
-                whileHover={{ y: -2 }}
-                className="absolute left-2 top-2 hidden h-12 w-12 items-center justify-center rounded-full border border-border bg-surface text-lg font-bold text-primary sm:flex"
-              >
-                {exp.id}
-              </motion.div>
-
-              {/* Content card */}
+          {experiences.map((exp) => {
+            const card = (
               <motion.div
                 whileHover={{ y: -4 }}
-                className="rounded-lg border border-border/60 bg-surface p-8 transition-colors"
+                className="rounded-lg border border-border/60 bg-surface p-8 text-left transition-colors"
               >
                 {/* Header with period and type */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-3">
@@ -122,7 +110,7 @@ export function Experience() {
                     </p>
                     <motion.span
                       whileHover={{ y: -1 }}
-                      className="flex items-center gap-2 rounded-full text-sm font-bold tracking-wide text-accent text-opacity-70 transition-colors hover:bg-accent hover:text-accent-foreground"
+                      className="flex items-center gap-2 rounded-full text-sm font-bold tracking-wide text-accent text-opacity-70 transition-colors"
                     >
                       {exp.type === 'Onsite' && <BiSolidBuildingHouse className="text-lg" />}
                       {exp.type === 'Remote' && <MdLocationOn className="text-lg" />}
@@ -154,8 +142,40 @@ export function Experience() {
                   ))}
                 </div>
               </motion.div>
-            </motion.div>
-          ))}
+            )
+
+            return (
+              <motion.div
+                key={exp.id}
+                variants={itemVariants}
+                className="relative sm:pl-24 sm:ml-4 pl-0"
+              >
+                {/* Timeline dot */}
+                <motion.div
+                  whileHover={{ y: -2 }}
+                  className="absolute left-2 top-2 hidden h-12 w-12 items-center justify-center rounded-full border border-border bg-surface text-lg font-bold text-primary sm:flex"
+                >
+                  {exp.id}
+                </motion.div>
+
+                {/* Content card */}
+                {exp.id === 1 ? (
+                  <StarBorder
+                    as="div"
+                    className="block w-full rounded-lg"
+                    innerClassName="rounded-lg"
+                    color="rgb(var(--color-accent))"
+                    speed="4s"
+                    thickness={2.5}
+                  >
+                    {card}
+                  </StarBorder>
+                ) : (
+                  card
+                )}
+              </motion.div>
+            )
+          })}
         </motion.div>
 
         {/* Footer */}

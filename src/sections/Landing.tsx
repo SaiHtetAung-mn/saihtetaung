@@ -159,7 +159,16 @@ export function Landing() {
           floorFriction={0.985}
           collisionStrength={0.48}
           recycleSettledIcons={false}
-          floatingRatio={0.35}
+          alwaysFloatingRatio={0}
+          floatingRatio={0.18}
+          bouncyRatio={0.42}
+          bounceRestitution={0.38}
+          bouncyRestitution={0.82}
+          impactSpin={0.016}
+          maxSpeed={8}
+          rotateOnImpact
+          floatAreaMinY={0.62}
+          floatAreaMaxY={0.88}
           floatStrength={0.045}
           floatDrift={18}
         />

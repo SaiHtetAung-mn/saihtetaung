@@ -28,10 +28,14 @@ type Body = TechIconSeed & {
   vx: number
   vy: number
   radius: number
+  mass: number
+  restitution: number
   rotation: number
   angularVelocity: number
   settledFrames: number
   floating: boolean
+  alwaysFloating: boolean
+  floatAnchorX: number
   canFloat: boolean
   floatAnchorY: number
   floatPhase: number
@@ -48,10 +52,18 @@ type TechIconBackgroundProps = {
   wallBounce?: number
   floorFriction?: number
   collisionStrength?: number
+  bouncyRatio?: number
+  bounceRestitution?: number
+  bouncyRestitution?: number
+  impactSpin?: number
+  maxSpeed?: number
   rotateOnImpact?: boolean
   recycleSettledIcons?: boolean
   recycleAfterFrames?: number
+  alwaysFloatingRatio?: number
   floatingRatio?: number
+  floatAreaMinY?: number
+  floatAreaMaxY?: number
   floatStrength?: number
   floatDrift?: number
   icons?: TechIconSeed[]
@@ -82,10 +94,18 @@ export default function TechIconBackground({
   wallBounce = 0.62,
   floorFriction = 0.985,
   collisionStrength = 0.55,
+  bouncyRatio = 0.3,
+  bounceRestitution = 0.42,
+  bouncyRestitution = 0.78,
+  impactSpin = 0.018,
+  maxSpeed = 9,
   rotateOnImpact = false,
   recycleSettledIcons = true,
   recycleAfterFrames = 120,
+  alwaysFloatingRatio = 0,
   floatingRatio = 0.3,
+  floatAreaMinY = 0.58,
+  floatAreaMaxY = 0.9,
   floatStrength = 0.045,
   floatDrift = 18,
   icons = defaultTechIconSeeds,
@@ -105,23 +125,66 @@ export default function TechIconBackground({
     let animationFrame = 0
     let lastTime = performance.now()
     const pointer = { x: -9999, y: -9999 }
+    const getFloatingAnchorY = (seedY: number, radius: number) => {
+      const minY = height * Math.min(floatAreaMinY, floatAreaMaxY)
+      const maxY = height * Math.max(floatAreaMinY, floatAreaMaxY)
+      const y = minY + seedY * (maxY - minY)
+
+      return Math.min(Math.max(y, radius), height - radius)
+    }
+
+    const getSettledFloatingAnchorY = (radius: number) => {
+      const minY = height * Math.max(0.68, Math.min(floatAreaMinY, floatAreaMaxY))
+      const maxY = height * Math.max(floatAreaMinY, floatAreaMaxY)
+      const y = minY + Math.random() * Math.max(0, maxY - minY)
+
+      return Math.min(Math.max(y, radius), height - radius)
+    }
+
+    const pickDistributedIndexes = (ratio: number) => {
+      const count = Math.min(icons.length, Math.max(0, Math.round(icons.length * ratio)))
+      const indexes = new Set<number>()
+      const step = Math.max(1, Math.floor(icons.length / Math.max(count, 1)))
+
+      for (let index = 0; index < icons.length && indexes.size < count; index += step) {
+        indexes.add(index)
+      }
+
+      for (let index = 0; index < icons.length && indexes.size < count; index += 1) {
+        indexes.add(index)
+      }
+
+      return indexes
+    }
+
+    const alwaysFloatingIndexes = pickDistributedIndexes(alwaysFloatingRatio)
+    const bouncyIndexes = pickDistributedIndexes(bouncyRatio)
 
     const bodies: Body[] = icons.map((seed, index) => {
       const radius = seed.size / 2
+      const px = Math.min(Math.max(seed.x * width, radius), width - radius)
+      const py = Math.min(Math.max(seed.y * height, radius), height - radius)
+      const alwaysFloating = alwaysFloatingIndexes.has(index)
+      const bouncy = bouncyIndexes.has(index)
+
       return {
         ...seed,
         element: iconRefs.current[index],
-        px: Math.min(Math.max(seed.x * width, radius), width - radius),
-        py: Math.min(Math.max(seed.y * height, radius), height - radius),
-        vx: (index % 2 === 0 ? 0.55 : -0.45) * (1 + index * 0.04),
+        px,
+        py,
+        vx: alwaysFloating ? 0 : (index % 2 === 0 ? 0.55 : -0.45) * (1 + index * 0.04),
         vy: 0,
         radius,
+        mass: Math.max(0.8, radius / 18),
+        restitution: bouncy ? bouncyRestitution : bounceRestitution,
         rotation: 0,
         angularVelocity: 0,
         settledFrames: 0,
-        floating: false,
-        canFloat: index < Math.round(icons.length * floatingRatio),
-        floatAnchorY: 0,
+        floating: alwaysFloating,
+        alwaysFloating,
+        floatAnchorX: px,
+        canFloat: !alwaysFloating && index < Math.round(icons.length * floatingRatio),
+        floatAnchorY: alwaysFloating ? getFloatingAnchorY(seed.y, radius) : py,
         floatPhase: index * 0.9,
       }
     })
@@ -134,8 +197,9 @@ export default function TechIconBackground({
       body.rotation = 0
       body.angularVelocity = 0
       body.settledFrames = 0
-      body.floating = false
-      body.floatAnchorY = 0
+      body.floating = body.alwaysFloating
+      body.floatAnchorX = body.px
+      body.floatAnchorY = body.alwaysFloating ? getFloatingAnchorY(body.y, body.radius) : 0
     }
 
     const resize = () => {
@@ -144,6 +208,10 @@ export default function TechIconBackground({
       bodies.forEach((body) => {
         body.px = Math.min(Math.max(body.px, body.radius), width - body.radius)
         body.py = Math.min(Math.max(body.py, body.radius), height - body.radius)
+        if (body.alwaysFloating) {
+          body.floatAnchorX = Math.min(Math.max(body.x * width, body.radius), width - body.radius)
+          body.floatAnchorY = getFloatingAnchorY(body.y, body.radius)
+        }
       })
     }
 
@@ -179,7 +247,10 @@ export default function TechIconBackground({
         }
 
         if (body.floating) {
-          const targetY = body.floatAnchorY + Math.sin(time * 0.001 + body.floatPhase) * floatDrift
+          const phase = time * 0.001 + body.floatPhase
+          const targetX = body.floatAnchorX + Math.cos(phase * 0.7) * floatDrift * 0.55
+          const targetY = body.floatAnchorY + Math.sin(phase) * floatDrift
+          body.vx += (targetX - body.px) * floatStrength * 0.45 * delta
           body.vy += (targetY - body.py) * floatStrength * delta
           body.vx += Math.cos(time * 0.0007 + body.floatPhase) * 0.008 * delta
         } else {
@@ -188,27 +259,34 @@ export default function TechIconBackground({
 
         body.vx *= friction
         body.vy *= friction
+        body.vx = Math.max(-maxSpeed, Math.min(maxSpeed, body.vx))
+        body.vy = Math.max(-maxSpeed, Math.min(maxSpeed, body.vy))
         body.px += body.vx * delta
         body.py += body.vy * delta
 
         if (body.px - body.radius < 0) {
           body.px = body.radius
-          body.vx = Math.abs(body.vx) * wallBounce
+          body.vx = Math.abs(body.vx) * Math.max(wallBounce, body.restitution * 0.8)
         } else if (body.px + body.radius > width) {
           body.px = width - body.radius
-          body.vx = -Math.abs(body.vx) * wallBounce
+          body.vx = -Math.abs(body.vx) * Math.max(wallBounce, body.restitution * 0.8)
         }
 
         if (body.py + body.radius > height) {
+          const impactSpeed = Math.abs(body.vy)
+          const impactRestitution = Math.min(0.92, body.restitution + impactSpeed * 0.018)
+
           body.py = height - body.radius
-          body.vy = -Math.abs(body.vy) * wallBounce
+          body.vy = impactSpeed < 0.38 ? 0 : -impactSpeed * impactRestitution
           body.vx *= floorFriction
+          body.angularVelocity += body.vx * impactSpin
 
           if (Math.abs(body.vx) < 0.05 && Math.abs(body.vy) < 0.1) {
             body.settledFrames += 1
             if (body.canFloat && !body.floating && body.settledFrames > Math.max(24, recycleAfterFrames * 0.35)) {
               body.floating = true
-              body.floatAnchorY = height - body.radius - Math.random() * height * 0.22
+              body.floatAnchorX = body.px
+              body.floatAnchorY = getSettledFloatingAnchorY(body.radius)
               body.vy = -0.9 - Math.random() * 0.8
               body.vx += (Math.random() - 0.5) * 0.8
               body.settledFrames = 0
@@ -220,7 +298,7 @@ export default function TechIconBackground({
           }
         } else if (body.py - body.radius < 0) {
           body.py = body.radius
-          body.vy = Math.abs(body.vy) * wallBounce
+          body.vy = Math.abs(body.vy) * Math.max(wallBounce, body.restitution * 0.8)
           body.settledFrames = 0
         } else {
           body.settledFrames = 0
@@ -248,16 +326,25 @@ export default function TechIconBackground({
 
             const relativeVx = b.vx - a.vx
             const relativeVy = b.vy - a.vy
-            const impulse = (relativeVx * nx + relativeVy * ny) * collisionStrength
+            const velocityAlongNormal = relativeVx * nx + relativeVy * ny
 
-            a.vx += impulse * nx
-            a.vy += impulse * ny
-            b.vx -= impulse * nx
-            b.vy -= impulse * ny
+            if (velocityAlongNormal < 0) {
+              const inverseMassA = 1 / a.mass
+              const inverseMassB = 1 / b.mass
+              const restitution = Math.min(a.restitution, b.restitution)
+              const impulse =
+                (-(1 + restitution) * velocityAlongNormal * collisionStrength) /
+                (inverseMassA + inverseMassB)
 
-            if (rotateOnImpact) {
-              a.angularVelocity -= impulse * 0.03
-              b.angularVelocity += impulse * 0.03
+              a.vx -= impulse * inverseMassA * nx
+              a.vy -= impulse * inverseMassA * ny
+              b.vx += impulse * inverseMassB * nx
+              b.vy += impulse * inverseMassB * ny
+
+              if (rotateOnImpact) {
+                a.angularVelocity -= impulse * impactSpin
+                b.angularVelocity += impulse * impactSpin
+              }
             }
           }
         }
@@ -296,12 +383,20 @@ export default function TechIconBackground({
     cursorRadius,
     enableCursorSplit,
     floorFriction,
+    floatAreaMaxY,
+    floatAreaMinY,
     floatDrift,
     floatingRatio,
     floatStrength,
     friction,
     gravity,
     icons,
+    alwaysFloatingRatio,
+    bounceRestitution,
+    bouncyRatio,
+    bouncyRestitution,
+    impactSpin,
+    maxSpeed,
     recycleAfterFrames,
     recycleSettledIcons,
     rotateOnImpact,

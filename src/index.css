@@ -88,6 +88,32 @@ body {
   animation: bounce-x 1.2s infinite;
 }
 
+@keyframes star-movement-bottom {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes star-movement-top {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-star-movement-bottom {
+  animation: star-movement-bottom linear infinite;
+}
+
+.animate-star-movement-top {
+  animation: star-movement-top linear infinite;
+}
+
 .hero-landing {
   color: rgb(var(--color-primary));
 }
