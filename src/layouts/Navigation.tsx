@@ -50,7 +50,7 @@ export function Navigation() {
   return (
     <nav
       aria-label="Primary"
-      className="fixed top-0 left-0 right-0 z-50 border-b border-border/60 bg-background/95 text-primary backdrop-blur transition-colors duration-300 ease-out"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-border/45 bg-background/55 text-primary shadow-[0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-xl backdrop-saturate-150 transition-colors duration-300 ease-out dark:bg-background/45"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -96,7 +96,7 @@ export function Navigation() {
               whileHover={{ y: -1 }}
               whileTap={{ y: 0 }}
               onClick={toggleTheme}
-              className="rounded-lg border border-border/70 bg-surface p-2 text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="rounded-lg border border-border/55 bg-surface/55 p-2 text-primary backdrop-blur-md transition-colors hover:border-accent/50 hover:bg-accent hover:text-accent-foreground"
               aria-label="Toggle theme"
               type="button"
             >
@@ -120,7 +120,7 @@ export function Navigation() {
               whileHover={{ y: -1 }}
               whileTap={{ y: 0 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="rounded-lg border border-border/70 bg-surface p-2 text-primary md:hidden"
+              className="rounded-lg border border-border/55 bg-surface/55 p-2 text-primary backdrop-blur-md transition-colors hover:border-accent/50 hover:bg-accent hover:text-accent-foreground md:hidden"
               aria-label="Toggle menu"
               aria-expanded={isOpen}
               aria-controls="mobile-navigation"
@@ -146,7 +146,7 @@ export function Navigation() {
             className="md:hidden overflow-hidden"
             id="mobile-navigation"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1">
+            <div className="mx-2 mb-3 mt-2 space-y-1 rounded-lg border border-border/45 bg-background/70 p-2 backdrop-blur-xl dark:bg-background/55">
               {navItems.map((item) => (
                 <a
                   key={item.id}

@@ -18,7 +18,7 @@ export function Landing() {
         glowColor: '#0b1220',
       }
     : {
-        gradientFrom: 'rgba(56, 189, 248, 0.45)',
+        gradientFrom: 'rgba(243, 245, 245, 0.45)',
         gradientTo: 'rgba(244, 63, 94, 0.35)',
         glowColor: '#ffffff',
       }
