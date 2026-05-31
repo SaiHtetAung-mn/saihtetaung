@@ -1,5 +1,5 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 
 interface AntigravityProps {
@@ -38,12 +38,31 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
   fieldStrength = 10
 }) => {
   const meshRef = useRef<THREE.InstancedMesh>(null);
-  const { viewport } = useThree();
+  const { gl, viewport } = useThree();
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
   const lastMousePos = useRef({ x: 0, y: 0 });
   const lastMouseMoveTime = useRef(0);
+  const pointer = useRef({ x: 0, y: 0 });
   const virtualMouse = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const updatePointer = (event: PointerEvent) => {
+      const rect = gl.domElement.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+
+      pointer.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      pointer.current.y = -(((event.clientY - rect.top) / rect.height) * 2 - 1);
+    };
+
+    window.addEventListener('pointerdown', updatePointer, { passive: true });
+    window.addEventListener('pointermove', updatePointer, { passive: true });
+
+    return () => {
+      window.removeEventListener('pointerdown', updatePointer);
+      window.removeEventListener('pointermove', updatePointer);
+    };
+  }, [gl]);
 
   const particles = useMemo(() => {
     const temp = [];
@@ -90,7 +109,8 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
     const mesh = meshRef.current;
     if (!mesh) return;
 
-    const { viewport: v, pointer: m } = state;
+    const { viewport: v } = state;
+    const m = pointer.current;
 
     const mouseDist = Math.sqrt(Math.pow(m.x - lastMousePos.current.x, 2) + Math.pow(m.y - lastMousePos.current.y, 2));
 
@@ -187,7 +207,7 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
 
 const Antigravity: React.FC<AntigravityProps> = props => {
   return (
-    <Canvas camera={{ position: [0, 0, 50], fov: 35 }}>
+    <Canvas className="pointer-events-none" camera={{ position: [0, 0, 50], fov: 35 }}>
       <AntigravityInner {...props} />
     </Canvas>
   );

@@ -131,13 +131,13 @@ export function Landing() {
           <AntigravityBackground
             count={300}
             color={isDark ? '#ffffff' : '#ff3b5c'}
-            magnetRadius={6}
+            magnetRadius={7.5}
             ringRadius={7}
-            waveSpeed={0.4}
+            waveSpeed={0.5}
             waveAmplitude={1}
-            particleSize={1.1}
+            particleSize={1.35}
             particleVariance={1}
-            lerpSpeed={0.05}
+            lerpSpeed={0.07}
             autoAnimate={false}
             rotationSpeed={0}
             depthFactor={1}
@@ -222,7 +222,12 @@ export function Landing() {
             </motion.div>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="text-center md:text-left order-last md:order-first">
+          <motion.div
+            variants={itemVariants}
+            className={`relative order-last text-center md:order-first md:text-left ${
+              background === 'tech-icons' ? 'hero-copy-mobile-scrim' : ''
+            }`}
+          >
             <h1 className="hero-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-4">
               Hi, I'm
             </h1>
