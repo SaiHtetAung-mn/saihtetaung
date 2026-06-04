@@ -1,43 +1,91 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
+import { flushSync } from 'react-dom'
 
 type Theme = 'light' | 'dark'
 
+type ThemeToggleOrigin = {
+  x: number
+  y: number
+}
+
+type BrowserViewTransition = {
+  ready: Promise<void>
+  finished: Promise<void>
+  updateCallbackDone: Promise<void>
+  skipTransition: () => void
+}
+
+declare global {
+  interface Document {
+    startViewTransition?: (callback: () => void | Promise<void>) => BrowserViewTransition
+  }
+}
+
 interface ThemeContextType {
   theme: Theme
-  toggleTheme: () => void
+  toggleTheme: (origin?: ThemeToggleOrigin) => void
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light')
+  const themeRef = useRef<Theme>('light')
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as Theme | null
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
 
     const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light')
-    setTheme(initialTheme)
-    
-    const root = document.documentElement
-    if (initialTheme === 'dark') {
-      root.classList.add('dark')
-    } else {
-      root.classList.remove('dark')
-    }
+    applyTheme(initialTheme)
   }, [])
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
+  const applyTheme = (newTheme: Theme) => {
+    themeRef.current = newTheme
     setTheme(newTheme)
     localStorage.setItem('theme', newTheme)
-    
-    const root = document.documentElement
-    if (newTheme === 'dark') {
-      root.classList.add('dark')
-    } else {
-      root.classList.remove('dark')
+
+    document.documentElement.classList.toggle('dark', newTheme === 'dark')
+  }
+
+  const toggleTheme = (origin?: ThemeToggleOrigin) => {
+    const newTheme = themeRef.current === 'light' ? 'dark' : 'light'
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (!document.startViewTransition || prefersReducedMotion) {
+      applyTheme(newTheme)
+      return
     }
+
+    const x = origin?.x ?? window.innerWidth - 40
+    const y = origin?.y ?? 40
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    )
+
+    const transition = document.startViewTransition(() => {
+      flushSync(() => {
+        applyTheme(newTheme)
+      })
+    })
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`,
+          ],
+        },
+        {
+          duration: 860,
+          easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+          fill: 'both',
+          pseudoElement: '::view-transition-new(root)',
+        }
+      )
+    })
   }
 
   const value = { theme, toggleTheme }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import type { MouseEvent } from 'react'
 import { motion } from 'framer-motion'
 import { useTheme } from '@/context/ThemeContext'
 
@@ -45,6 +46,14 @@ export function Navigation() {
       element.scrollIntoView({ behavior: 'smooth' })
       setIsOpen(false)
     }
+  }
+
+  const handleThemeToggle = (event: MouseEvent<HTMLButtonElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect()
+    toggleTheme({
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+    })
   }
 
   return (
@@ -95,7 +104,7 @@ export function Navigation() {
             <motion.button
               whileHover={{ y: -1 }}
               whileTap={{ y: 0 }}
-              onClick={toggleTheme}
+              onClick={handleThemeToggle}
               className="rounded-lg border border-border/55 bg-surface/55 p-2 text-primary backdrop-blur-md transition-colors hover:border-accent/50 hover:bg-accent hover:text-accent-foreground"
               aria-label="Toggle theme"
               type="button"
