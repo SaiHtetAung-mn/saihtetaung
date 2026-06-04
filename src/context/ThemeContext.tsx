@@ -8,19 +8,6 @@ type ThemeToggleOrigin = {
   y: number
 }
 
-type BrowserViewTransition = {
-  ready: Promise<void>
-  finished: Promise<void>
-  updateCallbackDone: Promise<void>
-  skipTransition: () => void
-}
-
-declare global {
-  interface Document {
-    startViewTransition?: (callback: () => void | Promise<void>) => BrowserViewTransition
-  }
-}
-
 interface ThemeContextType {
   theme: Theme
   toggleTheme: (origin?: ThemeToggleOrigin) => void
