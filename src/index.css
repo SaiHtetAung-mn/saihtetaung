@@ -224,6 +224,12 @@ body {
   transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
+.hero-button--icon {
+  width: 3.5rem;
+  min-width: 3.5rem;
+  padding: 0;
+}
+
 .hero-button--primary {
   background: rgb(var(--color-accent));
   color: rgb(var(--color-accent-foreground));

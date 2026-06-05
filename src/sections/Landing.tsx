@@ -276,18 +276,19 @@ export function Landing() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 1.1 }}
-              className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center md:justify-start"
+              className="flex flex-row flex-wrap gap-3 justify-center md:justify-start"
             >
               <motion.a
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 0 }}
                 href='https://github.com/SaiHtetAung-mn'
-                target='__blank'
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="hero-button hero-button--ghost"
+                target='_blank'
+                rel="noopener noreferrer"
+                className="hero-button hero-button--icon hero-button--ghost"
+                aria-label="Open GitHub profile"
+                title="GitHub"
               >
                 <FiGithub className="h-5 w-5" />
-                GitHub
               </motion.a>
               <motion.a
                 whileHover={{ y: -2 }}
