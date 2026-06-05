@@ -87,14 +87,14 @@ export function Portfolio() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.34, delay: Math.min(index * 0.05, 0.2), ease: 'easeOut' }}
                   whileHover={{ y: -2 }}
-                  className="group relative overflow-hidden rounded-lg border border-border/60 bg-surface transition-colors hover:border-accent/45"
+                  className="group relative overflow-hidden rounded-lg border border-border/60 bg-surface transition-shadow hover:shadow-[0_18px_54px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_20px_64px_rgba(0,0,0,0.42)]"
                 >
                   <div className="bg-surface p-1.5">
                     <div className="relative aspect-[16/10] w-full overflow-hidden rounded-md bg-background/40">
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+                        className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.02]"
                         loading="lazy"
                       />
                       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,rgba(0,0,0,0.14)_26%,rgba(0,0,0,0.68)_66%,rgba(0,0,0,0.92)_100%)]" />
@@ -109,7 +109,7 @@ export function Portfolio() {
                           className="mt-3 inline-flex items-center gap-1 rounded-full border border-white/45 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground"
                         >
                           Detail
-                          <FiArrowUpRight className="h-3.5 w-3.5" />
+                          <FiArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </button>
                       </div>
                     </div>

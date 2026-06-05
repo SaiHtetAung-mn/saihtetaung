@@ -214,19 +214,19 @@ body {
 
 .hero-button {
   display: inline-flex;
-  min-height: 3.5rem;
+  min-height: 3rem;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   border-radius: 9999px;
-  padding: 0.9rem 1.45rem;
+  padding: 0.75rem 1.2rem;
   font-weight: 800;
   transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .hero-button--icon {
-  width: 3.5rem;
-  min-width: 3.5rem;
+  width: 3rem;
+  min-width: 3rem;
   padding: 0;
 }
 
@@ -262,9 +262,25 @@ body {
 
 .hero-portrait {
   position: relative;
-  width: min(76vw, 24rem);
+  width: min(64vw, 18rem);
   aspect-ratio: 1;
   border-radius: 1.125rem;
+}
+
+@media (min-width: 640px) {
+  .hero-button {
+    min-height: 3.5rem;
+    padding: 0.9rem 1.45rem;
+  }
+
+  .hero-button--icon {
+    width: 4rem;
+    min-width: 4rem;
+  }
+
+  .hero-portrait {
+    width: min(76vw, 24rem);
+  }
 }
 
 .hero-portrait__image {

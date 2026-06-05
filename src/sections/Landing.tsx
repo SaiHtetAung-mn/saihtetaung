@@ -185,7 +185,7 @@ export function Landing() {
   return (
     <section
       id="landing"
-      className={`hero-landing relative min-h-screen flex items-center justify-center pt-24 sm:pt-16 overflow-hidden ${isDark ? 'hero-landing--dark' : 'hero-landing--light'}`}
+      className={`hero-landing relative min-h-screen flex items-start justify-center pt-20 sm:pt-16 md:items-center overflow-hidden ${isDark ? 'hero-landing--dark' : 'hero-landing--light'}`}
     >
       {renderBackground()}
       <motion.div
@@ -193,12 +193,12 @@ export function Landing() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1, margin: '0px 0px -10% 0px' }}
-        className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full pb-24"
+        className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full pb-14 md:pb-24"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-12 items-center">
           <motion.div
             variants={itemVariants}
-            className="mt-4 flex justify-center order-first md:order-last md:mt-0"
+            className="flex justify-center order-first md:order-last"
           >
             <motion.div
               initial="initial"
@@ -288,7 +288,7 @@ export function Landing() {
                 aria-label="Open GitHub profile"
                 title="GitHub"
               >
-                <FiGithub className="h-5 w-5" />
+                <FiGithub className="h-5 w-5 md:h-8 md:w-8" />
               </motion.a>
               <motion.a
                 whileHover={{ y: -2 }}
@@ -310,7 +310,7 @@ export function Landing() {
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex justify-center pointer-events-none"
+          className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 justify-center pointer-events-none md:flex"
         >
           <svg className="w-6 h-6 text-current opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />

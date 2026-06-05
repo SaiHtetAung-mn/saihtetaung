@@ -90,7 +90,7 @@ export function Navigation() {
                   {activeSection === item.id && (
                     <motion.div
                       layoutId="activeIndicator"
-                      className="absolute inset-x-0 -bottom-2 h-px bg-accent"
+                      className="absolute inset-x-0 -bottom-2 mx-auto h-1 w-5 rounded-full bg-accent"
                       transition={{ type: 'spring', stiffness: 360, damping: 34 }}
                     />
                   )}
