@@ -224,7 +224,7 @@ export function Landing() {
 
           <motion.div
             variants={itemVariants}
-            className={`relative order-last text-center md:order-first md:text-left ${
+            className={`relative z-20 order-last text-center md:order-first md:text-left ${
               background === 'tech-icons' ? 'hero-copy-mobile-scrim' : ''
             }`}
           >
@@ -289,15 +289,6 @@ export function Landing() {
                 <FiGithub className="h-5 w-5" />
                 GitHub
               </motion.a>
-
-              <motion.button
-                whileHover={{ y: -2 }}
-                whileTap={{ y: 0 }}
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="hero-button hero-button--outline"
-              >
-                Hire Me
-              </motion.button>
               <motion.a
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 0 }}

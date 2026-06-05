@@ -59,7 +59,7 @@ export function Navigation() {
   return (
     <nav
       aria-label="Primary"
-      className="fixed top-0 left-0 right-0 z-50 border-b border-border/45 bg-background/55 text-primary shadow-[0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-xl backdrop-saturate-150 transition-colors duration-300 ease-out dark:bg-background/45"
+      className="fixed top-0 left-0 right-0 z-50 bg-background/55 text-primary shadow-[0_12px_34px_rgba(0,0,0,0.08),0_1px_0_rgba(255,255,255,0.08)_inset] backdrop-blur-xl backdrop-saturate-150 transition-colors duration-300 ease-out dark:bg-background/45 dark:shadow-[0_14px_40px_rgba(0,0,0,0.36),0_1px_0_rgba(255,255,255,0.05)_inset]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -105,7 +105,7 @@ export function Navigation() {
               whileHover={{ y: -1 }}
               whileTap={{ y: 0 }}
               onClick={handleThemeToggle}
-              className="rounded-lg border border-border/55 bg-surface/55 p-2 text-primary backdrop-blur-md transition-colors hover:border-accent/50 hover:bg-accent hover:text-accent-foreground"
+              className="rounded-lg bg-surface/70 p-2 text-primary shadow-[0_8px_22px_rgba(0,0,0,0.08),0_1px_0_rgba(255,255,255,0.12)_inset] backdrop-blur-md transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:bg-surface/60 dark:shadow-[0_10px_26px_rgba(0,0,0,0.34),0_1px_0_rgba(255,255,255,0.06)_inset]"
               aria-label="Toggle theme"
               type="button"
             >
@@ -129,7 +129,7 @@ export function Navigation() {
               whileHover={{ y: -1 }}
               whileTap={{ y: 0 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="rounded-lg border border-border/55 bg-surface/55 p-2 text-primary backdrop-blur-md transition-colors hover:border-accent/50 hover:bg-accent hover:text-accent-foreground md:hidden"
+              className="rounded-lg bg-surface/70 p-2 text-primary shadow-[0_8px_22px_rgba(0,0,0,0.08),0_1px_0_rgba(255,255,255,0.12)_inset] backdrop-blur-md transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:bg-surface/60 dark:shadow-[0_10px_26px_rgba(0,0,0,0.34),0_1px_0_rgba(255,255,255,0.06)_inset] md:hidden"
               aria-label="Toggle menu"
               aria-expanded={isOpen}
               aria-controls="mobile-navigation"
