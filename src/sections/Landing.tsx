@@ -66,9 +66,17 @@ const landingTechIcons: TechIconSeed[] = [
   { Icon: SiPostman, x: 0.82, y: 0.74, size: 38 },
 ]
 
+const landingMobileTechIcons: TechIconSeed[] = [
+  { Icon: SiNestjs, x: 0.18, y: 0.08, size: 44 },
+  { Icon: SiMongodb, x: 0.78, y: 0.12, size: 46 },
+  { Icon: SiDocker, x: 0.28, y: 0.34, size: 44 },
+  { Icon: SiLinux, x: 0.68, y: 0.38, size: 42 },
+]
+
 export function Landing() {
   const { theme } = useTheme()
   const [background, setBackground] = useState<LandingBackground | null>(null)
+  const [isMobileViewport, setIsMobileViewport] = useState(false)
   const isDark = theme === 'dark'
   const dotFieldTheme = isDark
     ? {
@@ -105,6 +113,16 @@ export function Landing() {
   useEffect(() => {
     const backgrounds: LandingBackground[] = ['dot-field', 'antigravity', 'tech-icons']
     setBackground(backgrounds[Math.floor(Math.random() * backgrounds.length)])
+  }, [])
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 767px)')
+    const syncViewport = () => setIsMobileViewport(mediaQuery.matches)
+
+    syncViewport()
+    mediaQuery.addEventListener('change', syncViewport)
+
+    return () => mediaQuery.removeEventListener('change', syncViewport)
   }, [])
 
   const renderBackground = () => {
@@ -153,7 +171,7 @@ export function Landing() {
       return (
         <TechIconBackground
           className="bottom-auto h-[100svh] md:bottom-0 md:h-full"
-          icons={landingTechIcons}
+          icons={isMobileViewport ? landingMobileTechIcons : landingTechIcons}
           iconClassName={isDark ? 'text-white/14' : 'text-accent/20'}
           cursorRadius={140}
           cursorForce={0.75}
