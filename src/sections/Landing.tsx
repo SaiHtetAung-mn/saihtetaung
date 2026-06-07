@@ -130,6 +130,8 @@ export function Landing({ isPageLoaded = true }: LandingProps) {
   }, [])
 
   const renderBackground = () => {
+    if (!isPageLoaded) return null
+
     if (background === 'dot-field') {
       return (
         <DotFieldBackground
@@ -172,8 +174,6 @@ export function Landing({ isPageLoaded = true }: LandingProps) {
     }
 
     if (background === 'tech-icons') {
-      if (!isPageLoaded) return null
-
       return (
         <TechIconBackground
           className="bottom-auto h-[100svh] md:bottom-0 md:h-full"
@@ -215,8 +215,7 @@ export function Landing({ isPageLoaded = true }: LandingProps) {
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1, margin: '0px 0px -10% 0px' }}
+        animate={isPageLoaded ? 'visible' : 'hidden'}
         className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full pb-14 md:pb-24"
       >
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-12 items-center">
@@ -226,7 +225,7 @@ export function Landing({ isPageLoaded = true }: LandingProps) {
           >
             <motion.div
               initial="initial"
-              animate="rest"
+              animate={isPageLoaded ? 'rest' : 'initial'}
               whileHover="hover"
               className="hero-portrait"
               variants={{
@@ -257,48 +256,63 @@ export function Landing({ isPageLoaded = true }: LandingProps) {
             </h1>
             
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 overflow-hidden whitespace-nowrap font-mono">
-              <BlurText
-                text="Sai Htet Aung"
-                by="character"
-                delay={0.35}
-                stagger={0.035}
-                className="hero-name"
-              />
+              {isPageLoaded ? (
+                <BlurText
+                  key="loaded-name"
+                  text="Sai Htet Aung"
+                  by="character"
+                  delay={0.35}
+                  stagger={0.035}
+                  className="hero-name"
+                />
+              ) : (
+                <span className="hero-name opacity-0">Sai Htet Aung</span>
+              )}
             </h2>
 
             <motion.div
               initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={isPageLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: 0.85 }}
               className="hero-role text-lg sm:text-xl mb-3"
             >
-              <RotatingText
-                texts={['Fullstack Developer', 'Software Engineer']}
-                className="text-accent font-mono"
-                rotationInterval={4400}
-                staggerDuration={0.03}
-                splitBy="characters"
-              />
+              {isPageLoaded ? (
+                <RotatingText
+                  key="loaded-role"
+                  texts={['Fullstack Developer', 'Software Engineer']}
+                  className="text-accent font-mono"
+                  rotationInterval={4400}
+                  staggerDuration={0.03}
+                  splitBy="characters"
+                />
+              ) : (
+                <span className="text-accent font-mono opacity-0">Fullstack Developer</span>
+              )}
             </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={isPageLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 1 }}
               className="hero-description max-w-xl mx-auto md:mx-0 text-base sm:text-lg mb-8 leading-relaxed"
             >
-              <TextType
-                texts={['I ship full-stack solutions from robust backends to polished frontends.']}
-                typingSpeed={36}
-                startDelay={1300}
-                loop={false}
-                showCursor={false}
-              />
+              {isPageLoaded ? (
+                <TextType
+                  key="loaded-description"
+                  texts={['I ship full-stack solutions from robust backends to polished frontends.']}
+                  typingSpeed={36}
+                  startDelay={1300}
+                  loop={false}
+                  showCursor={false}
+                />
+              ) : (
+                <span className="opacity-0">I ship full-stack solutions from robust backends to polished frontends.</span>
+              )}
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={isPageLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 1.1 }}
               className="flex flex-row flex-wrap gap-3 justify-center md:justify-start"
             >
@@ -332,7 +346,7 @@ export function Landing({ isPageLoaded = true }: LandingProps) {
 
         {/* Scroll Indicator */}
         <motion.div
-          animate={{ y: [0, 6, 0] }}
+          animate={isPageLoaded ? { y: [0, 6, 0] } : { y: 0 }}
           transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 justify-center pointer-events-none md:flex"
         >

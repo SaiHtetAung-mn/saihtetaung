@@ -52,12 +52,12 @@ export default function PageLoader({ onComplete }: PageLoaderProps) {
             transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
           >
             <TrueFocus
-              sentence="Nice To Meet You"
-              blurAmount={6}
+              sentence="How are you today?"
+              blurAmount={10}
               borderColor="#ff3b5c"
               glowColor="rgba(255, 59, 92, 0.35)"
               animationDuration={0.55}
-              pauseBetweenAnimations={0.7}
+              pauseBetweenAnimations={0.5}
             />
           </motion.div>
         </motion.div>
