@@ -73,7 +73,11 @@ const landingMobileTechIcons: TechIconSeed[] = [
   { Icon: SiLinux, x: 0.68, y: 0.38, size: 42 },
 ]
 
-export function Landing() {
+type LandingProps = {
+  isPageLoaded?: boolean
+}
+
+export function Landing({ isPageLoaded = true }: LandingProps) {
   const { theme } = useTheme()
   const [background, setBackground] = useState<LandingBackground | null>(null)
   const [isMobileViewport, setIsMobileViewport] = useState(false)
@@ -168,6 +172,8 @@ export function Landing() {
     }
 
     if (background === 'tech-icons') {
+      if (!isPageLoaded) return null
+
       return (
         <TechIconBackground
           className="bottom-auto h-[100svh] md:bottom-0 md:h-full"

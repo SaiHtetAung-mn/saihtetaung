@@ -1,9 +1,11 @@
 'use client'
 
+import { useCallback, useState } from 'react'
 import { ThemeProvider } from '@/context/ThemeContext'
 import useDisableRightClick from '@/hooks/useDisableRightClick'
 import { Navigation } from '@/layouts/Navigation'
 import { Landing, Portfolio, About, Education, Experience, Skills, Contact } from '@/sections'
+import PageLoader from '@/components/PageLoader'
 import StackSection from '@/components/StackSection'
 
 const sections = [
@@ -17,11 +19,14 @@ const sections = [
 ]
 
 function App() {
+  const [isPageLoaded, setIsPageLoaded] = useState(false)
+  const handleLoaderComplete = useCallback(() => setIsPageLoaded(true), [])
   //useDisableRightClick();
 
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-background text-primary transition-colors duration-300 ease-out">
+        <PageLoader onComplete={handleLoaderComplete} />
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>
@@ -29,7 +34,7 @@ function App() {
         <main id="main-content" tabIndex={-1} className="transition-colors duration-300 ease-out">
           {sections.map(({ id, Component }, idx) => (
             <StackSection key={id} idx={idx}>
-              <Component />
+              {id === 'landing' ? <Landing isPageLoaded={isPageLoaded} /> : <Component />}
             </StackSection>
           ))}
         </main>
