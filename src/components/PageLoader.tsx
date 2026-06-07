@@ -1,7 +1,8 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import TrueFocus from '@/components/TrueFocus'
 
-const MIN_VISIBLE_MS = 3000
+const MIN_VISIBLE_MS = 4200
 
 type PageLoaderProps = {
   onComplete?: () => void
@@ -37,7 +38,7 @@ export default function PageLoader({ onComplete }: PageLoaderProps) {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          aria-label="Loading portfolio"
+          aria-label="Nice To Meet You"
           aria-live="polite"
           className="page-loader"
           initial={prefersReducedMotion ? false : { opacity: 1 }}
@@ -45,14 +46,20 @@ export default function PageLoader({ onComplete }: PageLoaderProps) {
           transition={{ duration: prefersReducedMotion ? 0.18 : 0.38, ease: [0.22, 1, 0.36, 1] }}
         >
           <motion.div
-            className="page-loader__mark"
+            className="page-loader__focus-wrap"
             initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
             animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
             transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
           >
-            <span className="page-loader__accent">_</span>Aung
+            <TrueFocus
+              sentence="Nice To Meet You"
+              blurAmount={6}
+              borderColor="#ff3b5c"
+              glowColor="rgba(255, 59, 92, 0.35)"
+              animationDuration={0.55}
+              pauseBetweenAnimations={0.7}
+            />
           </motion.div>
-          <div className="page-loader__track" />
         </motion.div>
       )}
     </AnimatePresence>
