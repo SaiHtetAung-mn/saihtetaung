@@ -128,6 +128,13 @@ body {
   animation: star-movement-top linear infinite;
 }
 
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
 .hero-landing {
   color: rgb(var(--color-primary));
 }

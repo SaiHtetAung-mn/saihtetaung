@@ -98,11 +98,11 @@ export function Portfolio() {
                         loading="lazy"
                       />
                       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,rgba(0,0,0,0.14)_26%,rgba(0,0,0,0.68)_66%,rgba(0,0,0,0.92)_100%)]" />
-                      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.75)' }}>
-                        <h4 className="mb-1 text-base font-semibold leading-tight text-white sm:text-lg">
+                      <div className="absolute inset-x-0 bottom-0 p-3 sm:p-5" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.75)' }}>
+                        <h4 className="mb-1 line-clamp-2 text-sm font-semibold leading-tight text-white sm:text-lg">
                           {project.title}
                         </h4>
-                        <p className="text-sm leading-relaxed text-white/90">{project.description}</p>
+                        <p className="line-clamp-2 text-xs leading-relaxed text-white/90 sm:text-sm">{project.description}</p>
 
                         <button
                           onClick={() => setSelectedProject(project)}
