@@ -3,22 +3,30 @@ import { useEffect, useState } from 'react'
 import TrueFocus from '@/components/TrueFocus'
 
 const MIN_VISIBLE_MS = 4200
+const SESSION_KEY = 'portfolio-loader-seen'
 
 type PageLoaderProps = {
   onComplete?: () => void
 }
 
 export default function PageLoader({ onComplete }: PageLoaderProps) {
-  const [isVisible, setIsVisible] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
   const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
+    if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+      onComplete?.()
+      return
+    }
+
+    setIsVisible(true)
     const startedAt = performance.now()
 
     const complete = () => {
       const elapsed = performance.now() - startedAt
       const remaining = Math.max(0, MIN_VISIBLE_MS - elapsed)
       window.setTimeout(() => {
+        sessionStorage.setItem(SESSION_KEY, 'true')
         setIsVisible(false)
         onComplete?.()
       }, remaining)
