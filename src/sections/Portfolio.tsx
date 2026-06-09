@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FiArrowUpRight, FiExternalLink, FiGithub, FiX } from 'react-icons/fi'
 import ScrollFloatTitle from '@/components/ScrollFloatTitle'
@@ -20,8 +21,13 @@ type Project = {
 export function Portfolio() {
   const [activeCategory, setActiveCategory] = useState<Category>('work')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [isMounted, setIsMounted] = useState(false)
   const categories: Category[] = ['work', 'personal']
   const currentProjects = (portfolioData[activeCategory] ?? []) as Project[]
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -121,100 +127,103 @@ export function Portfolio() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.18 }}
-            className="fixed inset-0 z-[100] flex items-end justify-center bg-black/55 p-0 backdrop-blur-[2px] sm:items-center sm:p-6"
-            onClick={() => setSelectedProject(null)}
-          >
+      {isMounted && createPortal(
+        <AnimatePresence>
+          {selectedProject && (
             <motion.div
-              role="dialog"
-              aria-modal="true"
-              aria-label={`${selectedProject.title} project details`}
-              initial={{ opacity: 0, y: 20, scale: 0.985 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.99 }}
-              transition={{ duration: 0.18, ease: 'easeOut' }}
-              onClick={(e) => e.stopPropagation()}
-              className="max-h-[92vh] w-full overflow-hidden rounded-t-2xl border border-border/70 bg-surface shadow-2xl sm:max-h-[85vh] sm:max-w-3xl sm:rounded-xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.18 }}
+              className="fixed inset-0 z-[100] flex items-end justify-center bg-black/55 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-[2px] sm:items-center sm:p-6"
+              onClick={() => setSelectedProject(null)}
             >
-              <div className="sm:hidden pt-2">
-                <div className="mx-auto h-1.5 w-10 rounded-full bg-border/80" />
-              </div>
-
-              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border/60 bg-surface/95 px-4 py-3 sm:px-5">
-                <h3 className="pr-3 text-base font-semibold text-primary sm:text-lg">{selectedProject.title}</h3>
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border/70 bg-background text-primary transition-colors hover:border-accent/60 hover:text-accent"
-                  aria-label="Close project details"
-                >
-                  <FiX className="h-4 w-4" />
-                </button>
-              </div>
-
-              <div className="max-h-[calc(92vh-56px)] overflow-y-auto p-4 sm:max-h-[calc(85vh-60px)] sm:p-5">
-                <div className="overflow-hidden rounded-lg border border-border/60 bg-background/40">
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.title}
-                    className="h-auto max-h-[320px] w-full object-cover sm:max-h-[380px]"
-                    loading="lazy"
-                  />
+              <motion.div
+                role="dialog"
+                aria-modal="true"
+                aria-label={`${selectedProject.title} project details`}
+                initial={{ opacity: 0, y: 20, scale: 0.985 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.99 }}
+                transition={{ duration: 0.18, ease: 'easeOut' }}
+                onClick={(e) => e.stopPropagation()}
+                className="max-h-[calc(100svh-1.5rem)] w-full overflow-hidden rounded-2xl border border-border/70 bg-surface shadow-2xl sm:max-h-[85vh] sm:max-w-3xl sm:rounded-xl"
+              >
+                <div className="sm:hidden pt-2">
+                  <div className="mx-auto h-1.5 w-10 rounded-full bg-border/80" />
                 </div>
 
-                <p className="mt-4 text-sm leading-relaxed text-secondary sm:text-[15px]">{selectedProject.description}</p>
-
-                {selectedProject.responsibility && (
-                  <p className="mt-3 text-sm leading-relaxed text-secondary sm:text-[15px]">
-                    <span className="font-semibold text-primary">Role:</span> {selectedProject.responsibility}
-                  </p>
-                )}
-
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {selectedProject.tech_stack.map((tech) => (
-                    <span
-                      key={`${selectedProject.title}-${tech}`}
-                      className="rounded-full border border-border/70 bg-background px-2.5 py-1 text-xs font-medium text-primary"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border/60 bg-surface/95 px-4 py-3 sm:px-5">
+                  <h3 className="pr-3 text-base font-semibold text-primary sm:text-lg">{selectedProject.title}</h3>
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border/70 bg-background text-primary transition-colors hover:border-accent/60 hover:text-accent"
+                    aria-label="Close project details"
+                  >
+                    <FiX className="h-4 w-4" />
+                  </button>
                 </div>
 
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {selectedProject.code_url && (
-                    <a
-                      href={selectedProject.code_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-background px-3 py-1.5 text-sm font-medium text-primary transition-colors hover:border-accent/60 hover:bg-accent/10 hover:text-accent"
-                    >
-                      <FiGithub className="h-4 w-4" />
-                      Code
-                    </a>
+                <div className="max-h-[calc(100svh-5.75rem)] overflow-y-auto overscroll-contain p-4 sm:max-h-[calc(85vh-60px)] sm:p-5">
+                  <div className="overflow-hidden rounded-lg border border-border/60 bg-background/40">
+                    <img
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      className="h-auto max-h-[220px] w-full object-cover sm:max-h-[380px]"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <p className="mt-4 text-sm leading-relaxed text-secondary sm:text-[15px]">{selectedProject.description}</p>
+
+                  {selectedProject.responsibility && (
+                    <p className="mt-3 text-sm leading-relaxed text-secondary sm:text-[15px]">
+                      <span className="font-semibold text-primary">Role:</span> {selectedProject.responsibility}
+                    </p>
                   )}
-                  {(selectedProject.demo_url || selectedProject.link) && (
-                    <a
-                      href={selectedProject.demo_url ?? selectedProject.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-background px-3 py-1.5 text-sm font-medium text-primary transition-colors hover:border-accent/60 hover:bg-accent/10 hover:text-accent"
-                    >
-                      <FiExternalLink className="h-4 w-4" />
-                      Visit
-                    </a>
-                  )}
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {selectedProject.tech_stack.map((tech) => (
+                      <span
+                        key={`${selectedProject.title}-${tech}`}
+                        className="rounded-full border border-border/70 bg-background px-2.5 py-1 text-xs font-medium text-primary"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {selectedProject.code_url && (
+                      <a
+                        href={selectedProject.code_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-background px-3 py-1.5 text-sm font-medium text-primary transition-colors hover:border-accent/60 hover:bg-accent/10 hover:text-accent"
+                      >
+                        <FiGithub className="h-4 w-4" />
+                        Code
+                      </a>
+                    )}
+                    {(selectedProject.demo_url || selectedProject.link) && (
+                      <a
+                        href={selectedProject.demo_url ?? selectedProject.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-background px-3 py-1.5 text-sm font-medium text-primary transition-colors hover:border-accent/60 hover:bg-accent/10 hover:text-accent"
+                      >
+                        <FiExternalLink className="h-4 w-4" />
+                        Visit
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   )
 }
