@@ -22,11 +22,22 @@ export function Portfolio() {
   const [activeCategory, setActiveCategory] = useState<Category>('work')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [isMounted, setIsMounted] = useState(false)
+  const [isMobileViewport, setIsMobileViewport] = useState(false)
   const categories: Category[] = ['work', 'personal']
   const currentProjects = (portfolioData[activeCategory] ?? []) as Project[]
 
   useEffect(() => {
     setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 639px)')
+    const syncViewport = () => setIsMobileViewport(mediaQuery.matches)
+
+    syncViewport()
+    mediaQuery.addEventListener('change', syncViewport)
+
+    return () => mediaQuery.removeEventListener('change', syncViewport)
   }, [])
 
   useEffect(() => {
@@ -135,19 +146,19 @@ export function Portfolio() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.18 }}
-              className="fixed inset-0 z-[100] flex items-end justify-center bg-black/55 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-[2px] sm:items-center sm:p-6"
+              className="fixed inset-0 z-[100] flex items-end justify-center bg-black/55 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 sm:items-center sm:p-6 sm:backdrop-blur-[2px]"
               onClick={() => setSelectedProject(null)}
             >
               <motion.div
                 role="dialog"
                 aria-modal="true"
                 aria-label={`${selectedProject.title} project details`}
-                initial={{ opacity: 0, y: 20, scale: 0.985 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 10, scale: 0.99 }}
-                transition={{ duration: 0.18, ease: 'easeOut' }}
+                initial={isMobileViewport ? { y: '100%' } : { opacity: 0, y: 16, scale: 0.985 }}
+                animate={isMobileViewport ? { y: 0 } : { opacity: 1, y: 0, scale: 1 }}
+                exit={isMobileViewport ? { y: '100%' } : { opacity: 0, y: 10, scale: 0.99 }}
+                transition={{ duration: isMobileViewport ? 0.24 : 0.18, ease: [0.22, 1, 0.36, 1] }}
                 onClick={(e) => e.stopPropagation()}
-                className="max-h-[calc(100svh-1.5rem)] w-full overflow-hidden rounded-2xl border border-border/70 bg-surface shadow-2xl sm:max-h-[85vh] sm:max-w-3xl sm:rounded-xl"
+                className="max-h-[calc(100svh-1.5rem)] w-full transform-gpu overflow-hidden rounded-2xl border border-border/70 bg-surface shadow-2xl will-change-transform sm:max-h-[85vh] sm:max-w-3xl sm:rounded-xl"
               >
                 <div className="sm:hidden pt-2">
                   <div className="mx-auto h-1.5 w-10 rounded-full bg-border/80" />
