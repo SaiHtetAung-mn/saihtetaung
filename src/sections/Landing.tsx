@@ -239,7 +239,7 @@ export function Landing({ isPageLoaded = true }: LandingProps) {
                 <ImageWithSkeleton
                   src={meImage}
                   alt="Sai Htet Aung | Portfolio"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-[50%_35%]"
                 />
               </div>
             </motion.div>

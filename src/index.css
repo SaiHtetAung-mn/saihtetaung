@@ -294,7 +294,7 @@ body {
   position: relative;
   width: min(64vw, 18rem);
   aspect-ratio: 1;
-  border-radius: 1.125rem;
+  border-radius: 9999px;
 }
 
 @media (min-width: 640px) {
@@ -317,9 +317,13 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border: 1px solid rgb(var(--color-border));
   border-radius: inherit;
   background: rgb(var(--color-background));
+  box-shadow: 0 22px 64px rgba(0, 0, 0, 0.16);
+}
+
+.dark .hero-portrait__image {
+  box-shadow: 0 24px 72px rgba(0, 0, 0, 0.42);
 }
 
 .text-type {
