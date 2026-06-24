@@ -3,7 +3,7 @@ export default {
     {
       "school": 'University Of Information Technology, Yangon',
       "degree": 'Bachelor of Computer Science in Software Engineering',
-      "year": '2016 - 2024',
+      "year": 'Graduated 2024',
       "school_link": "https://www.uit.edu.mm/",
       "school_image": "uit.png",
       "verify_link": "https://drive.google.com/file/d/1ZOaEYGjeZJl-Z5Ao5XYRoXeG18tJ3NWY/view?usp=drive_link",
