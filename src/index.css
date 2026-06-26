@@ -206,42 +206,6 @@ body {
   opacity: 0.76;
 }
 
-@media (max-width: 767px) {
-  .hero-copy-mobile-scrim {
-    isolation: isolate;
-    padding: 1.25rem 1rem 1.35rem;
-  }
-
-  .hero-copy-mobile-scrim::before {
-    content: '';
-    position: absolute;
-    inset: -0.75rem -0.625rem;
-    z-index: 0;
-    border-radius: 1.25rem;
-    border: 1px solid rgba(var(--color-border), 0.72);
-    background: rgba(var(--color-background), 0.94);
-    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.14);
-    backdrop-filter: blur(22px) saturate(1.2);
-    -webkit-backdrop-filter: blur(22px) saturate(1.2);
-    pointer-events: none;
-  }
-
-  .hero-copy-mobile-scrim > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-copy-mobile-scrim .hero-role,
-  .hero-copy-mobile-scrim .hero-description {
-    opacity: 0.92;
-  }
-
-  .dark .hero-copy-mobile-scrim::before {
-    background: rgba(var(--color-background), 0.9);
-    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.42);
-  }
-}
-
 .hero-button {
   display: inline-flex;
   min-height: 3rem;

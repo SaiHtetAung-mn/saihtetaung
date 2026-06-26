@@ -247,9 +247,7 @@ export function Landing({ isPageLoaded = true }: LandingProps) {
 
           <motion.div
             variants={itemVariants}
-            className={`relative z-20 order-last text-center md:order-first md:text-left ${
-              background === 'tech-icons' ? 'hero-copy-mobile-scrim' : ''
-            }`}
+            className="relative z-20 order-last text-center md:order-first md:text-left"
           >
             <h1 className="hero-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-4">
               Hi, I'm
