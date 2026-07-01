@@ -7,7 +7,7 @@ type HaProxyIconProps = SVGProps<SVGSVGElement> & {
 
 export function SiHaproxy({
   size = '1em',
-  color = 'currentColor',
+  color = 'rgb(var(--color-accent))',
   title,
   style,
   ...props
