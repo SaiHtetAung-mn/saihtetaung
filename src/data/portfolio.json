@@ -13,12 +13,14 @@
       "link": "https://blueoceanmm.com/solutions/payb"
     },
     {
-      "title": "Boss ERP - Multi-Tenant ERP System",
+      "title": "Boss - Multi-Tenant ERP System",
       "image": "projects/boss-erp.png",
       "description": "A cloud-based, multi-tenant ERP system that brings all core business operations into one easy-to-manage platform.",
       "responsibility": "Contributed to system architecture and worked on both frontend and backend development from the early concept stage through launch.",
       "tech_stack": [
         "NodeJs",
+        "ExpressJs",
+        "InversifyJs for DI",
         "ReactJs",
         "MongoDb"
       ]

@@ -28,6 +28,7 @@ import {
 import { GrDeploy } from "react-icons/gr";
 import Magnet from '@/components/Magnet';
 import ScrollFloatTitle from '@/components/ScrollFloatTitle';
+import { SiHaproxy } from "@/components/HaProxyIcon";
 
 export function Skills() {
   const skillCategories = [
@@ -64,6 +65,7 @@ export function Skills() {
         { name: 'Linux', icon: SiLinux },
         { name: 'AWS', icon: SiAmazon },
         { name: 'Nginx', icon: SiNginx },
+        { name: 'HAProxy', icon: SiHaproxy },
         { name: 'Docker', icon: SiDocker },
         { name: 'Git', icon: SiGit },
         { name: 'CI/CD', icon: GrDeploy },
