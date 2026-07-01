@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og.png',
+        url: '/og-portfolio.png',
         width: 1200,
         height: 630,
         alt: 'Sai Htet Aung portfolio',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteTitle,
     description: siteDescription,
-    images: ['/og.png'],
+    images: ['/og-portfolio.png'],
   },
   icons: {
     icon: '/logo.svg',
