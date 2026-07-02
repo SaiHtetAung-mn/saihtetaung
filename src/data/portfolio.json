@@ -92,7 +92,7 @@
     {
       "title": "Elegance ORM",
       "image": "projects/elegance-orm.png",
-      "description": "A lightweight cli-based Object Relational Mapping for NodeJs inspired by Laravel Eloquent",
+      "description": "A lightweight cli-based Object Relational Mapping for NodeJs. I've always loved how Laravel's Eloquent ORM reads almost like plain English and its developer experience. While working more with Node.js, I got idea and decided to built it myself. Supported databases are Mysql/MariaDB, Postgresql and Sqlite.",
       "tech_stack": [
         "Typescript",
         "NodeJs"
